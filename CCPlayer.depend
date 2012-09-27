@@ -1,0 +1,449 @@
+# depslib dependency file v1.0
+1348414739 source:c:\users\liuenbao\desktop\cbproject\ccplayer\main.cpp
+	"App.h"
+	"SafeContainerTemplate.h"
+
+1347375843 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\thread.cpp
+	"Thread.h"
+
+1347470752 c:\users\liuenbao\desktop\cbproject\ccplayer\include\thread.h
+	<pthread.h>
+
+1348062141 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiobject.cpp
+	"UIObject.h"
+	"Common.h"
+	<algorithm>
+
+1348398329 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiobject.h
+	"Common.h"
+	<vector>
+	"UIObjectImplWin32.h"
+
+1347816712 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiwindowimpl.cpp
+	"UIObject.h"
+	"UIWindowImpl.h"
+	"UIWindowImplWin32.h"
+
+1347816683 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiwindowimpl.h
+	"Common.h"
+
+1348398293 c:\users\liuenbao\desktop\cbproject\ccplayer\include\common.h
+	<iostream>
+	<string>
+	<vector>
+	<limits>
+	<cassert>
+	<ctime>
+	<Windows.h>
+	"libavformat/avformat.h"
+	"libavcodec/avcodec.h"
+	"libswscale/swscale.h"
+
+1347984745 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiwindowimplwin32.h
+	"Common.h"
+
+1347984727 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiwindow.cpp
+	"UIWindow.h"
+
+1348398343 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiwindow.h
+	"UIObject.h"
+	"Common.h"
+	"UIWindowImplWin32.h"
+
+1347984759 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiwindowimplwin32.cpp
+	"UIWindowImplWin32.h"
+	"UIObject.h"
+
+1347471918 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiglviewimpl.cpp
+	"UIGLViewImpl.h"
+	"Common.h"
+
+1347471868 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiglviewimpl.h
+
+1347968883 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiglviewimplwin32.cpp
+	"UIGLViewImplWin32.h"
+	"UIObject.h"
+
+1347969277 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiglviewimplwin32.h
+	"Common.h"
+
+1347948807 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiview.cpp
+	"UIView.h"
+	"Common.h"
+
+1348398314 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiview.h
+	"UIObject.h"
+	"UIViewImplWin32.h"
+
+1347982112 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiglview.cpp
+	"UIGLView.h"
+	"Common.h"
+
+1348398321 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiglview.h
+	"UIView.h"
+	"UIGLViewImplWin32.h"
+
+1347931678 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiviewimpl.cpp
+	"UIViewImpl.h"
+	"Common.h"
+	"UIViewImplWin32.h"
+
+1347931826 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiviewimpl.h
+
+1347948981 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiviewimplwin32.cpp
+	"Common.h"
+	"UIObject.h"
+	"UIViewImplWin32.h"
+
+1347948848 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiviewimplwin32.h
+
+1348398163 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\app.cpp
+	"App.h"
+	"DataManager.h"
+	<gl\gl.h>
+	<gl\glu.h>
+
+1348397025 c:\users\liuenbao\desktop\cbproject\ccplayer\include\app.h
+	"Common.h"
+	"UIGLView.h"
+	"UIWindow.h"
+
+1348397084 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\datamanager.cpp
+	"DataManager.h"
+
+1348396940 c:\users\liuenbao\desktop\cbproject\ccplayer\include\datamanager.h
+	"Thread.h"
+	"Common.h"
+
+1347469296 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\audiodecoder.cpp
+	"AudioDecoder.h"
+
+1347469283 c:\users\liuenbao\desktop\cbproject\ccplayer\include\audiodecoder.h
+	"Thread.h"
+
+1347469389 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\videodecoder.cpp
+	"VideoDecoder.h"
+
+1347469372 c:\users\liuenbao\desktop\cbproject\ccplayer\include\videodecoder.h
+	"Thread.h"
+
+1347944908 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiobjectimpl.cpp
+	"UIObjectImpl.h"
+	"UIObjectImplWin32.h"
+
+1347944798 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiobjectimpl.h
+	"Common.h"
+
+1347946441 c:\users\liuenbao\desktop\cbproject\ccplayer\include\uiobjectimplwin32.h
+	"Common.h"
+
+1347946486 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\uiobjectimplwin32.cpp
+	"UIObjectImplWin32.h"
+	"UIObject.h"
+
+1348063357 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\common.cpp
+	"Common.h"
+	"App.h"
+
+1348119247 c:\users\liuenbao\desktop\cbproject\ccplayer\include\shared_ptr.hpp
+	"shared_count.hpp"
+
+1348119254 c:\users\liuenbao\desktop\cbproject\ccplayer\include\shared_count.hpp
+	"shared_count_base.hpp"
+	"shared_count_impl.hpp"
+	"shared_count_impld.hpp"
+
+1348119137 c:\users\liuenbao\desktop\cbproject\ccplayer\include\shared_count_base.hpp
+
+1348119258 c:\users\liuenbao\desktop\cbproject\ccplayer\include\shared_count_impl.hpp
+	"shared_count_base.hpp"
+
+1348119267 c:\users\liuenbao\desktop\cbproject\ccplayer\include\shared_count_impld.hpp
+	"shared_count_base.hpp"
+
+1348161762 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\openalwrapper.cpp
+	"OpenALWrapper.h"
+	<time.h>
+
+1348161891 c:\users\liuenbao\desktop\cbproject\ccplayer\include\openalwrapper.h
+	"Common.h"
+	<AL/al.h>
+	<AL/alc.h>
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"avio.h"
+	"libavformat/version.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/samplefmt.h"
+	"libavutil/avutil.h"
+	"libavutil/cpu.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"libavutil/pixfmt.h"
+	"libavutil/rational.h"
+	"libavcodec/version.h"
+	"libavutil/audioconvert.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\samplefmt.h
+	"avutil.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avutil.h
+	"common.h"
+	"error.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1348117677 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"attributes.h"
+	"libavutil/avconfig.h"
+	"config.h"
+	"intmath.h"
+	"common.h"
+	"mem.h"
+	"internal.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\attributes.h
+
+1347186394 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avconfig.h
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\error.h
+	<errno.h>
+	"avutil.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"attributes.h"
+	"rational.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\rational.h
+	<stdint.h>
+	<limits.h>
+	"attributes.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"attributes.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+	"attributes.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\pixfmt.h
+	"libavutil/avconfig.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\cpu.h
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\dict.h
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\version.h
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\audioconvert.h
+	<stdint.h>
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"libavformat/version.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\version.h
+	"libavutil/avutil.h"
+
+1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libswscale\swscale.h
+	"libavutil/avutil.h"
+	"libavutil/log.h"
+	"libavutil/pixfmt.h"
+
+1348679757 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
+	"Player.h"
+	"IGLRenderObject.h"
+	"MessageCenter.h"
+	"ModuleManager.h"
+	"Any.h"
+
+1348679645 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
+	"Common.h"
+	"Thread.h"
+	"IMessageReceiver.h"
+	"Event.h"
+	"SmartPtr.h"
+	"SpinLock.h"
+
+1348482995 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common.h
+	<iostream>
+	<string>
+	<vector>
+	<limits>
+	<cassert>
+	<ctime>
+	<Windows.h>
+	"libavformat/avformat.h"
+	"libavcodec/avcodec.h"
+	"libswscale/swscale.h"
+
+1348679227 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"IMessageReceiver.h"
+
+1348417862 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\thread.h
+	"Common.h"
+	<pthread.h>
+
+1348417903 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\thread.cpp
+	"Thread.h"
+
+1347469389 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+	"VideoDecoder.h"
+
+1347469372 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
+	"Thread.h"
+
+1348400166 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\uiglviewimplwin32.cpp
+	"Common.h"
+
+1348400199 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\uiwindowimplwin32.cpp
+
+1347469296 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+	"AudioDecoder.h"
+
+1347469283 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
+	"Thread.h"
+
+1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common.cpp
+	"Common.h"
+
+1348679471 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+	"DataManager.h"
+	"MessageCenter.h"
+
+1348417576 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\glviewimplwin32.cpp
+	"GLViewImplWin32.h"
+	<GL/gl.h>
+	<GL/glu.h>
+
+1348404938 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\windowimplwin32.cpp
+	"WindowImplWin32.h"
+
+1348403487 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\windowimplwin32.h
+	"Win32Def.h"
+
+1348403904 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
+	<Windows.h>
+
+1348679452 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+	"App.h"
+	"Win32Def.h"
+	"WindowImplWin32.h"
+	"GLViewImplWin32.h"
+	"Player.h"
+
+1348403316 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
+
+1348548645 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
+	"Win32Def.h"
+	"IGLRenderObject.h"
+
+1348485969 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\safecontainertemplate.h
+	<pthread.h>
+
+1348417459 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\glrenderobject.h
+
+1348417862 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\thread.h
+	"Common.h"
+	<pthread.h>
+
+1348672442 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
+	<iostream>
+	<string>
+	<vector>
+	<map>
+	<queue>
+	<limits>
+	<cassert>
+	<ctime>
+	<Windows.h>
+	"libavformat/avformat.h"
+	"libavcodec/avcodec.h"
+	"libswscale/swscale.h"
+
+1348484294 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+	"AudioRender.h"
+
+1348484275 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiorender.h
+
+1348484203 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+	"VideoRender.h"
+
+1348484188 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
+
+1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
+	"Common.h"
+
+1348417903 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\thread.cpp
+	"Thread.h"
+
+1348675648 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
+	"MessageCenter.h"
+	"IMessageReceiver.h"
+	"SmartPtr.h"
+
+1348672528 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
+	"Common.h"
+	"SpinLock.h"
+	"RWLock.h"
+	"Thread.h"
+	"Event.h"
+	"SmartPtr.h"
+
+1348487051 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\spinlock.h
+	<pthread.h>
+
+1348501960 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
+	<pthread.h>
+
+1348678988 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\event.h
+	"Any.h"
+
+1348675705 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\imessagereceiver.h
+	"Event.h"
+	"SmartPtr.h"
+
+1348547181 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
+	"ModuleManager.h"
+	"DataManager.h"
+	"MessageCenter.h"
+
+1348679780 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
+	"Common.h"
+
+1348417459 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\iglrenderobject.h
+
+1348675611 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\any.h
+	<typeinfo>
+	<type_traits>
+
+1348668838 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+
