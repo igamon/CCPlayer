@@ -33,7 +33,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions -fpermissive -std=gnu++0x" />
 			<Add directory="include" />
-			<Add directory="plugins\pthread-2.9.1" />
+			<Add directory="plugins\openal-1.14\include" />
+			<Add directory="plugins\pthread-2.9.1\include" />
 			<Add directory="plugins\ffmpeg-0.10.4\include" />
 			<Add directory="include\ccLib" />
 			<Add directory="include\ccLib\common" />
@@ -45,15 +46,21 @@
 			<Add library="pthreadGCE2" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
+			<Add library="avformat.dll" />
+			<Add library="OpenAL32.dll" />
+			<Add directory="plugins\openal-1.14\lib" />
+			<Add directory="plugins\ffmpeg-0.10.4\lib" />
 			<Add directory="plugins\pthread-2.9.1\lib\x86" />
 		</Linker>
 		<Unit filename="include\ccLib\AudioDecoder.h" />
 		<Unit filename="include\ccLib\AudioRender.h" />
 		<Unit filename="include\ccLib\DataManager.h" />
 		<Unit filename="include\ccLib\IGLRenderObject.h" />
+		<Unit filename="include\ccLib\IRSPPlayerCommand.h" />
 		<Unit filename="include\ccLib\Player.h" />
 		<Unit filename="include\ccLib\VideoDecoder.h" />
 		<Unit filename="include\ccLib\VideoRender.h" />
+		<Unit filename="include\ccLib\common\ALWrapper.h" />
 		<Unit filename="include\ccLib\common\Any.h" />
 		<Unit filename="include\ccLib\common\Common.h" />
 		<Unit filename="include\ccLib\common\Event.h" />
@@ -77,6 +84,7 @@
 		<Unit filename="src\ccLib\Player.cpp" />
 		<Unit filename="src\ccLib\VideoDecoder.cpp" />
 		<Unit filename="src\ccLib\VideoRender.cpp" />
+		<Unit filename="src\ccLib\common\ALWrapper.cpp" />
 		<Unit filename="src\ccLib\common\Common.cpp" />
 		<Unit filename="src\ccLib\common\MessageCenter.cpp" />
 		<Unit filename="src\ccLib\common\ModuleManager.cpp" />

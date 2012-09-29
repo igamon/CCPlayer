@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "IGLRenderObject.h"
+#include "IRSPPlayerCommand.h"
 #include "MessageCenter.h"
 #include "ModuleManager.h"
 #include "Any.h"
@@ -11,7 +12,7 @@ CCPlayer::CCPlayer()
 {
     //this will start the message center thread
     CCMessageCenter::GetInstance()->InitMessageCenter();
-    CCMessageCenter::GetInstance()->RegisterMessageReceiver(MESSAGE_OBJECT_ENUM_CCPLAYER, this);
+    CCMessageCenter::GetInstance()->RegisterMessageReceiver(MESSAGE_OBJECT_ENUM_PLAYER, this);
 
     //启动自己的线程
     Launch();
@@ -19,12 +20,12 @@ CCPlayer::CCPlayer()
 
 CCPlayer::~CCPlayer()
 {
-    CCMessageCenter::GetInstance()->UnRegisterMessageReceiver(MESSAGE_OBJECT_ENUM_CCPLAYER);
+    CCMessageCenter::GetInstance()->UnRegisterMessageReceiver(MESSAGE_OBJECT_ENUM_PLAYER);
 }
 
 void CCPlayer::Open(const std::string& loadParams)
 {
-    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_OUTPLACE, MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_TYPE_ENUM_OPEN, Any(loadParams));
+    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_CLIENT, MESSAGE_OBJECT_ENUM_PLAYER, COMMAND_TYPE_ENUM_OPEN, Any(loadParams));
 }
 
 void CCPlayer::SendMessage(MessageObjectId messageSender,
@@ -59,6 +60,9 @@ bool CCPlayer::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 void CCPlayer::Run()
 {
     //m_pGLRender->CreateGLContext();
+    std::string mediaUrl;
+    IRSPPlayCommand* pRspObject = NULL;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -66,22 +70,58 @@ void CCPlayer::Run()
         {
             switch(event.GetPtr()->type)
             {
-                case MESSAGE_TYPE_ENUM_OPEN:
+                case COMMAND_TYPE_ENUM_OPEN:
                     {
+                        mediaUrl = any_cast<std::string>(event.GetPtr()->anyParams);
+
+                        //Create the media source pump to support the data packet
                         CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_DATA_MANAGER);
 
-                        SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_DATA_MANAGER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                        SendMessage(MESSAGE_OBJECT_ENUM_PLAYER, MESSAGE_OBJECT_ENUM_DATA_MANAGER, MESSAGE_TYPE_ENUM_OPEN_FILE, Any(mediaUrl));
+                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
+                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
+                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
+                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
+
+                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_DATA_MANAGER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_AUDIO_RENDER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_AUDIO_DECODER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_VIDEO_RENDER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_VIDEO_DECODER, event.GetPtr()->type, event.GetPtr()->anyParams);
+                    }
+                    break;
+                case MESSAGE_TYPE_ENUM_OPENED_FILE:
+                    {
+                        std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
+                        int ret = any_cast<int>(openedParams[0]);
+                        AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
+                        int vsIndex = any_cast<int>(openedParams[2]);
+                        int asIndex = any_cast<int>(openedParams[3]);
+
+                        if(asIndex != -1)
+                        {
+                            std::vector<Any> findedASParams;
+                            findedASParams.push_back(Any(asIndex));
+                            findedASParams.push_back(Any(pAVFormatCtx));
+
+                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
+                            SendMessage(MESSAGE_OBJECT_ENUM_PLAYER, MESSAGE_OBJECT_ENUM_AUDIO_DECODER, MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM, findedASParams);
+
+                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
+                            SendMessage(MESSAGE_OBJECT_ENUM_PLAYER, MESSAGE_OBJECT_ENUM_AUDIO_RENDER, MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM, findedASParams);
+                        }
+
+                        if(pRspObject != NULL)
+                        {
+                            pRspObject->OpenResponse(ret);
+                        }
                     }
                     break;
             }
-            //std::cout << any_cast<std::string>(event.GetPtr()->anyParams) << std::endl;
+            //std::cout << "CCPlayer" << any_cast<std::string>(event.GetPtr()->anyParams) << std::endl;
         }
 
         Sleep(10);
-
-    //    m_pGLRender->DrawFrame();
-    //    m_pGLRender->SwapBuffers();
-    //    Sleep(10);
     }
 }
 

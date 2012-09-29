@@ -275,9 +275,10 @@
 	"libavutil/log.h"
 	"libavutil/pixfmt.h"
 
-1348679757 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1348850614 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
 	"IGLRenderObject.h"
+	"IRSPPlayerCommand.h"
 	"MessageCenter.h"
 	"ModuleManager.h"
 	"Any.h"
@@ -302,7 +303,7 @@
 	"libavcodec/avcodec.h"
 	"libswscale/swscale.h"
 
-1348679227 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+1348757457 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\datamanager.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -315,27 +316,35 @@
 1348417903 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\thread.cpp
 	"Thread.h"
 
-1347469389 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+1348746897 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
 	"VideoDecoder.h"
+	"MessageCenter.h"
 
-1347469372 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
+1348745195 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
 	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"IMessageReceiver.h"
 
 1348400166 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\uiglviewimplwin32.cpp
 	"Common.h"
 
 1348400199 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\uiwindowimplwin32.cpp
 
-1347469296 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+1348850523 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
 	"AudioDecoder.h"
+	"MessageCenter.h"
 
-1347469283 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
+1348760492 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
 	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"IMessageReceiver.h"
 
 1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common.cpp
 	"Common.h"
 
-1348679471 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+1348759337 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
 	"DataManager.h"
 	"MessageCenter.h"
 
@@ -353,7 +362,7 @@
 1348403904 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
 	<Windows.h>
 
-1348679452 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1348753911 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"WindowImplWin32.h"
@@ -375,7 +384,7 @@
 	"Common.h"
 	<pthread.h>
 
-1348672442 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
+1348753589 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
 	<iostream>
 	<string>
 	<vector>
@@ -389,15 +398,27 @@
 	"libavcodec/avcodec.h"
 	"libswscale/swscale.h"
 
-1348484294 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+1348850554 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
 	"AudioRender.h"
+	"MessageCenter.h"
+	"ALWrapper.h"
 
-1348484275 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiorender.h
+1348846551 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiorender.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"ALWrapper.h"
+	"IMessageReceiver.h"
 
-1348484203 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1348746911 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
+	"MessageCenter.h"
 
-1348484188 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
+1348745494 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"IMessageReceiver.h"
 
 1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
 	"Common.h"
@@ -424,17 +445,21 @@
 1348501960 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
 	<pthread.h>
 
-1348678988 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\event.h
+1348850442 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\event.h
 	"Any.h"
 
 1348675705 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\imessagereceiver.h
 	"Event.h"
 	"SmartPtr.h"
 
-1348547181 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
+1348747347 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
 	"ModuleManager.h"
-	"DataManager.h"
 	"MessageCenter.h"
+	"AudioRender.h"
+	"AudioDecoder.h"
+	"VideoRender.h"
+	"VideoDecoder.h"
+	"DataManager.h"
 
 1348679780 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
 	"Common.h"
@@ -445,5 +470,43 @@
 	<typeinfo>
 	<type_traits>
 
-1348668838 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+1348744795 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+
+1348759902 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspplayercommand.h
+
+1338099490 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\pthread.h
+	<windows.h>
+	"config.h"
+	<time.h>
+	<signal.h>
+	<limits.h>
+	"need_errno.h"
+	<errno.h>
+	<sched.h>
+	<sys/types.h>
+
+1309316764 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\sched.h
+	"need_errno.h"
+	<errno.h>
+	<sys/types.h>
+	<time.h>
+
+1348849903 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\alwrapper.h
+	"Common.h"
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alext.h>
+
+1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\al.h
+
+1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alc.h
+
+1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alext.h
+	<stddef.h>
+	"efx.h"
+
+1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\efx.h
+
+1348849970 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
+	"ALWrapper.h"
 

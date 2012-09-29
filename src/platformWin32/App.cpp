@@ -35,7 +35,7 @@ int CCApp::Exec()
 
     //while(1)
     {
-        playerInstance.Open("HelloWorld");
+        playerInstance.Open("test.flv");
         Sleep(15);
     }
 
