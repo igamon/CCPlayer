@@ -44,6 +44,11 @@ bool CCAudioDecoder::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 void CCAudioDecoder::Run()
 {
     AVCodecContext *pAudioCodecCtx = NULL;
+
+    AVFrame* pDecodedFrame = NULL;
+    int gotFrame = 0;
+    int decodedLen = 0;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -53,26 +58,66 @@ void CCAudioDecoder::Run()
             {
                 case MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM:
                     {
-                        std::vector<Any> findedASParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
-                        int asIndex = any_cast<int>(findedASParams[0]);
-                        AVFormatContext* pFormatCtx = any_cast<AVFormatContext*>(findedASParams[1]);
+                        CCChannels channels = -1;
+                        CCRates rates = -1 ;
+                        CCType type = CCType::unknow;
 
-                        if(FindAudioDecoderContext(&pAudioCodecCtx, pFormatCtx, asIndex) == 0)
+                        pAudioCodecCtx = any_cast<AVCodecContext*>(event.GetPtr()->anyParams);
+                        int ret = GetAudioInformation(pAudioCodecCtx, &channels, &rates, &type);
+
+                        if(ret == 0)
                         {
-                            std::cout << "The Audio Decoder context is OK" << std::endl;
-                        }else
-                        {
-                            std::cout << "The Audio Decoder context is BAD" << std::endl;
+                            std::vector<Any> audioInformartion;
+                            audioInformartion.push_back(Any(channels));
+                            audioInformartion.push_back(Any(rates));
+                            audioInformartion.push_back(Any(type));
+
+                            SendMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                        MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                        MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
+                                        Any(audioInformartion));
+                            //crate the frame buffer size
+                            pDecodedFrame = avcodec_alloc_frame();
                         }
                     }
                     break;
-                case MESSAGE_TYPE_ENUM_REQUEST_AUDIO_BYTES_FIRST_TIME:
+                case MESSAGE_TYPE_ENUM_GET_AUDIO_PACKET:
                     {
-                        std::vector<Any> reqFirstTime = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
+                        SmartPtr<CCPacket> packet
+                                            = any_cast<SmartPtr<CCPacket> >(event.GetPtr()->anyParams);
+
+                        AVPacket* pPacket = packet.GetPtr()->GetPacketPointer();
 
 
-                    }
+                        while(pPacket->size > 0)
+                        {
+                            avcodec_get_frame_defaults(pDecodedFrame);
+
+                            decodedLen = avcodec_decode_audio4(pAudioCodecCtx,
+                                                               pDecodedFrame,
+                                                               &gotFrame,
+                                                               pPacket);
+
+                            pPacket->data += decodedLen;
+                            pPacket->size -= decodedLen;
+
+                            if(gotFrame)
+                            {
+                                int decodedDataSize = av_samples_get_buffer_size(NULL,
+                                                                       pAudioCodecCtx->channels,
+                                                                       pDecodedFrame->nb_samples,
+                                                                       pAudioCodecCtx->sample_fmt,
+                                                                       1);
+
+                                SmartPtr<AudioFrame> audioFrame(new AudioFrame(pDecodedFrame->data[0], decodedDataSize));
+                                SendMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                            MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                            MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME,
+                                            Any(audioFrame));
+                            }
+                    } // end while ??
                     break;
+                } // end switch case
             }
         }
 
@@ -80,16 +125,48 @@ void CCAudioDecoder::Run()
     }
 }
 
-int CCAudioDecoder::FindAudioDecoderContext(AVCodecContext** ppASDecoderCtx, AVFormatContext* pFormatCtx, int asIndex)
+int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx, CCChannels* pChannels, CCRates* pRates, CCType* pType)
 {
-    if(pFormatCtx == NULL || asIndex == -1)
+    if (pAudioCtx->channels < 1
+            || pAudioCtx->channels > 8
+            || pAudioCtx->channels == 3
+            || pAudioCtx->channels == 5)
     {
+        std::cout << "Unsupported channels " << std::endl;
         return FAILURE;
     }
 
-    *ppASDecoderCtx = pFormatCtx->streams[asIndex]->codec;
+    *pChannels = pAudioCtx->channels;
+    *pRates = pAudioCtx->sample_rate;
+    if (pAudioCtx->sample_fmt == AV_SAMPLE_FMT_U8)
+    {
+        *pType = CCType::u8;
+    }
+    else if (pAudioCtx->sample_fmt == AV_SAMPLE_FMT_S16)
+    {
+        *pType = CCType::s16;
+    }
+    else if (pAudioCtx->sample_fmt == AV_SAMPLE_FMT_FLT)
+    {
+        *pType = CCType::f32;
+    }
+    else if (pAudioCtx->sample_fmt == AV_SAMPLE_FMT_DBL)
+    {
+        *pType = CCType::d64;
+    }
+    else if (pAudioCtx->sample_fmt == AV_SAMPLE_FMT_S32
+            && sizeof(int32_t) == sizeof(float))
+    {
+        // we need to convert this to AV_SAMPLE_FMT_FLT after decoding
+        *pType = CCType::f32;
+    }
+    else
+    {
+        std::cout << "Unsupported the format " << std::endl;
+        return FAILURE;
+    }
 
-    return SUCCESS;
+    return 0;
 }
 
 }

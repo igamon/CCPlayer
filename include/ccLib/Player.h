@@ -30,6 +30,9 @@ public:
     void ReceiverMessage(const SmartPtr<Event>& rSmtEvent);
     bool PopFrontMessage(SmartPtr<Event>& rSmtEvent);
 
+private:
+    int FindAudioDecoderContext(AVCodecContext** ppASDecoderCtx, AVFormatContext* pFormatCtx, int asIndex);
+
 public:
     virtual void Run();
 

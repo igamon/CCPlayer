@@ -5,9 +5,6 @@
 namespace CCPlayer
 {
 
-#define AUDIO_BUFFER_SIZE 192000
-#define AUDIO_NUM_BUFFERS 6
-
 CCAudioRender::CCAudioRender()
 {
 }
@@ -56,169 +53,151 @@ void CCAudioRender::Run()
         {
             switch(event.GetPtr()->type)
             {
-                case MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM:
+                case MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION:
                 {
-                    std::vector<Any> findedASParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
-                    int asIndex = any_cast<int>(findedASParams[0]);
-                    AVFormatContext* pFormatCtx = any_cast<AVFormatContext*>(findedASParams[1]);
+                    std::vector<Any> audioInformartion =
+                                        any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
 
-                    ALenum audType = 0;
-                    ALuint audRate = 0;
-                    ALenum audFormat = 0;
-                    ALenum audChannels = 0;
+                    CCChannels channels = any_cast<CCChannels>(audioInformartion[0]);
+                    CCRates rates = any_cast<CCRates>(audioInformartion[1]);
+                    CCType type = any_cast<CCType>(audioInformartion[2]);
 
-                    if(GetAudioCtx(pFormatCtx, asIndex, &audChannels, &audRate, &audFormat, &audType) == 0)
-                    {
-                        alWrapper.SetAudioCtx(audChannels, audRate, audFormat, audType);
+                    ALenum audFormat = GetAudioFormat(channels, type);
 
-                        int bytePerBuffer = alWrapper.GetPerBufferBytes();
-                        int buffers = alWrapper.GetAudioBuffers();
-
-                        std::vector<Any> reqFirstTime;
-                        reqFirstTime.push_back(Any(buffers));
-                        reqFirstTime.push_back(Any(bytePerBuffer));
-
-                        SendMessage(MESSAGE_OBJECT_ENUM_AUDIO_RENDER, MESSAGE_OBJECT_ENUM_AUDIO_DECODER, MESSAGE_TYPE_ENUM_REQUEST_AUDIO_BYTES_FIRST_TIME, Any(reqFirstTime));
-                    }
+                    alWrapper.SetAudioCtx(channels, rates, audFormat);
                 }
                 break;
-            }
+            case  MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME:
+                {
+                    SmartPtr<AudioFrame> audioFrame
+                                            = any_cast<SmartPtr<AudioFrame> >(event.GetPtr()->anyParams);
+                    m_audioFrameQueue.push(audioFrame);
+                }
+                break;
+            } // end switch case
         }
 
         Sleep(10);
     }
 }
 
-int CCAudioRender::GetAudioCtx(AVFormatContext *pFormatCtx, int asIndex, ALenum* pChannels, ALuint *pRate, ALenum *pFormat, ALenum *pType)
+ALenum CCAudioRender::GetAudioFormat(CCChannels channels, CCType type)
 {
-    AVCodecContext *audioCodecCtx = pFormatCtx->streams[asIndex]->codec;
-
-    if (audioCodecCtx->channels < 1
-            || audioCodecCtx->channels > 8
-            || audioCodecCtx->channels == 3
-            || audioCodecCtx->channels == 5)
+    ALenum audioFormat = 0;
+    if (type == CCPlayer::u8)
     {
-        return FAILURE;
-    }
-    *pChannels = audioCodecCtx->channels;
-    *pRate = audioCodecCtx->sample_rate;
-    if (audioCodecCtx->sample_fmt == AV_SAMPLE_FMT_U8)
-    {
-        *pType = AL_UNSIGNED_BYTE_SOFT;
-
-        if (*pChannels == 1)
+        if (channels == 1)
         {
-            *pFormat = AL_FORMAT_MONO8;
+            audioFormat = AL_FORMAT_MONO8;
         }
-        else if (*pChannels == 2)
+        else if (channels == 2)
         {
-            *pFormat = AL_FORMAT_STEREO8;
+            audioFormat = AL_FORMAT_STEREO8;
         }
         else if (alIsExtensionPresent("AL_EXT_MCFORMATS"))
         {
-            if (*pChannels == 4)
+            if (channels == 4)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_QUAD8");
+                audioFormat = alGetEnumValue("AL_FORMAT_QUAD8");
             }
-            else if (*pChannels == 6)
+            else if (channels == 6)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_51CHN8");
+                audioFormat = alGetEnumValue("AL_FORMAT_51CHN8");
             }
-            else if (*pChannels == 7)
+            else if (channels == 7)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_71CHN8");
+                audioFormat = alGetEnumValue("AL_FORMAT_71CHN8");
             }
-            else if (*pChannels == 8)
+            else if (channels == 8)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_81CHN8");
+                audioFormat = alGetEnumValue("AL_FORMAT_81CHN8");
             }
         }
     }
-    else if (audioCodecCtx->sample_fmt == AV_SAMPLE_FMT_S16)
+    else if (type == CCPlayer::s16)
     {
-        *pType = AL_SHORT_SOFT;
-
-         if (*pChannels == 1)
+        if (channels == 1)
         {
-            *pFormat = AL_FORMAT_MONO16;
+            audioFormat = AL_FORMAT_MONO16;
         }
-        else if (*pChannels == 2)
+        else if (channels == 2)
         {
-            *pFormat = AL_FORMAT_STEREO16;
+            audioFormat = AL_FORMAT_STEREO16;
         }
         else if (alIsExtensionPresent("AL_EXT_MCFORMATS"))
         {
-            if (*pChannels == 4)
+            if (channels == 4)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_QUAD16");
+                audioFormat = alGetEnumValue("AL_FORMAT_QUAD16");
             }
-            else if (*pChannels == 6)
+            else if (channels == 6)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_51CHN16");
+                audioFormat = alGetEnumValue("AL_FORMAT_51CHN16");
             }
-            else if (*pChannels == 7)
+            else if (channels == 7)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_61CHN16");
+                audioFormat = alGetEnumValue("AL_FORMAT_61CHN16");
             }
-            else if (*pChannels == 8)
+            else if (channels == 8)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_71CHN16");
-            }
-        }
-    }
-    else if (audioCodecCtx->sample_fmt == AV_SAMPLE_FMT_DBL)
-    {
-        if (alIsExtensionPresent("AL_EXT_double"))
-        {
-            *pType = AL_DOUBLE_SOFT;
-
-            if (*pChannels == 1)
-            {
-                *pFormat = alGetEnumValue("AL_FORMAT_MONO_DOUBLE_EXT");
-            }
-            else if (*pChannels == 2)
-            {
-                *pFormat = alGetEnumValue("AL_FORMAT_STEREO_DOUBLE_EXT");
+                audioFormat = alGetEnumValue("AL_FORMAT_71CHN16");
             }
         }
     }
-    else if ((audioCodecCtx->sample_fmt == AV_SAMPLE_FMT_S32
-            && sizeof(int32_t) == sizeof(float)) || audioCodecCtx->sample_fmt == AV_SAMPLE_FMT_FLT)
+    else if (type == CCPlayer::f32)
     {
         if (alIsExtensionPresent("AL_EXT_float32"))
         {
-            *pType = AL_FLOAT_SOFT;
-
-            if (*pChannels == 1)
+            if (channels == 1)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_MONO_FLOAT32");
+                audioFormat = alGetEnumValue("AL_FORMAT_MONO_FLOAT32");
             }
-            else if (*pChannels == 2)
+            else if (channels == 2)
             {
-                *pFormat = alGetEnumValue("AL_FORMAT_STEREO_FLOAT32");
+                audioFormat = alGetEnumValue("AL_FORMAT_STEREO_FLOAT32");
             }
             else if (alIsExtensionPresent("AL_EXT_MCFORMATS"))
             {
-                if (*pChannels == 4)
+                if (channels == 4)
                 {
-                    *pFormat = alGetEnumValue("AL_FORMAT_QUAD32");
+                    audioFormat = alGetEnumValue("AL_FORMAT_QUAD32");
                 }
-                else if (*pChannels == 6)
+                else if (channels == 6)
                 {
-                    *pFormat = alGetEnumValue("AL_FORMAT_51CHN32");
+                    audioFormat = alGetEnumValue("AL_FORMAT_51CHN32");
                 }
-                else if (*pChannels == 7)
+                else if (channels == 7)
                 {
-                    *pFormat = alGetEnumValue("AL_FORMAT_61CHN32");
+                    audioFormat = alGetEnumValue("AL_FORMAT_61CHN32");
                 }
-                else if (*pChannels == 8)
+                else if (channels == 8)
                 {
-                    *pFormat = alGetEnumValue("AL_FORMAT_71CHN32");
+                    audioFormat = alGetEnumValue("AL_FORMAT_71CHN32");
                 }
             }
         }
     }
-	return 0;
+    else if (type == CCPlayer::d64)
+    {
+        if (alIsExtensionPresent("AL_EXT_double"))
+        {
+            if (channels == 1)
+            {
+                audioFormat = alGetEnumValue("AL_FORMAT_MONO_DOUBLE_EXT");
+            }
+            else if (channels == 2)
+            {
+                audioFormat = alGetEnumValue("AL_FORMAT_STEREO_DOUBLE_EXT");
+            }
+        }
+    }
+    if (type == 0)
+    {
+        std::cout << "Unfinded format for the audio " << std::endl;
+    }
+
+    return audioFormat;
 }
+
 
 }

@@ -43,16 +43,64 @@ bool CCVideoDecoder::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCVideoDecoder::Run()
 {
+    AVCodecContext* pVideoCtx = NULL;
+    SwsContext* pImageConvertCtx = NULL;
+    int imgWidth = 0;
+    int imgHeight = 0;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
         if(PopFrontMessage(event))
         {
-            std::cout << "CCVideoDecoder" << any_cast<std::string>(event.GetPtr()->anyParams) << std::endl;
+            switch(event.GetPtr()->type)
+            {
+                case MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM:
+                {
+                    pVideoCtx = any_cast<AVCodecContext*>(event.GetPtr()->anyParams);
+
+                    if(pVideoCtx != NULL)
+                    {
+                        GetVideoInformation(pVideoCtx, &pImageConvertCtx, &imgWidth, &imgHeight);
+
+                        //send the width and height of the image frame to the render.
+                        //incomplete.
+
+                    }
+
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET:
+                {
+
+                }
+                break;
+            } // end switch case
         }
 
         Sleep(10);
     }
+}
+
+int CCVideoDecoder::GetVideoInformation(AVCodecContext* pVideoCtx,
+                                        SwsContext** ppImageConvertCtx,
+                                        int *pImgWidth,
+                                        int *pImgHeight)
+{
+    *pImgWidth = VIDEO_OUTPUT_WIDTH;
+    *pImgHeight = VIDEO_OUTPUT_HEIGHT;
+
+    *ppImageConvertCtx = sws_getContext(pVideoCtx->width,
+                   pVideoCtx->height,
+                   pVideoCtx->pix_fmt,
+                   VIDEO_OUTPUT_WIDTH,
+                   VIDEO_OUTPUT_HEIGHT,
+                   PIX_FMT_RGBA,
+                   SWS_BICUBIC,
+                   NULL,
+                   NULL,
+                   NULL);
+    return 0;
 }
 
 }

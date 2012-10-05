@@ -43,6 +43,28 @@ struct FFmpegStuff
     AVFormatContext *pAVFormatContext;
 };
 
+class CCPacket
+{
+public:
+    CCPacket()
+    {
+        av_init_packet(&packet);
+    }
+    ~CCPacket()
+    {
+        av_free_packet(&packet);
+    }
+
+public:
+    AVPacket* GetPacketPointer()
+    {
+        return &packet;
+    }
+
+private:
+    AVPacket packet;
+};
+
 }
 
 #endif

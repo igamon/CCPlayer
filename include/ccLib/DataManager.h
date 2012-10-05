@@ -27,7 +27,13 @@ public:
     virtual void Run();
 
 private:
-    int OpenFile(const std::string& mediaUrl, AVFormatContext** ppFormatCtx, int* pVSIndex, int* pASIndex);
+    int OpenFile(const std::string& mediaUrl,
+                 AVFormatContext** ppFormatCtx,
+                 int* pASIndex,
+                 int* pVSIndex);
+    void GetCodecContext(AVFormatContext* pFormatCtx,
+                          int streamIndex,
+                          AVCodecContext** ppCodecContext);
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

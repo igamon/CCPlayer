@@ -4,6 +4,7 @@
 #include "Thread.h"
 #include "Common.h"
 #include "SpinLock.h"
+#include "VideoDef.h"
 #include "IMessageReceiver.h"
 
 namespace CCPlayer

@@ -4,6 +4,7 @@
 #include "Thread.h"
 #include "Common.h"
 #include "SpinLock.h"
+#include "AudioDef.h"
 #include "IMessageReceiver.h"
 
 namespace CCPlayer
@@ -27,7 +28,10 @@ public:
     virtual void Run();
 
 private:
-    int FindAudioDecoderContext(AVCodecContext** ppASDecoderCtx, AVFormatContext* pFormatCtx, int asIndex);
+    int GetAudioInformation(AVCodecContext *pAudioCtx,
+                            CCChannels* pChannels,
+                            CCRates* pRates,
+                            CCType* pFormat);
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

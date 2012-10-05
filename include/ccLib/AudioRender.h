@@ -5,6 +5,7 @@
 #include "Common.h"
 #include "SpinLock.h"
 #include "ALWrapper.h"
+#include "AudioDef.h"
 #include "IMessageReceiver.h"
 
 namespace CCPlayer
@@ -28,7 +29,10 @@ public:
     virtual void Run();
 
 private:
-    int GetAudioCtx(AVFormatContext *pFormatCtx, int asIndex, ALenum* pChannels, ALuint *pRate, ALenum *pFormat, ALenum *pType);
+    ALenum GetAudioFormat(CCChannels channels, CCType type);
+
+private:
+    std::queue<SmartPtr<AudioFrame> > m_audioFrameQueue;
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

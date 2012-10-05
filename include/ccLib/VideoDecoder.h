@@ -4,6 +4,7 @@
 #include "Thread.h"
 #include "Common.h"
 #include "SpinLock.h"
+#include "VideoDef.h"
 #include "IMessageReceiver.h"
 
 namespace CCPlayer
@@ -25,6 +26,12 @@ public:
 
 public:
     virtual void Run();
+
+private:
+    int GetVideoInformation(AVCodecContext* pVideoCtx,
+                                        SwsContext** ppImageConvertCtx,
+                                        int *pImgWidth,
+                                        int *pImgHeight);
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

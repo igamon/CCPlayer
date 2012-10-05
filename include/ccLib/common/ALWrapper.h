@@ -2,6 +2,7 @@
 #define ALWRAPPER_H
 
 #include "Common.h"
+#include "AudioDef.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -16,22 +17,22 @@ public:
 	virtual ~ALWrapper();
 
 public:
-    void SetAudioCtx(ALenum channels, ALuint rate, ALenum format, ALenum type);
-    int GetAudioBuffers();
-    int GetPerBufferBytes();
+    void SetAudioCtx(ALenum channels, ALuint rate, ALenum format);
 
 private:
 	void AL_APIENTRY wrap_BufferSamples();
 
 private:
 	void Create(const std::string &deviceName);
-	ALsizei GetBytesByFrames(ALsizei size, ALenum channels, ALenum type);
 
 private:
-    ALsizei m_bytesPerBuffer;
 	ALenum m_audChannels;
 	ALenum m_audFormat;
 	ALuint m_audRate;
+
+private:
+    ALuint m_audSource;
+    ALuint m_audBuffers[AUDIO_BUFFER_NUMBER];
 
 private:
 	ALCdevice *m_audioDevice;
