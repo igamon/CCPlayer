@@ -87,4 +87,19 @@ void ALWrapper::Create(const std::string &deviceName)
 	assert(alGetError() == AL_NO_ERROR && "Could not rewind buffers");
 }
 
+void ALWrapper::InitAudioFrame(AudioFrame* pAudioFrame, int index)
+{
+    alBufferData(m_audBuffers[index],
+                 m_audFormat,
+                 pAudioFrame->GetFrameData(),
+                 pAudioFrame->GetFrameSize(),
+                 m_audRate);
+    alSourceQueueBuffers(m_audSource, 1, &m_audBuffers[index]);
+}
+
+void ALWrapper::Play()
+{
+    alSourcePlay(m_audSource);
+}
+
 } /* namespace cc */

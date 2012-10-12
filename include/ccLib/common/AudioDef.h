@@ -74,6 +74,17 @@ public:
         }
     }
 
+public:
+    int GetFrameSize()
+    {
+        return m_dataSize;
+    }
+
+    char* GetFrameData()
+    {
+        return m_pData;
+    }
+
 private:
     int m_dataSize;
     char* m_pData;

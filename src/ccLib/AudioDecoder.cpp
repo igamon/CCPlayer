@@ -83,23 +83,23 @@ void CCAudioDecoder::Run()
                     break;
                 case MESSAGE_TYPE_ENUM_GET_AUDIO_PACKET:
                     {
-                        SmartPtr<CCPacket> packet
+                        SmartPtr<CCPacket> shdPacket
                                             = any_cast<SmartPtr<CCPacket> >(event.GetPtr()->anyParams);
 
-                        AVPacket* pPacket = packet.GetPtr()->GetPacketPointer();
+                        AVPacket packet = shdPacket.GetPtr()->GetPacket();
+                        std::cout << "Get a render audio frame" << std::endl;
 
-
-                        while(pPacket->size > 0)
+                        while(packet.size > 0)
                         {
                             avcodec_get_frame_defaults(pDecodedFrame);
 
                             decodedLen = avcodec_decode_audio4(pAudioCodecCtx,
                                                                pDecodedFrame,
                                                                &gotFrame,
-                                                               pPacket);
+                                                               &packet);
 
-                            pPacket->data += decodedLen;
-                            pPacket->size -= decodedLen;
+                            packet.data += decodedLen;
+                            packet.size -= decodedLen;
 
                             if(gotFrame)
                             {
@@ -116,6 +116,7 @@ void CCAudioDecoder::Run()
                                             Any(audioFrame));
                             }
                     } // end while ??
+                    std::cout << "Here" << std::endl;
                     break;
                 } // end switch case
             }
@@ -127,6 +128,18 @@ void CCAudioDecoder::Run()
 
 int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx, CCChannels* pChannels, CCRates* pRates, CCType* pType)
 {
+    AVCodec *pAVCodecVideo = avcodec_find_decoder(pAudioCtx->codec_id);
+
+    if(pAVCodecVideo == NULL)
+    {
+        return FAILURE;
+    }
+
+    if(avcodec_open(pAudioCtx, pAVCodecVideo) != 0)
+    {
+        return FAILURE;
+    }
+
     if (pAudioCtx->channels < 1
             || pAudioCtx->channels > 8
             || pAudioCtx->channels == 3

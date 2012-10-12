@@ -18,6 +18,10 @@ public:
 
 public:
     void SetAudioCtx(ALenum channels, ALuint rate, ALenum format);
+    void InitAudioFrame(AudioFrame* pAudioFrame, int index);
+
+public:
+    void Play();
 
 private:
 	void AL_APIENTRY wrap_BufferSamples();

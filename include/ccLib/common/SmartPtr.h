@@ -1,6 +1,8 @@
 #ifndef SMARTPTR_H
 #define SMARTPTR_H
 
+#include "SpinLock.h"
+
 namespace CCPlayer
 {
 
@@ -21,6 +23,7 @@ class IRefCountImpl : public IRefCount<T>
 {
 private:
     int __m_counter;
+
 protected:
     virtual void __IncRefCount()
     {
@@ -29,7 +32,7 @@ protected:
     virtual void __DecRefCount()
     {
         __m_counter--;
-        if(__m_counter<=0)
+        if(__m_counter==0)
         {
             __DestroyRef();
         }

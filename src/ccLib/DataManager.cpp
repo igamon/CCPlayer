@@ -115,7 +115,11 @@ void CCDataManager::Run()
             case DATA_MANAGER_STATUS_ENUM_WORKING:
             {
                 SmartPtr<CCPacket> packet(new CCPacket());
-                av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer());
+                if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
+                {
+                    m_bRunning = false;
+                    continue;
+                }
 
                 if(packet.GetPtr()->GetPacketPointer()->stream_index
                             == asIndex)
@@ -142,7 +146,9 @@ void CCDataManager::Run()
             {
             }
             break;
-        }
+        } // end switch
+
+        Sleep(10);
     }
 }
 

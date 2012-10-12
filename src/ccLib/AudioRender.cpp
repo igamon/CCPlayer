@@ -5,6 +5,16 @@
 namespace CCPlayer
 {
 
+enum AudioRenderStatus
+{
+    AUDIO_RENDER_STATUS_ENUM_UNKNOW,
+    AUDIO_RENDER_STATUS_ENUM_INITTED,
+    AUDIO_RENDER_STATUS_ENUM_UPDATING,
+    AUDIO_RENDER_STATUS_ENUM_SLEEPING,
+    AUDIO_REDNER_STATUS_ENUM_DEADING,
+    AUDIO_RENDER_STATUS_ENUM_MAX
+};
+
 CCAudioRender::CCAudioRender()
 {
 }
@@ -46,6 +56,8 @@ void CCAudioRender::Run()
 {
     ALWrapper alWrapper;
 
+    AudioRenderStatus status = AUDIO_RENDER_STATUS_ENUM_UNKNOW;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -65,19 +77,58 @@ void CCAudioRender::Run()
                     ALenum audFormat = GetAudioFormat(channels, type);
 
                     alWrapper.SetAudioCtx(channels, rates, audFormat);
+
+                    status = AUDIO_RENDER_STATUS_ENUM_INITTED;
                 }
                 break;
             case  MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME:
                 {
-                    SmartPtr<AudioFrame> audioFrame
+                    SmartPtr<AudioFrame> shrdAudioFrame
                                             = any_cast<SmartPtr<AudioFrame> >(event.GetPtr()->anyParams);
-                    m_audioFrameQueue.push(audioFrame);
+                    m_audioFrameQueue.push(shrdAudioFrame);
                 }
                 break;
             } // end switch case
+
+            switch(status)
+            {
+                case AUDIO_RENDER_STATUS_ENUM_UNKNOW:
+                    {
+                        //do nothing at all
+                    }
+                    break;
+                case AUDIO_RENDER_STATUS_ENUM_INITTED:
+                    {
+                        if(m_audioFrameQueue.size() >= AUDIO_BUFFER_NUMBER)
+                        {
+                            std::cout << "Init the audio buffers" << std::endl;
+                            for(int i=0; i<AUDIO_BUFFER_NUMBER;i++)
+                            {
+                                SmartPtr<AudioFrame> shrdAudioFrame = m_audioFrameQueue.front();
+                                m_audioFrameQueue.pop();
+
+                                alWrapper.InitAudioFrame(shrdAudioFrame.GetPtr(), i);
+                            }
+
+                            alWrapper.Play();
+
+                            status = AUDIO_RENDER_STATUS_ENUM_UPDATING;
+                        }
+                    }
+                    break;
+                case AUDIO_RENDER_STATUS_ENUM_UPDATING:
+                    {
+                        std::cout << "updating the data" << std::endl;
+                    }
+                    break;
+                case AUDIO_RENDER_STATUS_ENUM_SLEEPING:
+                    break;
+                case AUDIO_REDNER_STATUS_ENUM_DEADING:
+                    break;
+            }
         }
 
-        Sleep(10);
+        //Sleep(10);
     }
 }
 

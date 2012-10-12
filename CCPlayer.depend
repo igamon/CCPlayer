@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1348414739 source:c:\users\liuenbao\desktop\cbproject\ccplayer\main.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\main.cpp
 	"App.h"
 	"SafeContainerTemplate.h"
 
@@ -170,7 +170,7 @@
 	<AL/al.h>
 	<AL/alc.h>
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avformat.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avformat.h
 	<time.h>
 	<stdio.h>
 	"libavcodec/avcodec.h"
@@ -179,7 +179,7 @@
 	"avio.h"
 	"libavformat/version.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\avcodec.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\avcodec.h
 	<errno.h>
 	"libavutil/samplefmt.h"
 	"libavutil/avutil.h"
@@ -191,10 +191,10 @@
 	"libavcodec/version.h"
 	"libavutil/audioconvert.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\samplefmt.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\samplefmt.h
 	"avutil.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avutil.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avutil.h
 	"common.h"
 	"error.h"
 	"mathematics.h"
@@ -203,7 +203,7 @@
 	"log.h"
 	"pixfmt.h"
 
-1348117677 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\common.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\common.h
 	<ctype.h>
 	<errno.h>
 	<inttypes.h>
@@ -220,62 +220,62 @@
 	"mem.h"
 	"internal.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\attributes.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\attributes.h
 
-1347186394 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avconfig.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avconfig.h
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\error.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\error.h
 	<errno.h>
 	"avutil.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\mathematics.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\mathematics.h
 	<stdint.h>
 	<math.h>
 	"attributes.h"
 	"rational.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\rational.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\rational.h
 	<stdint.h>
 	<limits.h>
 	"attributes.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\intfloat_readwrite.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\intfloat_readwrite.h
 	<stdint.h>
 	"attributes.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\log.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\log.h
 	<stdarg.h>
 	"avutil.h"
 	"attributes.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\pixfmt.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\pixfmt.h
 	"libavutil/avconfig.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\cpu.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\cpu.h
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\dict.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\dict.h
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\version.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\version.h
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\audioconvert.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\audioconvert.h
 	<stdint.h>
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avio.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avio.h
 	<stdint.h>
 	"libavutil/common.h"
 	"libavutil/dict.h"
 	"libavutil/log.h"
 	"libavformat/version.h"
 
-1339272584 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\version.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\version.h
 	"libavutil/avutil.h"
 
-1349186766 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libswscale\swscale.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libswscale\swscale.h
 	"libavutil/avutil.h"
 	"libavutil/log.h"
 	"libavutil/pixfmt.h"
 
-1349181003 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
 	"IGLRenderObject.h"
 	"IRSPPlayerCommand.h"
@@ -283,7 +283,7 @@
 	"ModuleManager.h"
 	"Any.h"
 
-1349079534 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
 	"Common.h"
 	"Thread.h"
 	"IMessageReceiver.h"
@@ -303,7 +303,7 @@
 	"libavcodec/avcodec.h"
 	"libswscale/swscale.h"
 
-1349258381 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\datamanager.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -316,11 +316,11 @@
 1348417903 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\thread.cpp
 	"Thread.h"
 
-1349187183 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
 	"VideoDecoder.h"
 	"MessageCenter.h"
 
-1349186210 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -332,11 +332,11 @@
 
 1348400199 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\uiwindowimplwin32.cpp
 
-1349341413 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+1350040296 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
 	"AudioDecoder.h"
 	"MessageCenter.h"
 
-1349341290 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -346,47 +346,47 @@
 1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common.cpp
 	"Common.h"
 
-1349265099 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+1350040436 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
 	"DataManager.h"
 	"MessageCenter.h"
 
-1348417576 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\glviewimplwin32.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\glviewimplwin32.cpp
 	"GLViewImplWin32.h"
 	<GL/gl.h>
 	<GL/glu.h>
 
-1348404938 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\windowimplwin32.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\videomodule\windowimplwin32.cpp
 	"WindowImplWin32.h"
 
-1348403487 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\windowimplwin32.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\windowimplwin32.h
 	"Win32Def.h"
 
-1348403904 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
 	<Windows.h>
 
-1348753911 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"WindowImplWin32.h"
 	"GLViewImplWin32.h"
 	"Player.h"
 
-1348403316 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
 
-1348548645 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
 	"Win32Def.h"
 	"IGLRenderObject.h"
 
-1348485969 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\safecontainertemplate.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\safecontainertemplate.h
 	<pthread.h>
 
 1348417459 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\glrenderobject.h
 
-1348417862 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\thread.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\thread.h
 	"Common.h"
 	<pthread.h>
 
-1349257652 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
+1350040203 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
 	<iostream>
 	<string>
 	<vector>
@@ -400,12 +400,12 @@
 	"libavcodec/avcodec.h"
 	"libswscale/swscale.h"
 
-1349341756 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+1350040589 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
 	"AudioRender.h"
 	"MessageCenter.h"
 	"ALWrapper.h"
 
-1349341720 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiorender.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\audiorender.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -413,29 +413,29 @@
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1348746911 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 
-1349180764 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
 	"VideoDef.h"
 	"IMessageReceiver.h"
 
-1348415374 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
 	"Common.h"
 
-1348417903 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\thread.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\thread.cpp
 	"Thread.h"
 
-1348675648 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
 	"MessageCenter.h"
 	"IMessageReceiver.h"
 	"SmartPtr.h"
 
-1348672528 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
 	"Common.h"
 	"SpinLock.h"
 	"RWLock.h"
@@ -443,20 +443,20 @@
 	"Event.h"
 	"SmartPtr.h"
 
-1348487051 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\spinlock.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\spinlock.h
 	<pthread.h>
 
-1348501960 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
 	<pthread.h>
 
-1349341346 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\event.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\event.h
 	"Any.h"
 
-1348675705 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\imessagereceiver.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\imessagereceiver.h
 	"Event.h"
 	"SmartPtr.h"
 
-1348747347 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
+1349872165 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
 	"ModuleManager.h"
 	"MessageCenter.h"
 	"AudioRender.h"
@@ -465,20 +465,21 @@
 	"VideoDecoder.h"
 	"DataManager.h"
 
-1348679780 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
 	"Common.h"
 
-1348417459 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\iglrenderobject.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\iglrenderobject.h
 
-1348675611 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\any.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\any.h
 	<typeinfo>
 	<type_traits>
 
-1348744795 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+1349884852 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+	"SpinLock.h"
 
-1348759902 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspplayercommand.h
+1349872164 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspplayercommand.h
 
-1338099490 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\pthread.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\pthread.h
 	<windows.h>
 	"config.h"
 	<time.h>
@@ -489,34 +490,34 @@
 	<sched.h>
 	<sys/types.h>
 
-1309316764 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\sched.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\sched.h
 	"need_errno.h"
 	<errno.h>
 	<sys/types.h>
 	<time.h>
 
-1349188834 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\alwrapper.h
+1349874155 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\alwrapper.h
 	"Common.h"
 	"AudioDef.h"
 	<AL/al.h>
 	<AL/alc.h>
 	<AL/alext.h>
 
-1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\al.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\al.h
 
-1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alc.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alc.h
 
-1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alext.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alext.h
 	<stddef.h>
 	"efx.h"
 
-1332950117 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\efx.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\efx.h
 
-1349189181 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
+1349884646 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
 	"ALWrapper.h"
 
-1349343508 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\audiodef.h
+1349874309 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\audiodef.h
 	"Common.h"
 
-1349343715 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
+1349872165 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
 
