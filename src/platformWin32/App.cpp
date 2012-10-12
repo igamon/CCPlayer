@@ -1,8 +1,8 @@
 #include "App.h"
 #include "Win32Def.h"
+#include "Player.h"
 #include "WindowImplWin32.h"
 #include "GLViewImplWin32.h"
-#include "Player.h"
 
 namespace CCPlayer
 {
@@ -16,6 +16,11 @@ CCApp::~CCApp()
 {
 }
 
+void CCApp::OpenResponse(int ErrCode)
+{
+    m_pPlayerInstance->InitGLRenderObject(m_pGLRenderView);
+}
+
 int CCApp::Exec()
 {
     if(!m_bInited)
@@ -23,23 +28,22 @@ int CCApp::Exec()
         return -1;
     }
 
-    CCWindowImplWin32 mainWindow(WINDOW_X_POS, WINDOW_Y_POS, WINDOW_WIDTH, WINDOW_HEIGHT);
-    CCGLViewImplWin32 glRenderView(
-                        mainWindow.GetWndHandle(),
+    m_pMainWindow = new CCWindowImplWin32(WINDOW_X_POS,
+                                          WINDOW_Y_POS,
+                                          WINDOW_WIDTH,
+                                          WINDOW_HEIGHT);
+    m_pGLRenderView = new CCGLViewImplWin32(
+                        m_pMainWindow->GetWndHandle(),
                         10,
                         10,
                         WINDOW_WIDTH - 40,
                         WINDOW_HEIGHT - 60);
 
-    CCPlayer playerInstance;
+    m_pPlayerInstance = new CCPlayer();
+    m_pPlayerInstance->SetRspCommandObject(this);
+    m_pPlayerInstance->Open("test.flv");
 
-    //while(1)
-    {
-        playerInstance.Open("test.flv");
-        Sleep(15);
-    }
-
-    return mainWindow.MainLoop();
+    return m_pMainWindow->MainLoop();
 }
 
 LRESULT CALLBACK GlobalUIObjectsEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam)

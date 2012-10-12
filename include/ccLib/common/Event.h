@@ -13,6 +13,8 @@ enum MessageType
 //this is for client control the player
     COMMAND_TYPE_ENUM_OPEN,
 
+    MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
+
 //this is for player control the all modules
     MESSAGE_TYPE_ENUM_OPEN_FILE,
     MESSAGE_TYPE_ENUM_OPENED_FILE,
@@ -25,6 +27,8 @@ enum MessageType
     MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET,
 
     MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
+    MESSAGE_TYPE_ENUM_GET_VIDEO_INFORMATION
+
 };
 
 struct Event

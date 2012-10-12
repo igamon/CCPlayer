@@ -45,8 +45,6 @@ void CCVideoDecoder::Run()
 {
     AVCodecContext* pVideoCtx = NULL;
     SwsContext* pImageConvertCtx = NULL;
-    int imgWidth = 0;
-    int imgHeight = 0;
 
     while(m_bRunning)
     {
@@ -61,11 +59,18 @@ void CCVideoDecoder::Run()
 
                     if(pVideoCtx != NULL)
                     {
+                        int imgWidth = 0;
+                        int imgHeight = 0;
                         GetVideoInformation(pVideoCtx, &pImageConvertCtx, &imgWidth, &imgHeight);
 
-                        //send the width and height of the image frame to the render.
-                        //incomplete.
+                        std::vector<Any> videoInformartion;
+                        videoInformartion.push_back(Any(imgWidth));
+                        videoInformartion.push_back(Any(imgHeight));
 
+                        SendMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                    MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
+                                    Any(videoInformartion));
                     }
 
                 }
@@ -87,6 +92,18 @@ int CCVideoDecoder::GetVideoInformation(AVCodecContext* pVideoCtx,
                                         int *pImgWidth,
                                         int *pImgHeight)
 {
+    AVCodec *pAVCodecVideo = avcodec_find_decoder(pVideoCtx->codec_id);
+
+    if(pAVCodecVideo == NULL)
+    {
+        return FAILURE;
+    }
+
+    if(avcodec_open(pVideoCtx, pAVCodecVideo) != 0)
+    {
+        return FAILURE;
+    }
+
     *pImgWidth = VIDEO_OUTPUT_WIDTH;
     *pImgHeight = VIDEO_OUTPUT_HEIGHT;
 
@@ -100,7 +117,7 @@ int CCVideoDecoder::GetVideoInformation(AVCodecContext* pVideoCtx,
                    NULL,
                    NULL,
                    NULL);
-    return 0;
+    return SUCCESS;
 }
 
 }

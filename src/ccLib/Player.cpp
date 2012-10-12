@@ -9,6 +9,7 @@ namespace CCPlayer
 {
 
 CCPlayer::CCPlayer()
+:m_pRspCommentObject(NULL)
 {
     //this will start the message center thread
     CCMessageCenter::GetInstance()->InitMessageCenter();
@@ -23,9 +24,25 @@ CCPlayer::~CCPlayer()
     CCMessageCenter::GetInstance()->UnRegisterMessageReceiver(MESSAGE_OBJECT_ENUM_PLAYER);
 }
 
+void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
+{
+    m_pRspCommentObject = pRspCommentObject;
+}
+
+void CCPlayer::InitGLRenderObject(IGLRender* pGLRenderObject)
+{
+    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                                MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                                MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
+                                                Any(pGLRenderObject));
+}
+
 void CCPlayer::Open(const std::string& loadParams)
 {
-    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_CLIENT, MESSAGE_OBJECT_ENUM_PLAYER, COMMAND_TYPE_ENUM_OPEN, Any(loadParams));
+    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_CLIENT,
+                                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                                COMMAND_TYPE_ENUM_OPEN,
+                                                Any(loadParams));
 }
 
 void CCPlayer::SendMessage(MessageObjectId messageSender,
@@ -33,7 +50,10 @@ void CCPlayer::SendMessage(MessageObjectId messageSender,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender, messageReceiver, msg, anyParam);
+    CCMessageCenter::GetInstance()->SendMessage(messageSender,
+                                                messageReceiver,
+                                                msg,
+                                                anyParam);
 }
 
 void CCPlayer::ReceiverMessage(const SmartPtr<Event>& rSmtEvent)
@@ -59,8 +79,6 @@ bool CCPlayer::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCPlayer::Run()
 {
-    IRSPPlayCommand* pRspObject = NULL;
-
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -78,16 +96,6 @@ void CCPlayer::Run()
                                     MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                     MESSAGE_TYPE_ENUM_OPEN_FILE,
                                     Any(mediaUrl));
-                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
-                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
-                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
-                        //CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
-
-                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_DATA_MANAGER, event.GetPtr()->type, event.GetPtr()->anyParams);
-                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_AUDIO_RENDER, event.GetPtr()->type, event.GetPtr()->anyParams);
-                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_AUDIO_DECODER, event.GetPtr()->type, event.GetPtr()->anyParams);
-                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_VIDEO_RENDER, event.GetPtr()->type, event.GetPtr()->anyParams);
-                        //SendMessage(MESSAGE_OBJECT_ENUM_CCPLAYER, MESSAGE_OBJECT_ENUM_VIDEO_DECODER, event.GetPtr()->type, event.GetPtr()->anyParams);
                     }
                     break;
                 case MESSAGE_TYPE_ENUM_OPENED_FILE:
@@ -120,9 +128,9 @@ void CCPlayer::Run()
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
                         }
 
-                        if(pRspObject != NULL)
+                        if(m_pRspCommentObject != NULL)
                         {
-                            pRspObject->OpenResponse(ret);
+                            m_pRspCommentObject->OpenResponse(ret);
                         }
                     }
                     break;

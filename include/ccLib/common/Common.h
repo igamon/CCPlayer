@@ -48,12 +48,10 @@ class CCPacket
 public:
     CCPacket()
     {
-        std::cout << "Init the packet" << std::endl;
         av_init_packet(&packet);
     }
     ~CCPacket()
     {
-        std::cout << "free the packet" << std::endl;
         av_free_packet(&packet);
     }
 

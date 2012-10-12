@@ -1,6 +1,8 @@
 #ifndef VIDEODEF_H
 #define VIDEODEF_H
 
+#include "Common.h"
+
 namespace CCPlayer
 {
 
@@ -66,6 +68,22 @@ public:
             m_pFrameData = NULL;
         }
 	}
+
+public:
+    char* GetFrameData()
+    {
+        return m_pFrameData;
+    }
+
+    int GetFrameSize()
+    {
+        return m_frameSize;
+    }
+
+    double GetShowTime()
+    {
+        return m_showTime;
+    }
 
 private:
 	char *m_pFrameData;

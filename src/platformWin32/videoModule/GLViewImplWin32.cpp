@@ -276,6 +276,8 @@ int CCGLViewImplWin32::DrawFrame()
 	// rotate 45 degrees every second
 	x += (double)45.0;
 
+    SwapBuffers();
+
 	return 0;
 }
 

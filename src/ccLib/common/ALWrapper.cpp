@@ -97,6 +97,53 @@ void ALWrapper::InitAudioFrame(AudioFrame* pAudioFrame, int index)
     alSourceQueueBuffers(m_audSource, 1, &m_audBuffers[index]);
 }
 
+bool ALWrapper::NeedData()
+{
+    ALint processed = 0;
+    alGetSourcei(m_audSource, AL_BUFFERS_PROCESSED, &processed);
+    if (processed == 0)
+    {
+        ALint state = AL_SOURCE_STATE;
+        alGetSourcei(m_audSource, AL_SOURCE_STATE, &state);
+        if (alGetError() != AL_NO_ERROR)
+        {
+            std::cout << "Cannot check OpenAL source state." << std::endl;
+        }
+        if (state != AL_PLAYING)
+        {
+            alSourcePlay(m_audSource);
+            if (alGetError() != AL_NO_ERROR)
+            {
+                std::cout << "Cannot restart OpenAL source playback." << std::endl;
+            }
+        }
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+
+void ALWrapper::UpdateAudioFrame(AudioFrame* pAudioFrame)
+{
+    ALuint updateBuffer = 0;
+    alSourceUnqueueBuffers(m_audSource, 1, &updateBuffer);
+    assert(updateBuffer != 0);
+    alBufferData(updateBuffer,
+                 m_audFormat,
+                 pAudioFrame->GetFrameData(),
+                 pAudioFrame->GetFrameSize(),
+                 m_audRate);
+
+    alSourceQueueBuffers(m_audSource, 1, &updateBuffer);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        std::cout << "Cannot buffer OpenAL data." << std::endl;
+    }
+}
+
 void ALWrapper::Play()
 {
     alSourcePlay(m_audSource);

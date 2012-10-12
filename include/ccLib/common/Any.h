@@ -13,13 +13,13 @@ template<typename ValueType>
 friend ValueType * any_cast(Any *);
 
 template<typename ValueType>
-friend ValueType * any_cast(const CCPlayer::Any * operand);
+friend ValueType * any_cast(const Any * operand);
 
 template<typename ValueType>
-ValueType any_cast(CCPlayer::Any & operand);
+ValueType any_cast(Any & operand);
 
 template<typename ValueType>
-const ValueType any_cast(const CCPlayer::Any & operand);
+const ValueType any_cast(const Any & operand);
 
 public:
     Any():content(0)
@@ -112,21 +112,21 @@ public:
 };
 
 template<typename ValueType>
-ValueType* any_cast(CCPlayer::Any * operand)
+ValueType* any_cast(Any * operand)
 {
     return ( operand && operand->type() == typeid(ValueType) )
-            ? &static_cast<CCPlayer::Any::holder<ValueType> *>(operand->content)->held
+            ? &static_cast<Any::holder<ValueType> *>(operand->content)->held
             : 0;
 }
 
 template<typename ValueType>
-const ValueType * any_cast(const CCPlayer::Any * operand)
+const ValueType * any_cast(const Any * operand)
 {
-    return any_cast<ValueType>(const_cast<CCPlayer::Any *>(operand));
+    return any_cast<ValueType>(const_cast<Any *>(operand));
 }
 
 template<typename ValueType>
-const ValueType any_cast(const CCPlayer::Any & operand)
+const ValueType any_cast(const Any & operand)
 {
     typedef typename std::remove_reference<ValueType>::type nonref;
     const nonref * result = any_cast<nonref>(&operand);
@@ -136,7 +136,7 @@ const ValueType any_cast(const CCPlayer::Any & operand)
 }
 
 template<typename ValueType>
-ValueType any_cast(CCPlayer::Any & operand)
+ValueType any_cast(Any & operand)
 {
     typedef typename std::remove_reference<ValueType>::type nonref;
     nonref * result = any_cast<nonref>(&operand);

@@ -87,7 +87,6 @@ void CCAudioDecoder::Run()
                                             = any_cast<SmartPtr<CCPacket> >(event.GetPtr()->anyParams);
 
                         AVPacket packet = shdPacket.GetPtr()->GetPacket();
-                        std::cout << "Get a render audio frame" << std::endl;
 
                         while(packet.size > 0)
                         {
@@ -116,7 +115,6 @@ void CCAudioDecoder::Run()
                                             Any(audioFrame));
                             }
                     } // end while ??
-                    std::cout << "Here" << std::endl;
                     break;
                 } // end switch case
             }
@@ -126,16 +124,19 @@ void CCAudioDecoder::Run()
     }
 }
 
-int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx, CCChannels* pChannels, CCRates* pRates, CCType* pType)
+int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx,
+                                        CCChannels* pChannels,
+                                        CCRates* pRates,
+                                        CCType* pType)
 {
-    AVCodec *pAVCodecVideo = avcodec_find_decoder(pAudioCtx->codec_id);
+    AVCodec *pAVCodecAudio = avcodec_find_decoder(pAudioCtx->codec_id);
 
-    if(pAVCodecVideo == NULL)
+    if(pAVCodecAudio == NULL)
     {
         return FAILURE;
     }
 
-    if(avcodec_open(pAudioCtx, pAVCodecVideo) != 0)
+    if(avcodec_open(pAudioCtx, pAVCodecAudio) != 0)
     {
         return FAILURE;
     }

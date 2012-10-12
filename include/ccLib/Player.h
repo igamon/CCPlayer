@@ -8,7 +8,8 @@
 #include "SmartPtr.h"
 #include "SpinLock.h"
 
-class IGLRenderObject;
+class IRSPCommand;
+class IGLRender;
 
 namespace CCPlayer
 {
@@ -20,6 +21,10 @@ public:
     virtual ~CCPlayer();
 
 public:
+    void SetRspCommandObject(IRSPCommand* pRspCommentObject);
+
+public:
+    void InitGLRenderObject(IGLRender* pGLRenderObject);
     void Open(const std::string& loadParams);
 
 public:
@@ -39,6 +44,9 @@ public:
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;
     CCSpinLock m_spinLockMessageQueue;
+
+private:
+    IRSPCommand* m_pRspCommentObject;
 };
 
 }

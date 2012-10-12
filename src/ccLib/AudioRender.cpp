@@ -118,7 +118,13 @@ void CCAudioRender::Run()
                     break;
                 case AUDIO_RENDER_STATUS_ENUM_UPDATING:
                     {
-                        std::cout << "updating the data" << std::endl;
+                        if(alWrapper.NeedData() && !m_audioFrameQueue.empty())
+                        {
+                            SmartPtr<AudioFrame> shrdAudioFrame = m_audioFrameQueue.front();
+                            m_audioFrameQueue.pop();
+
+                            alWrapper.UpdateAudioFrame(shrdAudioFrame.GetPtr());
+                        }
                     }
                     break;
                 case AUDIO_RENDER_STATUS_ENUM_SLEEPING:

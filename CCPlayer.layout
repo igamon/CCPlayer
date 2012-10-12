@@ -1,69 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="src\platformWin32\App.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="693" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\Any.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1486" topLine="79" />
-		</Cursor>
-	</File>
-	<File name="src\platformWin32\videoModule\GLViewImplWin32.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2681" topLine="122" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\AudioDef.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="438" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="src\platformWin32\videoModule\WindowImplWin32.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1932" topLine="71" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\Common.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1192" topLine="61" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\Event.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="556" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\IMessageReceiver.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="13" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="241" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\MessageCenter.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1251" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\ModuleManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="228" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="include\ccLib\common\Mutex.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="405" topLine="12" />
-		</Cursor>
-	</File>
 	<File name="include\ccLib\common\RWLock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="12" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="290" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="include\ccLib\common\SafeContainerTemplate.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="src\ccLib\common\ALWrapper.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="258" topLine="7" />
+			<Cursor1 position="2498" topLine="103" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\SafeContainerTemplate.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="242" topLine="12" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\common\SmartPtr.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
@@ -71,9 +21,19 @@
 			<Cursor1 position="82" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="src\ccLib\common\MessageCenter.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1914" topLine="53" />
+		</Cursor>
+	</File>
 	<File name="include\ccLib\common\SpinLock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="15" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="221" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\common\ModuleManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1314" topLine="40" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\common\Thread.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -81,29 +41,39 @@
 			<Cursor1 position="228" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="src\ccLib\common\Thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="101" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="include\ccLib\common\VideoDef.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1089" topLine="12" />
+			<Cursor1 position="1334" topLine="59" />
+		</Cursor>
+	</File>
+	<File name="src\platformWin32\App.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="288" topLine="16" />
 		</Cursor>
 	</File>
 	<File name="include\platformWin32\App.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="152" topLine="11" />
+			<Cursor1 position="280" topLine="19" />
 		</Cursor>
 	</File>
-	<File name="include\platformWin32\videoModule\WindowImplWin32.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+	<File name="src\platformWin32\videoModule\GLViewImplWin32.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="341" topLine="8" />
+			<Cursor1 position="6353" topLine="274" />
 		</Cursor>
 	</File>
-	<File name="include\platformWin32\videoModule\GLViewImplWin32.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="11" zoom_2="0">
+	<File name="include\platformWin32\videoModule\GLViewImplWin32.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="11" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="29" topLine="0" />
+			<Cursor1 position="173" topLine="8" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="11" zoom_2="0">
+	<File name="src\platformWin32\videoModule\WindowImplWin32.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="157" topLine="0" />
+			<Cursor1 position="1932" topLine="71" />
 		</Cursor>
 	</File>
 	<File name="include\platformWin32\videoModule\Win32Def.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
@@ -111,19 +81,9 @@
 			<Cursor1 position="87" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\ccLib\AudioDecoder.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2942" topLine="84" />
-		</Cursor>
-	</File>
 	<File name="include\ccLib\AudioDecoder.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="855" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\AudioRender.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1617" topLine="69" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\AudioRender.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
@@ -131,64 +91,29 @@
 			<Cursor1 position="553" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3304" topLine="123" />
-		</Cursor>
-	</File>
 	<File name="include\ccLib\DataManager.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="843" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\Player.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5350" topLine="92" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\VideoDecoder.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1457" topLine="97" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\VideoRender.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="77" topLine="0" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\IGLRenderObject.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="87" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\common\ALWrapper.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2252" topLine="88" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\IRSPPlayerCommand.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="14" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="120" topLine="0" />
+			<Cursor1 position="119" topLine="2" />
 		</Cursor>
 	</File>
-	<File name="include\ccLib\Player.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+	<File name="include\ccLib\Player.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="857" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\common\MessageCenter.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1914" topLine="53" />
+			<Cursor1 position="427" topLine="22" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\VideoDecoder.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="726" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="src\ccLib\common\ModuleManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="192" topLine="3" />
+			<Cursor1 position="667" topLine="25" />
 		</Cursor>
 	</File>
 	<File name="include\ccLib\VideoRender.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
@@ -196,14 +121,89 @@
 			<Cursor1 position="551" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\ccLib\common\Thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="101" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="include\ccLib\common\ALWrapper.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="419" topLine="15" />
+			<Cursor1 position="424" topLine="16" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\Any.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2778" topLine="136" />
+		</Cursor>
+	</File>
+	<File name="include\platformWin32\videoModule\WindowImplWin32.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="8" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="341" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\AudioDef.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="438" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="11" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="157" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\Common.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="911" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\AudioDecoder.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3953" topLine="104" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\Event.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="192" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\AudioRender.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5529" topLine="170" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\IMessageReceiver.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="13" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="241" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3304" topLine="123" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\MessageCenter.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1251" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\Player.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3394" topLine="101" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\ModuleManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="228" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\VideoDecoder.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1247" topLine="50" />
+		</Cursor>
+	</File>
+	<File name="include\ccLib\common\Mutex.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="405" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="src\ccLib\VideoRender.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1738" topLine="66" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

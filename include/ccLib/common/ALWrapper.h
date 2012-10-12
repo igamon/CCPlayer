@@ -19,6 +19,8 @@ public:
 public:
     void SetAudioCtx(ALenum channels, ALuint rate, ALenum format);
     void InitAudioFrame(AudioFrame* pAudioFrame, int index);
+    bool NeedData();
+    void UpdateAudioFrame(AudioFrame* pAudioFrame);
 
 public:
     void Play();

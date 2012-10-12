@@ -1,7 +1,9 @@
 #ifndef GLRENDEROBJECT_H
 #define GLRENDEROBJECT_H
 
-class IGLRenderObject
+#include "VideoDef.h"
+
+class IGLRender
 {
 public:
     virtual int SwapBuffers() = 0;
