@@ -58,8 +58,8 @@
 		<Unit filename="include\ccLib\AudioDecoder.h" />
 		<Unit filename="include\ccLib\AudioRender.h" />
 		<Unit filename="include\ccLib\DataManager.h" />
-		<Unit filename="include\ccLib\IGLRenderObject.h" />
-		<Unit filename="include\ccLib\IRSPPlayerCommand.h" />
+		<Unit filename="include\ccLib\IGLRender.h" />
+		<Unit filename="include\ccLib\IRSPCommand.h" />
 		<Unit filename="include\ccLib\Player.h" />
 		<Unit filename="include\ccLib\VideoDecoder.h" />
 		<Unit filename="include\ccLib\VideoRender.h" />

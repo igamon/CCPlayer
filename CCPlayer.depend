@@ -371,12 +371,12 @@
 	"WindowImplWin32.h"
 	"GLViewImplWin32.h"
 
-1350060098 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
-	"IRSPPlayerCommand.h"
+1350061853 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
+	"IRSPCommand.h"
 
-1350061009 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
+1350061880 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
 	"Win32Def.h"
-	"IGLRenderObject.h"
+	"IGLRender.h"
 
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\safecontainertemplate.h
 	<pthread.h>
@@ -414,10 +414,10 @@
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1350061502 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1350061828 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
-	"IGLRenderObject.h"
+	"IGLRender.h"
 
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
 	"Thread.h"
@@ -524,4 +524,9 @@
 
 1350057774 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
 	"Common.h"
+
+1350060188 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\iglrender.h
+	"VideoDef.h"
+
+1350058534 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
 

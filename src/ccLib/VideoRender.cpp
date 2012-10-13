@@ -1,6 +1,6 @@
 #include "VideoRender.h"
 #include "MessageCenter.h"
-#include "IGLRenderObject.h"
+#include "IGLRender.h"
 
 namespace CCPlayer
 {

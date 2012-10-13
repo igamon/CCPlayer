@@ -1,6 +1,6 @@
 #include "Player.h"
-#include "IGLRenderObject.h"
-#include "IRSPPlayerCommand.h"
+#include "IGLRender.h"
+#include "IRSPCommand.h"
 #include "MessageCenter.h"
 #include "ModuleManager.h"
 #include "Any.h"

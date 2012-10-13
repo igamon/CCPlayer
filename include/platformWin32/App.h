@@ -1,7 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
-#include "IRSPPlayerCommand.h"
+#include "IRSPCommand.h"
 
 namespace CCPlayer
 {

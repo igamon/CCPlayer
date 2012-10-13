@@ -2,7 +2,7 @@
 #define UIGLVIEWIMPLWIN32_H
 
 #include "Win32Def.h"
-#include "IGLRenderObject.h"
+#include "IGLRender.h"
 
 namespace CCPlayer
 {
