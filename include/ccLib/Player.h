@@ -8,11 +8,11 @@
 #include "SmartPtr.h"
 #include "SpinLock.h"
 
-class IRSPCommand;
-class IGLRender;
-
 namespace CCPlayer
 {
+
+class IRSPCommand;
+class CCUIWindow;
 
 class CCPlayer : public CCThread, public IMessageReceiver
 {
@@ -24,7 +24,7 @@ public:
     void SetRspCommandObject(IRSPCommand* pRspCommentObject);
 
 public:
-    //void InitGLRenderObject(IGLRender* pGLRenderObject);
+    void InitGLWindow(CCUIWindow* pGLWindow);
     void Open(const std::string& loadParams);
 
 public:

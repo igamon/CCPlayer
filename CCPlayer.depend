@@ -1,7 +1,6 @@
 # depslib dependency file v1.0
-1350048893 source:c:\users\liuenbao\desktop\cbproject\ccplayer\main.cpp
+1350216287 source:c:\users\liuenbao\desktop\cbproject\ccplayer\main.cpp
 	"App.h"
-	"SafeContainerTemplate.h"
 
 1347375843 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\thread.cpp
 	"Thread.h"
@@ -275,15 +274,14 @@
 	"libavutil/log.h"
 	"libavutil/pixfmt.h"
 
-1350211528 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1350216891 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
-	"IGLRender.h"
 	"IRSPCommand.h"
 	"MessageCenter.h"
 	"ModuleManager.h"
 	"Any.h"
 
-1350211489 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
+1350216742 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
 	"Common.h"
 	"Thread.h"
 	"IMessageReceiver.h"
@@ -365,14 +363,14 @@
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
 	<Windows.h>
 
-1350211498 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1350216396 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"Player.h"
 	"WindowImplWin32.h"
 	"GLViewImplWin32.h"
 
-1350061853 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
+1350216273 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
 	"IRSPCommand.h"
 
 1350214319 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
@@ -415,10 +413,11 @@
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1350211613 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1350221427 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
-	"IGLRender.h"
+	"UIGLView.h"
+	"UIWindow.h"
 
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
 	"Thread.h"
@@ -529,20 +528,42 @@
 1350211432 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\iglrender.h
 	"Common.h"
 
-1350058534 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
+1350216763 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
 
-1350214077 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiwindow.cpp
+1350218690 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiwindow.cpp
 	"UIWindow.h"
 
-1350214161 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiwindow.h
+1350218783 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiwindow.h
 	"UIObject.h"
 
-1350213671 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiobject.h
+1350217323 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiobject.h
 	"Common.h"
 
-1350212219 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiglview.cpp
+1350223759 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiglview.cpp
+	"UIGLView.h"
+	"UIWindow.h"
+	"GLViewImplWin32.h"
+
+1350223736 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
+	"Common.h"
+	"UIObject.h"
+
+1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\win32def.h
+	<Windows.h>
+
+1350218794 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\windowimplwin32.h
+	"Win32Def.h"
+	"UIWindow.h"
+
+1350223619 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\glviewimplwin32.h
+	"Win32Def.h"
 	"UIGLView.h"
 
-1350214111 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
-	"UIObject.h"
+1350223540 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glviewimplwin32.cpp
+	"GLViewImplWin32.h"
+	<GL/gl.h>
+	<GL/glu.h>
+
+1350219158 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
+	"WindowImplWin32.h"
 

@@ -58,7 +58,6 @@
 		<Unit filename="include\ccLib\AudioDecoder.h" />
 		<Unit filename="include\ccLib\AudioRender.h" />
 		<Unit filename="include\ccLib\DataManager.h" />
-		<Unit filename="include\ccLib\IGLRender.h" />
 		<Unit filename="include\ccLib\IRSPCommand.h" />
 		<Unit filename="include\ccLib\Player.h" />
 		<Unit filename="include\ccLib\VideoDecoder.h" />
@@ -68,6 +67,7 @@
 		<Unit filename="include\ccLib\common\AudioDef.h" />
 		<Unit filename="include\ccLib\common\Common.h" />
 		<Unit filename="include\ccLib\common\Event.h" />
+		<Unit filename="include\ccLib\common\GLViewImplWin32.h" />
 		<Unit filename="include\ccLib\common\IMessageReceiver.h" />
 		<Unit filename="include\ccLib\common\MessageCenter.h" />
 		<Unit filename="include\ccLib\common\ModuleManager.h" />
@@ -81,9 +81,8 @@
 		<Unit filename="include\ccLib\common\UIWindow.h" />
 		<Unit filename="include\ccLib\common\VideoDef.h" />
 		<Unit filename="include\platformWin32\App.h" />
-		<Unit filename="include\platformWin32\videoModule\GLViewImplWin32.h" />
-		<Unit filename="include\platformWin32\videoModule\Win32Def.h" />
-		<Unit filename="include\platformWin32\videoModule\WindowImplWin32.h" />
+		<Unit filename="include\platformWin32\Win32Def.h" />
+		<Unit filename="include\platformWin32\WindowImplWin32.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src\ccLib\AudioDecoder.cpp" />
 		<Unit filename="src\ccLib\AudioRender.cpp" />
@@ -93,14 +92,14 @@
 		<Unit filename="src\ccLib\VideoRender.cpp" />
 		<Unit filename="src\ccLib\common\ALWrapper.cpp" />
 		<Unit filename="src\ccLib\common\Common.cpp" />
+		<Unit filename="src\ccLib\common\GLViewImplWin32.cpp" />
 		<Unit filename="src\ccLib\common\MessageCenter.cpp" />
 		<Unit filename="src\ccLib\common\ModuleManager.cpp" />
 		<Unit filename="src\ccLib\common\Thread.cpp" />
 		<Unit filename="src\ccLib\common\UIGLView.cpp" />
 		<Unit filename="src\ccLib\common\UIWindow.cpp" />
 		<Unit filename="src\platformWin32\App.cpp" />
-		<Unit filename="src\platformWin32\videoModule\GLViewImplWin32.cpp" />
-		<Unit filename="src\platformWin32\videoModule\WindowImplWin32.cpp" />
+		<Unit filename="src\platformWin32\WindowImplWin32.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

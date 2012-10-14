@@ -7,7 +7,6 @@ namespace CCPlayer
 {
 
 class CCPlayer;
-class CCGLViewImplWin32;
 class CCWindowImplWin32;
 
 class CCApp: public IRSPCommand
@@ -22,7 +21,6 @@ public:
 
 private:
     CCWindowImplWin32* m_pMainWindow;
-    CCGLViewImplWin32* m_pGLRenderView;
     CCPlayer* m_pPlayerInstance;
     bool m_bInited;
 };

@@ -13,7 +13,7 @@ CCUIWindow::~CCUIWindow()
     //dtor
 }
 
-void CCUIWindow::AddSubUIObject(CCUIObject* pSubObject)
+void CCUIWindow::AddSubUIObjectHelp(CCUIObject* pSubObject)
 {
     m_subUIObjects.push_back(pSubObject);
 }

@@ -6,7 +6,7 @@
 
 namespace CCPlayer
 {
-class CCWindowImplWin32
+class CCWindowImplWin32: public CCUIWindow
 {
 public:
     CCWindowImplWin32(int x, int y, int width, int height);
@@ -18,12 +18,14 @@ public:
     HWND GetWndHandle();
     int MainLoop();
 
+public:
+    virtual void AddSubUIObject(CCUIObject* pSubObject);
+    virtual void InsertUIObejct(int index, CCUIObject* pSubObject);
+    virtual void LayoutSubViews();
+
 private:
     void RegisterWindowClass();
     void UnRegisterWindowClass();
-
-private:
-    HWND m_hWnd;
 
 private:
     static const char* ourClassNameA;

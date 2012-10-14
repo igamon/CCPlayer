@@ -14,14 +14,14 @@ public:
     virtual ~CCGLViewImplWin32();
 
 public:
-    virtual int CreateGLContext();
-    virtual int SwapBuffers();
-    virtual int DrawFrame();
+    int DrawFrame1();
+    int CreateGLContext();
 
 private:
     void RegisterViewClass();
     void UnRegisterViewClass();
     void InitGL();
+    int SwapBuffers();
 
 private:
     static const char* ourClassNameA;
@@ -34,7 +34,6 @@ private:
     int m_height;
 
 private:
-    HWND        m_hWnd;
     HDC			m_hDC;
     HGLRC		m_hRC;
 };

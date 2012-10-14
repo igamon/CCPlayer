@@ -21,11 +21,13 @@ CCGLViewImplWin32::CCGLViewImplWin32(HWND hParent, int x, int y, int width, int 
     m_width = width;
     m_height = height;
 
-    m_hWnd = ::CreateWindowA(ourClassNameA, "",
+    m_selfHandle = ::CreateWindowA(ourClassNameA, "",
                         WS_CHILDWINDOW | WS_VISIBLE,
                         x, y, width, height,
                         hParent, NULL,
                         ::GetModuleHandle(NULL), NULL);
+
+    CreateGLContext();
 }
 
 CCGLViewImplWin32::~CCGLViewImplWin32()
@@ -104,7 +106,7 @@ int CCGLViewImplWin32::CreateGLContext()
 		0, 0, 0
 	};
 
-	if (!(m_hDC=::GetDC(m_hWnd)))
+	if (!(m_hDC=::GetDC(m_selfHandle)))
 	{
         return -1;
 	}
@@ -146,7 +148,7 @@ int CCGLViewImplWin32::SwapBuffers()
     }
 }
 
-int CCGLViewImplWin32::DrawFrame()
+int CCGLViewImplWin32::DrawFrame1()
 {
     static long double x = 0.0;
 	const static GLfloat MatYellowDiffuse[] = {0.86f, 0.74f, 0.14f, 1.0f};

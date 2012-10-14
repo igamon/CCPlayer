@@ -14,7 +14,7 @@ public:
         return m_selfHandle;
     }
 
-private:
+protected:
     UIObjectHandle m_selfHandle;
 };
 

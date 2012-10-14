@@ -1,6 +1,7 @@
 #include "VideoRender.h"
 #include "MessageCenter.h"
-#include "IGLRender.h"
+#include "UIGLView.h"
+#include "UIWindow.h"
 
 namespace CCPlayer
 {
@@ -55,6 +56,7 @@ bool CCVideoRender::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 void CCVideoRender::Run()
 {
     //IGLRender* pGLRenderObject = NULL;
+    CCUIGLView* pGLRenderHandle = NULL;
     int imgWidth = 0;
     int imgHeight = 0;
 
@@ -70,6 +72,17 @@ void CCVideoRender::Run()
             {
                 case MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT:
                 {
+                    CCUIWindow* pGLWindow
+                        = any_cast<CCUIWindow*>(event.GetPtr()->anyParams);
+                    pGLRenderHandle = new CCUIGLView();
+                    pGLRenderHandle->CreateRenderRect(
+                                        pGLWindow,
+                                        10,
+                                        10,
+                                        40,
+                                        60);
+                    status = VIDEO_RENDER_STATUS_ENUM_INITTED;
+
                     /*
                     pGLRenderObject = any_cast<IGLRender*>(event.GetPtr()->anyParams);
 
@@ -96,7 +109,7 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
-                //pGLRenderObject->DrawFrame();
+                pGLRenderHandle->DrawFrame();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:
@@ -115,6 +128,8 @@ void CCVideoRender::Run()
             }
             break;
         } // end of the render status
+
+        Sleep(10);
     }
 }
 

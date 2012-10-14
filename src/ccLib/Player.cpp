@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "IGLRender.h"
 #include "IRSPCommand.h"
 #include "MessageCenter.h"
 #include "ModuleManager.h"
@@ -29,15 +28,13 @@ void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
     m_pRspCommentObject = pRspCommentObject;
 }
 
-/*
-void CCPlayer::InitGLRenderObject(IGLRender* pGLRenderObject)
+void CCPlayer::InitGLWindow(CCUIWindow* pGLWindow)
 {
     CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                                 MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                                 MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
-                                                Any(pGLRenderObject));
+                                                Any(pGLWindow));
 }
-*/
 
 void CCPlayer::Open(const std::string& loadParams)
 {
@@ -104,7 +101,7 @@ void CCPlayer::Run()
                     {
                         std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
                         int ret = any_cast<int>(openedParams[0]);
-                        AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
+                        //AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
                         AVCodecContext* pAudioCtx = any_cast<AVCodecContext*>(openedParams[2]);
                         AVCodecContext* pVideoCtx = any_cast<AVCodecContext*>(openedParams[3]);
 

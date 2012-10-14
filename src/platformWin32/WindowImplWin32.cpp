@@ -12,7 +12,7 @@ CCWindowImplWin32::CCWindowImplWin32(int x, int y, int width, int height)
         RegisterWindowClass();
     }
 
-    m_hWnd = ::CreateWindowA(ourClassNameA, "",
+    m_selfHandle = ::CreateWindowA(ourClassNameA, "",
                                    WS_OVERLAPPEDWINDOW,
                                    x, y, width, height,
                                    NULL, NULL,
@@ -57,21 +57,16 @@ void CCWindowImplWin32::Show(bool bShow)
 {
     if(bShow)
     {
-        ::ShowWindow(m_hWnd, SW_SHOW);
+        ::ShowWindow(m_selfHandle, SW_SHOW);
     }else
     {
-        ::ShowWindow(m_hWnd, SW_HIDE);
+        ::ShowWindow(m_selfHandle, SW_HIDE);
     }
 }
 
 void CCWindowImplWin32::Update()
 {
-    ::UpdateWindow(m_hWnd);
-}
-
-HWND CCWindowImplWin32::GetWndHandle()
-{
-    return m_hWnd;
+    ::UpdateWindow(m_selfHandle);
 }
 
 int CCWindowImplWin32::MainLoop()
@@ -83,6 +78,38 @@ int CCWindowImplWin32::MainLoop()
         ::DispatchMessage(&msg);
     }
     return msg.wParam;
+}
+
+void CCWindowImplWin32::AddSubUIObject(CCUIObject* pSubObject)
+{
+    CCUIWindow::AddSubUIObjectHelp(pSubObject);
+
+    LayoutSubViews();
+}
+
+void CCWindowImplWin32::InsertUIObejct(int index, CCUIObject* pSubObject)
+{
+    CCUIWindow::InsertUIObejctHelp(index, pSubObject);
+
+    LayoutSubViews();
+}
+
+void CCWindowImplWin32::LayoutSubViews()
+{
+    std::vector<CCUIObject*>::iterator it = m_subUIObjects.begin();
+
+    while(it != m_subUIObjects.end())
+    {
+        ::SetWindowPos((*it)->GetUIObjectHandle(),
+                     HWND_TOP,
+                     10,
+                     10,
+                     100,
+                     200,
+                     SWP_SHOWWINDOW);
+
+        it ++;
+    }
 }
 
 } // end namespace CCPlayer

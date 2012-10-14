@@ -15,6 +15,7 @@ public:
 public:
     virtual void AddSubUIObject(CCUIObject* pSubObject) = 0;
     virtual void InsertUIObejct(int index, CCUIObject* pSubObject) = 0;
+    virtual void LayoutSubViews() = 0;
 
 protected:
     void AddSubUIObjectHelp(CCUIObject* pSubObject);
