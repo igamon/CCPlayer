@@ -29,6 +29,7 @@ void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
     m_pRspCommentObject = pRspCommentObject;
 }
 
+/*
 void CCPlayer::InitGLRenderObject(IGLRender* pGLRenderObject)
 {
     CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
@@ -36,6 +37,7 @@ void CCPlayer::InitGLRenderObject(IGLRender* pGLRenderObject)
                                                 MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
                                                 Any(pGLRenderObject));
 }
+*/
 
 void CCPlayer::Open(const std::string& loadParams)
 {

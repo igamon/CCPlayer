@@ -54,7 +54,7 @@ bool CCVideoRender::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCVideoRender::Run()
 {
-    IGLRender* pGLRenderObject = NULL;
+    //IGLRender* pGLRenderObject = NULL;
     int imgWidth = 0;
     int imgHeight = 0;
 
@@ -70,6 +70,7 @@ void CCVideoRender::Run()
             {
                 case MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT:
                 {
+                    /*
                     pGLRenderObject = any_cast<IGLRender*>(event.GetPtr()->anyParams);
 
                     if(pGLRenderObject != NULL)
@@ -77,6 +78,7 @@ void CCVideoRender::Run()
                         pGLRenderObject->CreateGLContext();
                         status = VIDEO_RENDER_STATUS_ENUM_INITTED;
                     }
+                    */
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_GET_VIDEO_INFORMATION:
@@ -94,12 +96,12 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
-                pGLRenderObject->DrawFrame();
+                //pGLRenderObject->DrawFrame();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:
             {
-                pGLRenderObject->DrawFrame();
+                //pGLRenderObject->DrawFrame();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_SLEEPING:

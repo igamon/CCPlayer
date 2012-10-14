@@ -11,6 +11,7 @@
 #include <ctime>
 
 #include <Windows.h>
+typedef HWND UIObjectHandle;
 
 #define SUCCESS     0
 #define FAILURE     -1

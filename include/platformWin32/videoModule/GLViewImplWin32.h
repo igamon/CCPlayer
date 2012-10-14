@@ -7,7 +7,7 @@
 namespace CCPlayer
 {
 
-class CCGLViewImplWin32 : public IGLRender
+class CCGLViewImplWin32 : public CCUIObject
 {
 public:
     CCGLViewImplWin32(HWND hParent, int x, int y, int width, int height);

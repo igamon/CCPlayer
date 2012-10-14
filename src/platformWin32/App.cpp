@@ -18,7 +18,7 @@ CCApp::~CCApp()
 
 void CCApp::OpenResponse(int ErrCode)
 {
-    m_pPlayerInstance->InitGLRenderObject(m_pGLRenderView);
+    //m_pPlayerInstance->InitGLRenderObject(m_pGLRenderView);
 }
 
 int CCApp::Exec()

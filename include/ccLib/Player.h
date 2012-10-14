@@ -24,7 +24,7 @@ public:
     void SetRspCommandObject(IRSPCommand* pRspCommentObject);
 
 public:
-    void InitGLRenderObject(IGLRender* pGLRenderObject);
+    //void InitGLRenderObject(IGLRender* pGLRenderObject);
     void Open(const std::string& loadParams);
 
 public:
