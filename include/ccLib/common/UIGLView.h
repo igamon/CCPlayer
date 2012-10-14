@@ -1,10 +1,12 @@
 #ifndef UIGLVIEW_H
 #define UIGLVIEW_H
 
+#include "UIObject.h"
+
 namespace CCPlayer
 {
 
-class CCUIGLView
+class CCUIGLView: public CCUIObject
 {
 public:
     CCUIGLView();

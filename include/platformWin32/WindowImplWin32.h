@@ -2,6 +2,7 @@
 #define WINDOWIMPLWIN32_H
 
 #include "Win32Def.h"
+#include "UIWindow.h"
 
 namespace CCPlayer
 {

@@ -2,12 +2,12 @@
 #define UIGLVIEWIMPLWIN32_H
 
 #include "Win32Def.h"
-#include "IGLRender.h"
+#include "UIGLView.h"
 
 namespace CCPlayer
 {
 
-class CCGLViewImplWin32 : public CCUIObject
+class CCGLViewImplWin32 : public CCUIGLView
 {
 public:
     CCGLViewImplWin32(HWND hParent, int x, int y, int width, int height);
