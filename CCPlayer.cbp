@@ -73,10 +73,12 @@
 		<Unit filename="include\ccLib\common\ModuleManager.h" />
 		<Unit filename="include\ccLib\common\Mutex.h" />
 		<Unit filename="include\ccLib\common\RWLock.h" />
-		<Unit filename="include\ccLib\common\SafeContainerTemplate.h" />
 		<Unit filename="include\ccLib\common\SmartPtr.h" />
 		<Unit filename="include\ccLib\common\SpinLock.h" />
 		<Unit filename="include\ccLib\common\Thread.h" />
+		<Unit filename="include\ccLib\common\UIGLView.h" />
+		<Unit filename="include\ccLib\common\UIObject.h" />
+		<Unit filename="include\ccLib\common\UIWindow.h" />
 		<Unit filename="include\ccLib\common\VideoDef.h" />
 		<Unit filename="include\platformWin32\App.h" />
 		<Unit filename="include\platformWin32\videoModule\GLViewImplWin32.h" />
@@ -94,6 +96,8 @@
 		<Unit filename="src\ccLib\common\MessageCenter.cpp" />
 		<Unit filename="src\ccLib\common\ModuleManager.cpp" />
 		<Unit filename="src\ccLib\common\Thread.cpp" />
+		<Unit filename="src\ccLib\common\UIGLView.cpp" />
+		<Unit filename="src\ccLib\common\UIWindow.cpp" />
 		<Unit filename="src\platformWin32\App.cpp" />
 		<Unit filename="src\platformWin32\videoModule\GLViewImplWin32.cpp" />
 		<Unit filename="src\platformWin32\videoModule\WindowImplWin32.cpp" />
