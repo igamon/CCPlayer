@@ -28,12 +28,12 @@ void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
     m_pRspCommentObject = pRspCommentObject;
 }
 
-void CCPlayer::InitGLWindow(CCGLViewImplWin32* pGLWindow)
+void CCPlayer::InitGLWindow(CCUIGLView* pGLRenderView)
 {
     CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                                 MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                                 MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
-                                                Any(pGLWindow));
+                                                Any(pGLRenderView));
 }
 
 void CCPlayer::Open(const std::string& loadParams)

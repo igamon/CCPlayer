@@ -61,8 +61,6 @@ void CCVideoRender::Run()
     int imgWidth = 0;
     int imgHeight = 0;
 
-    CCGLViewImplWin32* pGLRenderHandle = NULL;
-
     VideoRenderStatus status
                         = VIDEO_RENDER_STATUS_ENUM_UNKNOW;
 
@@ -75,17 +73,12 @@ void CCVideoRender::Run()
             {
                 case MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT:
                 {
-                    pGLRenderHandle  = any_cast<CCGLViewImplWin32*>(event.GetPtr()->anyParams);
+                    CCUIGLView* pGLRenderView =
+                                    any_cast<CCUIGLView*>(event.GetPtr()->anyParams);
 
-                    /*pGLRenderHandle = new CCUIGLView();
-                    pGLRenderHandle->CreateRenderRect(
-                                        pGLWindow,
-                                        CW_USEDEFAULT,
-                                        CW_USEDEFAULT,
-                                        CW_USEDEFAULT,
-                                        CW_USEDEFAULT);
-                    */
-                    pGLRenderHandle->CreateGLContext();
+                    glWrapper.SetGLRenderView(pGLRenderView);
+                    glWrapper.CreateGLContext();
+
                     status = VIDEO_RENDER_STATUS_ENUM_INITTED;
                 }
                 break;
@@ -104,7 +97,7 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
-                pGLRenderHandle->DrawFrame1();
+                glWrapper.DrawFrame();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:

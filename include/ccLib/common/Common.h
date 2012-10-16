@@ -12,6 +12,9 @@
 #include <ctime>
 #include <algorithm>
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 #include <Windows.h>
 typedef HWND UIObjectHandle;
 

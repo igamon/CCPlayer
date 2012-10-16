@@ -7,21 +7,14 @@
 namespace CCPlayer
 {
 
-class CCUIWindow;
-class CCGLViewImplWin32;
-
 class CCUIGLView: public CCUIObject
 {
 public:
     CCUIGLView();
     virtual ~CCUIGLView();
 public:
-    int DrawFrame();
-
-public:
-    void CreateRenderRect(CCUIWindow* pParent, int x, int y, int width, int height);
-private:
-    CCGLViewImplWin32* m_pGLViewImplDependOS;
+    virtual int CreateGLContext() = 0;
+    virtual int SwapBuffers() = 0;
 };
 
 }

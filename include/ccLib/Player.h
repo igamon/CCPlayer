@@ -12,7 +12,7 @@ namespace CCPlayer
 {
 
 class IRSPCommand;
-class CCGLViewImplWin32;
+class CCUIGLView;
 class CCUIWindow;
 
 class CCPlayer : public CCThread, public IMessageReceiver
@@ -25,7 +25,7 @@ public:
     void SetRspCommandObject(IRSPCommand* pRspCommentObject);
 
 public:
-    void InitGLWindow(CCGLViewImplWin32* pGLWindow);
+    void InitGLWindow(CCUIGLView* pGLRenderView);
     void Open(const std::string& loadParams);
 
 public:

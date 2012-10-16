@@ -281,7 +281,7 @@
 	"ModuleManager.h"
 	"Any.h"
 
-1350321897 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
+1350362083 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
 	"Common.h"
 	"Thread.h"
 	"IMessageReceiver.h"
@@ -363,7 +363,7 @@
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
 	<Windows.h>
 
-1350321991 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1350361951 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"Player.h"
@@ -386,7 +386,7 @@
 	"Common.h"
 	<pthread.h>
 
-1350317907 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
+1350361469 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
 	<iostream>
 	<cstdlib>
 	<string>
@@ -397,6 +397,8 @@
 	<cassert>
 	<ctime>
 	<algorithm>
+	<GL/gl.h>
+	<GL/glu.h>
 	<Windows.h>
 	"libavformat/avformat.h"
 	"libavcodec/avcodec.h"
@@ -415,7 +417,7 @@
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1350322130 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1350361168 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 	"UIGLView.h"
@@ -543,12 +545,11 @@
 1350217323 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiobject.h
 	"Common.h"
 
-1350223759 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiglview.cpp
+1350361722 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\uiglview.cpp
 	"UIGLView.h"
 	"UIWindow.h"
-	"GLViewImplWin32.h"
 
-1350223736 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
+1350361691 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
 	"Common.h"
 	"UIObject.h"
 
@@ -577,9 +578,17 @@
 1350318679 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\timer.h
 	"Common.h"
 
-1350320043 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glwrapper.cpp
+1350361386 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glwrapper.cpp
 	"GLWrapper.h"
-
-1350320519 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\glwrapper.h
 	"UIGLView.h"
+
+1350361397 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\glwrapper.h
+	"Common.h"
+
+1350361131 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\glviewimplwin32.h
+	"Win32Def.h"
+	"UIGLView.h"
+
+1350361457 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\glviewimplwin32.cpp
+	"GLViewImplWin32.h"
 
