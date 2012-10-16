@@ -104,8 +104,8 @@ void CCWindowImplWin32::LayoutSubViews()
                      HWND_TOP,
                      10,
                      10,
-                     100,
-                     200,
+                     WINDOW_WIDTH - 60,
+                     WINDOW_HEIGHT - 80,
                      SWP_SHOWWINDOW);
 
         it ++;

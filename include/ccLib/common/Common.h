@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <iostream>
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <map>
@@ -9,6 +10,7 @@
 #include <limits>
 #include <cassert>
 #include <ctime>
+#include <algorithm>
 
 #include <Windows.h>
 typedef HWND UIObjectHandle;

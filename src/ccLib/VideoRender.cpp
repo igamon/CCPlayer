@@ -2,6 +2,8 @@
 #include "MessageCenter.h"
 #include "UIGLView.h"
 #include "UIWindow.h"
+#include "GLWrapper.h"
+#include "GLViewImplWin32.h"
 
 namespace CCPlayer
 {
@@ -55,10 +57,11 @@ bool CCVideoRender::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCVideoRender::Run()
 {
-    //IGLRender* pGLRenderObject = NULL;
-    CCUIGLView* pGLRenderHandle = NULL;
+    CCGLWrapper glWrapper;
     int imgWidth = 0;
     int imgHeight = 0;
+
+    CCGLViewImplWin32* pGLRenderHandle = NULL;
 
     VideoRenderStatus status
                         = VIDEO_RENDER_STATUS_ENUM_UNKNOW;
@@ -72,26 +75,18 @@ void CCVideoRender::Run()
             {
                 case MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT:
                 {
-                    CCUIWindow* pGLWindow
-                        = any_cast<CCUIWindow*>(event.GetPtr()->anyParams);
-                    pGLRenderHandle = new CCUIGLView();
+                    pGLRenderHandle  = any_cast<CCGLViewImplWin32*>(event.GetPtr()->anyParams);
+
+                    /*pGLRenderHandle = new CCUIGLView();
                     pGLRenderHandle->CreateRenderRect(
                                         pGLWindow,
-                                        10,
-                                        10,
-                                        40,
-                                        60);
-                    status = VIDEO_RENDER_STATUS_ENUM_INITTED;
-
-                    /*
-                    pGLRenderObject = any_cast<IGLRender*>(event.GetPtr()->anyParams);
-
-                    if(pGLRenderObject != NULL)
-                    {
-                        pGLRenderObject->CreateGLContext();
-                        status = VIDEO_RENDER_STATUS_ENUM_INITTED;
-                    }
+                                        CW_USEDEFAULT,
+                                        CW_USEDEFAULT,
+                                        CW_USEDEFAULT,
+                                        CW_USEDEFAULT);
                     */
+                    pGLRenderHandle->CreateGLContext();
+                    status = VIDEO_RENDER_STATUS_ENUM_INITTED;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_GET_VIDEO_INFORMATION:
@@ -109,7 +104,7 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
-                pGLRenderHandle->DrawFrame();
+                pGLRenderHandle->DrawFrame1();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:
@@ -129,7 +124,7 @@ void CCVideoRender::Run()
             break;
         } // end of the render status
 
-        Sleep(10);
+        Sleep(100);
     }
 }
 

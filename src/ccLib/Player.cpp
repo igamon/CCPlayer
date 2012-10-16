@@ -28,7 +28,7 @@ void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
     m_pRspCommentObject = pRspCommentObject;
 }
 
-void CCPlayer::InitGLWindow(CCUIWindow* pGLWindow)
+void CCPlayer::InitGLWindow(CCGLViewImplWin32* pGLWindow)
 {
     CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                                 MESSAGE_OBJECT_ENUM_VIDEO_RENDER,

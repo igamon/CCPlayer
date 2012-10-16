@@ -18,7 +18,7 @@ CCApp::~CCApp()
 
 void CCApp::OpenResponse(int ErrCode)
 {
-    m_pPlayerInstance->InitGLWindow(m_pMainWindow);
+    m_pPlayerInstance->InitGLWindow(m_pGLRenderView);
 }
 
 int CCApp::Exec()
@@ -32,12 +32,12 @@ int CCApp::Exec()
                                           WINDOW_Y_POS,
                                           WINDOW_WIDTH,
                                           WINDOW_HEIGHT);
-    //m_pGLRenderView = new CCGLViewImplWin32(
-    //                    m_pMainWindow->GetWndHandle(),
-    //                    10,
-    //                    10,
-    //                    WINDOW_WIDTH - 40,
-    //                    WINDOW_HEIGHT - 60);
+    m_pGLRenderView = new CCGLViewImplWin32(
+                        m_pMainWindow->GetUIObjectHandle(),
+                        10,
+                        10,
+                        WINDOW_WIDTH - 40,
+                        WINDOW_HEIGHT - 60);
 
     m_pPlayerInstance = new CCPlayer();
     m_pPlayerInstance->SetRspCommandObject(this);

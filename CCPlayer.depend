@@ -274,14 +274,14 @@
 	"libavutil/log.h"
 	"libavutil/pixfmt.h"
 
-1350216891 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1350321779 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
 	"IRSPCommand.h"
 	"MessageCenter.h"
 	"ModuleManager.h"
 	"Any.h"
 
-1350216742 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
+1350321897 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\player.h
 	"Common.h"
 	"Thread.h"
 	"IMessageReceiver.h"
@@ -363,14 +363,14 @@
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\win32def.h
 	<Windows.h>
 
-1350216396 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1350321991 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"Player.h"
 	"WindowImplWin32.h"
 	"GLViewImplWin32.h"
 
-1350216273 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
+1350321739 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\app.h
 	"IRSPCommand.h"
 
 1350214319 c:\users\liuenbao\desktop\cbproject\ccplayer\include\platformwin32\videomodule\glviewimplwin32.h
@@ -386,8 +386,9 @@
 	"Common.h"
 	<pthread.h>
 
-1350209919 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
+1350317907 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\common.h
 	<iostream>
+	<cstdlib>
 	<string>
 	<vector>
 	<map>
@@ -395,6 +396,7 @@
 	<limits>
 	<cassert>
 	<ctime>
+	<algorithm>
 	<Windows.h>
 	"libavformat/avformat.h"
 	"libavcodec/avcodec.h"
@@ -413,11 +415,13 @@
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1350221427 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1350322130 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 	"UIGLView.h"
 	"UIWindow.h"
+	"GLWrapper.h"
+	"GLViewImplWin32.h"
 
 1350048893 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\videorender.h
 	"Thread.h"
@@ -559,11 +563,23 @@
 	"Win32Def.h"
 	"UIGLView.h"
 
-1350223540 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glviewimplwin32.cpp
+1350321526 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glviewimplwin32.cpp
 	"GLViewImplWin32.h"
 	<GL/gl.h>
 	<GL/glu.h>
 
-1350219158 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
+1350319279 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
 	"WindowImplWin32.h"
+
+1350318701 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\timer.cpp
+	"Timer.h"
+
+1350318679 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\timer.h
+	"Common.h"
+
+1350320043 source:c:\users\liuenbao\desktop\cbproject\ccplayer\src\cclib\common\glwrapper.cpp
+	"GLWrapper.h"
+
+1350320519 c:\users\liuenbao\desktop\cbproject\ccplayer\include\cclib\common\glwrapper.h
+	"UIGLView.h"
 
