@@ -90,6 +90,13 @@ void CCVideoRender::Run()
                     imgHeight = any_cast<int>(videoInformartion[1]);
                 }
                 break;
+                case  MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME:
+                {
+                    SmartPtr<VideoFrame> shrdVideoFrame
+                                            = any_cast<SmartPtr<VideoFrame> >(event.GetPtr()->anyParams);
+                    m_videoFrameQueue.push(shrdVideoFrame);
+                }
+                break;
             } // end of case event
         } // end of get a message
 
@@ -97,7 +104,14 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
-                glWrapper.DrawFrame();
+                if(!m_videoFrameQueue.empty())
+                {
+                    SmartPtr<VideoFrame> shrdVideoFrame =
+                                            m_videoFrameQueue.front();
+                    m_videoFrameQueue.pop();
+
+                    glWrapper.DrawFrame(shrdVideoFrame.GetPtr(), imgWidth, imgHeight);
+                }
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:
@@ -117,7 +131,7 @@ void CCVideoRender::Run()
             break;
         } // end of the render status
 
-        Sleep(100);
+        Sleep(10);
     }
 }
 

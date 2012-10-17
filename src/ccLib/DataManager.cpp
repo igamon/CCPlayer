@@ -4,10 +4,44 @@
 namespace CCPlayer
 {
 
+static int ffmpegLockManager( void **mtx, enum AVLockOp op )
+{
+    switch( op )
+    {
+        case AV_LOCK_CREATE:
+        {
+            *mtx =(pthread_mutex_t*) malloc( sizeof(pthread_mutex_t) );
+
+            if( !*mtx ) {
+                return 1;
+            }
+
+            return !!pthread_mutex_init( (pthread_mutex_t*)*mtx, NULL );
+        }
+
+        case AV_LOCK_OBTAIN:
+        {
+            return !!pthread_mutex_lock( (pthread_mutex_t*) *mtx );
+        }
+
+        case AV_LOCK_RELEASE:
+        {
+            return !!pthread_mutex_unlock( (pthread_mutex_t*)*mtx );
+        }
+
+        case AV_LOCK_DESTROY:
+        {
+            pthread_mutex_destroy( (pthread_mutex_t*)*mtx );
+            free( *mtx );
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 CCDataManager::CCDataManager()
 {
-    //this is register for all ffmpeg action
-    av_register_all();
 }
 
 CCDataManager::~CCDataManager()
@@ -57,6 +91,15 @@ enum DataManagerStatus
 
 void CCDataManager::Run()
 {
+    //this is register for all ffmpeg action
+    av_register_all();
+
+    //this is for mutli-thread ffmpeg working
+    if(av_lockmgr_register(ffmpegLockManager))
+    {
+        // TODO Failure av_lockmgr_register
+    }
+
     std::string mediaUrl;
     AVFormatContext *pAVFormatContext = NULL;
     int asIndex;
@@ -86,6 +129,7 @@ void CCDataManager::Run()
                     {
                         GetCodecContext(pAVFormatContext, asIndex, &pAudioCtx);
                         GetCodecContext(pAVFormatContext, vsIndex, &pVideoCtx);
+
                         status = DATA_MANAGER_STATUS_ENUM_WORKING;
                     }
 
@@ -99,6 +143,9 @@ void CCDataManager::Run()
                                 MESSAGE_OBJECT_ENUM_PLAYER,
                                 MESSAGE_TYPE_ENUM_OPENED_FILE,
                                 openedParams);
+
+                    //just for wait for the decoders working , I will change it
+                    Sleep(100);
                 }
                 break;
                 default:

@@ -45,6 +45,12 @@ void CCVideoDecoder::Run()
 {
     AVCodecContext* pVideoCtx = NULL;
     SwsContext* pImageConvertCtx = NULL;
+    AVFrame *pDecodedFrame;
+	AVPicture *pDecodePicture;
+    int imgWidth = 0;
+    int imgHeight = 0;
+	int imgBufferLen = 0;
+    int gotFrame = 0;
 
     while(m_bRunning)
     {
@@ -59,9 +65,11 @@ void CCVideoDecoder::Run()
 
                     if(pVideoCtx != NULL)
                     {
-                        int imgWidth = 0;
-                        int imgHeight = 0;
-                        GetVideoInformation(pVideoCtx, &pImageConvertCtx, &imgWidth, &imgHeight);
+                        GetVideoInformation(pVideoCtx,
+                                            &pImageConvertCtx,
+                                            &imgWidth,
+                                            &imgHeight,
+                                            &imgBufferLen);
 
                         std::vector<Any> videoInformartion;
                         videoInformartion.push_back(Any(imgWidth));
@@ -71,13 +79,51 @@ void CCVideoDecoder::Run()
                                     MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                     MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
                                     Any(videoInformartion));
-                    }
 
+                        pDecodedFrame = avcodec_alloc_frame();
+                        pDecodePicture = (AVPicture*)av_mallocz(sizeof(AVPicture));
+                    }
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET:
                 {
+                    SmartPtr<CCPacket> shdPacket
+                                            = any_cast<SmartPtr<CCPacket> >(event.GetPtr()->anyParams);
 
+                    AVPacket packet = shdPacket.GetPtr()->GetPacket();
+
+                    avcodec_decode_video2(pVideoCtx,
+                                          pDecodedFrame,
+                                          &gotFrame,
+                                          &packet);
+
+                    if (gotFrame)
+                    {
+                        unsigned char* pScaleBuffer =
+                                        (unsigned char*)av_mallocz(imgBufferLen);
+
+                        avpicture_fill(pDecodePicture,
+                                       pScaleBuffer,
+                                       PIX_FMT_RGBA,
+                                       imgWidth,
+                                       imgHeight);
+
+                        sws_scale(pImageConvertCtx,
+                                  pDecodedFrame->data,
+                                  pDecodedFrame->linesize,
+                                  0,
+                                  pVideoCtx->height,
+                                  pDecodePicture->data,
+                                  pDecodePicture->linesize);
+
+                        SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, 0));
+                        SendMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                    MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME,
+                                    Any(videoFrame));
+
+                        av_free(pScaleBuffer);
+                    }
                 }
                 break;
             } // end switch case
@@ -90,22 +136,29 @@ void CCVideoDecoder::Run()
 int CCVideoDecoder::GetVideoInformation(AVCodecContext* pVideoCtx,
                                         SwsContext** ppImageConvertCtx,
                                         int *pImgWidth,
-                                        int *pImgHeight)
+                                        int *pImgHeight,
+                                        int *pImgBufferLen)
 {
     AVCodec *pAVCodecVideo = avcodec_find_decoder(pVideoCtx->codec_id);
+    //decoder->thread_count = 1;
+    //avcodec_thread_init(pVideoCtx, 1);
 
     if(pAVCodecVideo == NULL)
     {
         return FAILURE;
     }
 
-    if(avcodec_open(pVideoCtx, pAVCodecVideo) != 0)
+    if(avcodec_open2(pVideoCtx, pAVCodecVideo, NULL) != 0)
     {
         return FAILURE;
     }
 
     *pImgWidth = VIDEO_OUTPUT_WIDTH;
     *pImgHeight = VIDEO_OUTPUT_HEIGHT;
+
+    *pImgBufferLen = avpicture_get_size(PIX_FMT_RGBA,
+										VIDEO_OUTPUT_WIDTH,
+										VIDEO_OUTPUT_HEIGHT);
 
     *ppImageConvertCtx = sws_getContext(pVideoCtx->width,
                    pVideoCtx->height,

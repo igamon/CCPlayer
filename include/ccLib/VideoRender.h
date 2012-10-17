@@ -27,6 +27,9 @@ public:
     virtual void Run();
 
 private:
+    std::queue<SmartPtr<VideoFrame> > m_videoFrameQueue;
+
+private:
     std::queue<SmartPtr<Event> > m_messageQueue;
     CCSpinLock m_spinLockMessageQueue;
 };

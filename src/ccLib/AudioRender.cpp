@@ -81,7 +81,7 @@ void CCAudioRender::Run()
                     status = AUDIO_RENDER_STATUS_ENUM_INITTED;
                 }
                 break;
-            case  MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME:
+                case  MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME:
                 {
                     SmartPtr<AudioFrame> shrdAudioFrame
                                             = any_cast<SmartPtr<AudioFrame> >(event.GetPtr()->anyParams);

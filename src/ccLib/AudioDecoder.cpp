@@ -136,7 +136,7 @@ int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx,
         return FAILURE;
     }
 
-    if(avcodec_open(pAudioCtx, pAVCodecAudio) != 0)
+    if(avcodec_open2(pAudioCtx, pAVCodecAudio, NULL) != 0)
     {
         return FAILURE;
     }

@@ -23,6 +23,7 @@ typedef HWND UIObjectHandle;
 
 extern "C"
 {
+#include "libavutil/mem.h"
 #include "libavformat/avformat.h"
 #include "libavcodec/avcodec.h"
 #include "libswscale/swscale.h"
@@ -54,26 +55,29 @@ class CCPacket
 public:
     CCPacket()
     {
-        av_init_packet(&packet);
+        //av_init_packet(&packet);
+        m_pPacket = (AVPacket*)av_malloc(sizeof(AVPacket));
+        av_init_packet(m_pPacket);
     }
     ~CCPacket()
     {
-        av_free_packet(&packet);
+        av_free_packet(m_pPacket);
+        av_free(m_pPacket);
     }
 
 public:
     AVPacket* GetPacketPointer()
     {
-        return &packet;
+        return m_pPacket;
     }
 
     AVPacket GetPacket()
     {
-        return packet;
+        return *m_pPacket;
     }
 
 private:
-    AVPacket packet;
+    AVPacket* m_pPacket;
 };
 
 }

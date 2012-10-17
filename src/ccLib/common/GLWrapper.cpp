@@ -1,5 +1,6 @@
 #include "GLWrapper.h"
 #include "UIGLView.h"
+#include "VideoDef.h"
 
 namespace CCPlayer
 {
@@ -21,140 +22,58 @@ void CCGLWrapper::SetGLRenderView(CCUIGLView* pGLRenderView)
 int CCGLWrapper::CreateGLContext()
 {
     m_pGLRenderView->CreateGLContext();
+
+    glGenTextures(1, &m_glTexture);
+    glBindTexture(GL_TEXTURE_2D, m_glTexture);
+    glTexEnvf(GL_TEXTURE_ENV,
+              GL_TEXTURE_ENV_MODE,
+              GL_MODULATE);
+    glTexParameterf(GL_TEXTURE_2D,
+                    GL_TEXTURE_MIN_FILTER,
+                    GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D,
+                    GL_TEXTURE_MAG_FILTER,
+                    GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D,
+                    GL_TEXTURE_WRAP_S,
+                    GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D,
+                    GL_TEXTURE_WRAP_T,
+                    GL_CLAMP);
+    return 0;
 }
 
-int CCGLWrapper::DrawFrame()
+int CCGLWrapper::DrawFrame(VideoFrame* pVideoFrame, int width, int height)
 {
-    static long double x = 0.0;
-	const static GLfloat MatYellowDiffuse[] = {0.86f, 0.74f, 0.14f, 1.0f};
-	const static GLfloat MatOrangeDiffuse[] = {0.78f, 0.59f, 0.0f, 1.0f};
+    glBindTexture(GL_TEXTURE_2D, m_glTexture);
+    glTexImage2D(GL_TEXTURE_2D,
+                 0,
+                 GL_RGBA,
+                 VIDEO_OUTPUT_WIDTH,
+                 VIDEO_OUTPUT_WIDTH,
+                 0,
+                 GL_RGBA,
+                 GL_UNSIGNED_BYTE,
+                 pVideoFrame->GetFrameData());
 
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);	// clear screen and depth buffers
-	glLoadIdentity();									// reset modelview matrix
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_TEXTURE_2D);
 
-	// get the angle we wish to use
-	if(x >= 360.0f) x = 0.0f;
+    //Draw the image
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-1.0f, -1.0f, -8.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(1.0f, -1.0f, -8.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(1.0f, 1.0f, -8.0f);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-1.0f, 1.0f, -8.0f);
+    glEnd();
 
-	// move and rotate the cube
-	glPushMatrix();
-		glTranslatef(-5, -5, -35);
-		glRotated(x, 0.0f, 1.0f, 0.0f);
-
-		glColor3ub(220, 190, 35);		// yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatYellowDiffuse);
-
-		// draw the cube
-		glBegin(GL_TRIANGLES);
-			glNormal3f(0, 0, -1);
-			glVertex3f(-5, -5, -1);			// left
-			glVertex3f(0, 5, -1);			// top
-			glVertex3f(5, -5, -1);			// right
-
-			glNormal3f(0, 0, 1);
-			glVertex3f(-5, -5, 1);			// left
-			glVertex3f(0, 5, 1);			// top
-			glVertex3f(5, -5, 1);			// right
-		glEnd();
-
-		glColor3ub(200, 150, 0);			// dark yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatOrangeDiffuse);
-
-		glBegin(GL_QUADS);
-			glNormal3f(-1, 0, 0);
-			glVertex3f(-5, -5, -1);			// bottom left
-			glVertex3f(0, 5, -1);			// top left
-			glVertex3f(0, 5, 1);			// top right
-			glVertex3f(-5, -5, 1);			// bottom right
-
-			glNormal3f(1, 0, 0);
-			glVertex3f(5, -5, 1);			// bottom left
-			glVertex3f(0, 5, 1);			// top left
-			glVertex3f(0, 5, -1);			// top right
-			glVertex3f(5, -5, -1);			// bottom right
-		glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-		glTranslatef(5, -5, -35);
-		glRotated(x, 0.0f, 1.0f, 0.0f);
-
-		glColor3ub(220, 190, 35);		// yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatYellowDiffuse);
-
-		// draw the cube
-		glBegin(GL_TRIANGLES);
-			glNormal3f(0, 0, -1);
-			glVertex3f(-5, -5, -1);			// left
-			glVertex3f(0, 5, -1);			// top
-			glVertex3f(5, -5, -1);			// right
-
-			glNormal3f(0, 0, 1);
-			glVertex3f(-5, -5, 1);			// left
-			glVertex3f(0, 5, 1);			// top
-			glVertex3f(5, -5, 1);			// right
-		glEnd();
-
-		glColor3ub(200, 150, 0);			// dark yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatOrangeDiffuse);
-
-		glBegin(GL_QUADS);
-			glNormal3f(-1, 0, 0);
-			glVertex3f(-5, -5, -1);			// bottom left
-			glVertex3f(0, 5, -1);			// top left
-			glVertex3f(0, 5, 1);			// top right
-			glVertex3f(-5, -5, 1);			// bottom right
-
-			glNormal3f(1, 0, 0);
-			glVertex3f(5, -5, 1);			// bottom left
-			glVertex3f(0, 5, 1);			// top left
-			glVertex3f(0, 5, -1);			// top right
-			glVertex3f(5, -5, -1);			// bottom right
-		glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-		glTranslatef(0, 5, -35);
-		glRotated(x, 0.0f, 1.0f, 0.0f);
-
-		glColor3ub(220, 190, 35);		// yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatYellowDiffuse);
-
-		// draw the cube
-		glBegin(GL_TRIANGLES);
-			glNormal3f(0, 0, -1);
-			glVertex3f(-5, -5, -1);			// left
-			glVertex3f(0, 5, -1);			// top
-			glVertex3f(5, -5, -1);			// right
-
-			glNormal3f(0, 0, 1);
-			glVertex3f(-5, -5, 1);			// left
-			glVertex3f(0, 5, 1);			// top
-			glVertex3f(5, -5, 1);			// right
-		glEnd();
-
-		glColor3ub(200, 150, 0);			// dark yellow
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatOrangeDiffuse);
-
-		glBegin(GL_QUADS);
-			glNormal3f(-1, 0, 0);
-			glVertex3f(-5, -5, -1);			// bottom left
-			glVertex3f(0, 5, -1);			// top left
-			glVertex3f(0, 5, 1);			// top right
-			glVertex3f(-5, -5, 1);			// bottom right
-
-			glNormal3f(1, 0, 0);
-			glVertex3f(5, -5, 1);			// bottom left
-			glVertex3f(0, 5, 1);			// top left
-			glVertex3f(0, 5, -1);			// top right
-			glVertex3f(5, -5, -1);			// bottom right
-		glEnd();
-	glPopMatrix();
-
-	// rotate 45 degrees every second
-	x += (double)45.0;
+    glDisable(GL_TEXTURE_2D);
 
     m_pGLRenderView->SwapBuffers();
-
 	return 0;
 }
 

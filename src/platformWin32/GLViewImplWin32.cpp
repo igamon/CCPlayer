@@ -1,4 +1,5 @@
 #include "GLViewImplWin32.h"
+#include "VideoDef.h"
 
 namespace CCPlayer
 {
@@ -58,12 +59,12 @@ void CCGLViewImplWin32::UnRegisterViewClass()
 
 void CCGLViewImplWin32::InitGL()
 {
-    glViewport(0,0,740,520);
+    glViewport(0,0,VIDEO_OUTPUT_WIDTH,VIDEO_OUTPUT_HEIGHT);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f,(GLfloat)740/(GLfloat)520,0.1f,100.0f);
+	gluPerspective(20.0f,(GLfloat)VIDEO_OUTPUT_WIDTH/(GLfloat)VIDEO_OUTPUT_HEIGHT,0.1f,100.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

@@ -31,7 +31,8 @@ private:
     int GetVideoInformation(AVCodecContext* pVideoCtx,
                                         SwsContext** ppImageConvertCtx,
                                         int *pImgWidth,
-                                        int *pImgHeight);
+                                        int *pImgHeight,
+                                        int *pImgBufferLen);
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

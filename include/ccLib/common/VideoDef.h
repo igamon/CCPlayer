@@ -12,7 +12,7 @@ namespace CCPlayer
 class VideoFrame
 {
 public:
-	VideoFrame(const char* pFrameData,
+	VideoFrame(const unsigned char* pFrameData,
                int frameSize,
                double showTime)
 	{
@@ -20,7 +20,7 @@ public:
 
 	    assert(m_frameSize != 0);
 
-	    m_pFrameData = new char[m_frameSize];
+	    m_pFrameData = new unsigned char[m_frameSize];
 	    memset(m_pFrameData, 0, m_frameSize);
 	    memcpy(m_pFrameData, pFrameData, m_frameSize);
 
@@ -33,7 +33,7 @@ public:
 
 	    assert(m_frameSize != 0);
 
-	    m_pFrameData = new char[m_frameSize];
+	    m_pFrameData = new unsigned char[m_frameSize];
 	    memset(m_pFrameData, 0, m_frameSize);
 	    memcpy(m_pFrameData, videoFrame.m_pFrameData, m_frameSize);
 
@@ -51,7 +51,7 @@ public:
 
 	    assert(m_frameSize != 0);
 
-	    m_pFrameData = new char[m_frameSize];
+	    m_pFrameData = new unsigned char[m_frameSize];
 	    memset(m_pFrameData, 0, m_frameSize);
 	    memcpy(m_pFrameData, videoFrame.m_pFrameData, m_frameSize);
 
@@ -70,7 +70,7 @@ public:
 	}
 
 public:
-    char* GetFrameData()
+    unsigned char* GetFrameData()
     {
         return m_pFrameData;
     }
@@ -86,7 +86,7 @@ public:
     }
 
 private:
-	char *m_pFrameData;
+	unsigned char *m_pFrameData;
 	int m_frameSize;
 
 private:
