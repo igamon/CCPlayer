@@ -121,7 +121,7 @@ void CCVideoRender::Run()
             break;
             case VIDEO_RENDER_STATUS_ENUM_SLEEPING:
             {
-
+                Sleep(10);
             }
             break;
             case VIDEO_REDNER_STATUS_ENUM_DEADING:
