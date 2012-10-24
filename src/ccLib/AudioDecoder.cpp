@@ -12,12 +12,12 @@ CCAudioDecoder::~CCAudioDecoder()
 {
 }
 
-void CCAudioDecoder::SendMessage(MessageObjectId messageSender,
+void CCAudioDecoder::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender, messageReceiver, msg, anyParam);
+    CCMessageCenter::GetInstance()->PostMessage(messageSender, messageReceiver, msg, anyParam);
 }
 
 void CCAudioDecoder::ReceiverMessage(const SmartPtr<Event>& rSmtEvent)
@@ -72,12 +72,17 @@ void CCAudioDecoder::Run()
                             audioInformartion.push_back(Any(rates));
                             audioInformartion.push_back(Any(type));
 
-                            SendMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                            PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                         MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
                                         MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
                                         Any(audioInformartion));
                             //crate the frame buffer size
                             pDecodedFrame = avcodec_alloc_frame();
+
+                            PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                        MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                        MESSAGE_TYPE_ENUM_AUDIO_DECODER_READY,
+                                        Any());
                         }
                     }
                     break;
@@ -109,7 +114,7 @@ void CCAudioDecoder::Run()
                                                                        1);
 
                                 SmartPtr<AudioFrame> audioFrame(new AudioFrame(pDecodedFrame->data[0], decodedDataSize));
-                                SendMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                             MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
                                             MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME,
                                             Any(audioFrame));
@@ -120,7 +125,7 @@ void CCAudioDecoder::Run()
             }
         }
 
-        Sleep(10);
+        Sleep(100);
     }
 }
 

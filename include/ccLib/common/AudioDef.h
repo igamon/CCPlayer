@@ -19,7 +19,7 @@ typedef enum
 }CCType;
 
 #define BASE_AUDIO_BUFFER_SIZE  4096
-#define AUDIO_BUFFER_NUMBER     6
+#define AUDIO_BUFFER_NUMBER     2
 
 class AudioFrame
 {

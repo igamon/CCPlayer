@@ -50,7 +50,7 @@ private:
     bool PopFrontMessage(SmartPtr<Event>& rSmtEvent);
 
 public:
-    static void SendMessage(MessageObjectId messageSender,
+    static void PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam);

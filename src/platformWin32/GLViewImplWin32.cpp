@@ -57,27 +57,6 @@ void CCGLViewImplWin32::UnRegisterViewClass()
     ::UnregisterClassA(ourClassNameA, GetModuleHandle(NULL));
 }
 
-void CCGLViewImplWin32::InitGL()
-{
-    glViewport(0,0,VIDEO_OUTPUT_WIDTH,VIDEO_OUTPUT_HEIGHT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	gluPerspective(20.0f,(GLfloat)VIDEO_OUTPUT_WIDTH/(GLfloat)VIDEO_OUTPUT_HEIGHT,0.1f,100.0f);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glShadeModel(GL_SMOOTH);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-	glClearDepth(1.0f);
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-}
-
-
 //below fuctions performed in gl render thread
 int CCGLViewImplWin32::CreateGLContext()
 {
@@ -128,9 +107,6 @@ int CCGLViewImplWin32::CreateGLContext()
 	{
 		return -1;
 	}
-
-    //Init the render rect
-	InitGL();
 
 	return 0;
 }

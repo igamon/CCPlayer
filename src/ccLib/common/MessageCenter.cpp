@@ -46,7 +46,7 @@ IMessageReceiver* CCMessageCenter::GetMessageReceiver(MessageObjectId messageObj
     return pMessageObject;
 }
 
-void CCMessageCenter::SendMessage(MessageObjectId messageSender,
+void CCMessageCenter::PostMessage(MessageObjectId messageSender,
                                   MessageObjectId messageReceiver,
                                   MessageType msg,
                                   Any anyParam)
@@ -101,7 +101,7 @@ void CCMessageCenter::Run()
                 event.GetPtr()->pReceiveModule->ReceiverMessage(event);
             }
         }
-        Sleep(10);
+        Sleep(100);
     }
 }
 

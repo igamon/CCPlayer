@@ -30,7 +30,7 @@ void CCPlayer::SetRspCommandObject(IRSPCommand* pRspCommentObject)
 
 void CCPlayer::InitGLWindow(CCUIGLView* pGLRenderView)
 {
-    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                                 MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                                 MESSAGE_TYPE_ENUM_INIT_GLRENDER_OBJECT,
                                                 Any(pGLRenderView));
@@ -38,18 +38,18 @@ void CCPlayer::InitGLWindow(CCUIGLView* pGLRenderView)
 
 void CCPlayer::Open(const std::string& loadParams)
 {
-    CCMessageCenter::GetInstance()->SendMessage(MESSAGE_OBJECT_ENUM_CLIENT,
+    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_CLIENT,
                                                 MESSAGE_OBJECT_ENUM_PLAYER,
                                                 COMMAND_TYPE_ENUM_OPEN,
                                                 Any(loadParams));
 }
 
-void CCPlayer::SendMessage(MessageObjectId messageSender,
+void CCPlayer::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender,
+    CCMessageCenter::GetInstance()->PostMessage(messageSender,
                                                 messageReceiver,
                                                 msg,
                                                 anyParam);
@@ -91,7 +91,7 @@ void CCPlayer::Run()
 
                         CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_DATA_MANAGER);
 
-                        SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                        PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                     MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                     MESSAGE_TYPE_ENUM_OPEN_FILE,
                                     Any(mediaUrl));
@@ -108,7 +108,7 @@ void CCPlayer::Run()
                         if(pAudioCtx != NULL)
                         {
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
-                            SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                            PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                         MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                         MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM,
                                         Any(pAudioCtx));
@@ -119,7 +119,7 @@ void CCPlayer::Run()
                         if(pVideoCtx != NULL)
                         {
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
-                            SendMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                            PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                         MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                         MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM,
                                         Any(pVideoCtx));
@@ -135,7 +135,7 @@ void CCPlayer::Run()
                     break;
             }
         }
-        Sleep(10);
+        Sleep(100);
     }
 }
 

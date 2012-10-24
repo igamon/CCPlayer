@@ -20,7 +20,6 @@ public:
 private:
     void RegisterViewClass();
     void UnRegisterViewClass();
-    void InitGL();
 
 private:
     static const char* ourClassNameA;

@@ -26,12 +26,12 @@ CCVideoRender::~CCVideoRender()
 {
 }
 
-void CCVideoRender::SendMessage(MessageObjectId messageSender,
+void CCVideoRender::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender, messageReceiver, msg, anyParam);
+    CCMessageCenter::GetInstance()->PostMessage(messageSender, messageReceiver, msg, anyParam);
 }
 
 void CCVideoRender::ReceiverMessage(const SmartPtr<Event>& rSmtEvent)
@@ -131,7 +131,7 @@ void CCVideoRender::Run()
             break;
         } // end of the render status
 
-        Sleep(10);
+        Sleep(100);
     }
 }
 

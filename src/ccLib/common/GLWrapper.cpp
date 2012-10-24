@@ -19,6 +19,26 @@ void CCGLWrapper::SetGLRenderView(CCUIGLView* pGLRenderView)
     m_pGLRenderView = pGLRenderView;
 }
 
+void CCGLWrapper::InitGL()
+{
+    glViewport(0, 0, 800, 600);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	gluPerspective(45.0f, (GLfloat)800/(GLfloat)600, 0.1f, 100.0f);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glShadeModel(GL_SMOOTH);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+	glClearDepth(1.0f);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
+
 int CCGLWrapper::CreateGLContext()
 {
     m_pGLRenderView->CreateGLContext();
@@ -40,6 +60,10 @@ int CCGLWrapper::CreateGLContext()
     glTexParameterf(GL_TEXTURE_2D,
                     GL_TEXTURE_WRAP_T,
                     GL_CLAMP);
+
+    //Init the render rect
+	InitGL();
+
     return 0;
 }
 
@@ -62,13 +86,13 @@ int CCGLWrapper::DrawFrame(VideoFrame* pVideoFrame, int width, int height)
     //Draw the image
     glBegin(GL_QUADS);
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-1.0f, -1.0f, -8.0f);
+    glVertex3f(-1.0f, -1.0f, -4.0f);
     glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(1.0f, -1.0f, -8.0f);
+    glVertex3f(1.0f, -1.0f, -4.0f);
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(1.0f, 1.0f, -8.0f);
+    glVertex3f(1.0f, 1.0f, -4.0f);
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-1.0f, 1.0f, -8.0f);
+    glVertex3f(-1.0f, 1.0f, -4.0f);
     glEnd();
 
     glDisable(GL_TEXTURE_2D);

@@ -74,6 +74,7 @@
 		<Unit filename="include\ccLib\common\ModuleManager.h" />
 		<Unit filename="include\ccLib\common\Mutex.h" />
 		<Unit filename="include\ccLib\common\RWLock.h" />
+		<Unit filename="include\ccLib\common\ReferenceTimer.h" />
 		<Unit filename="include\ccLib\common\SmartPtr.h" />
 		<Unit filename="include\ccLib\common\SpinLock.h" />
 		<Unit filename="include\ccLib\common\Thread.h" />
@@ -98,6 +99,7 @@
 		<Unit filename="src\ccLib\common\GLWrapper.cpp" />
 		<Unit filename="src\ccLib\common\MessageCenter.cpp" />
 		<Unit filename="src\ccLib\common\ModuleManager.cpp" />
+		<Unit filename="src\ccLib\common\ReferenceTimer.cpp" />
 		<Unit filename="src\ccLib\common\Thread.cpp" />
 		<Unit filename="src\ccLib\common\Timer.cpp" />
 		<Unit filename="src\ccLib\common\UIGLView.cpp" />

@@ -21,6 +21,9 @@ public:
     int DrawFrame(VideoFrame* pVideoFrame, int width, int height);
 
 private:
+    void InitGL();
+
+private:
     CCUIGLView* m_pGLRenderView;
     GLuint m_glTexture;
 };

@@ -4,6 +4,20 @@
 namespace CCPlayer
 {
 
+enum DataManagerStatus
+{
+    DATA_MANAGER_STATUS_ENUM_INIT,
+    DATA_MANAGER_STATUS_ENUM_WORKING,
+    DATA_MANAGER_STATUS_ENUM_SLEEPING,
+    DATA_MANAGER_STATUS_ENUM_DEADING,
+    DATA_MANAGER_STATUS_ENUM_MAX
+};
+
+#define DECODERS_STATUS_ENUM_NONE_READY     0
+#define DECODERS_STATUS_ENUM_AUDIO_READY    1
+#define DECODERS_STATUS_ENUM_VIDEO_READY    2
+#define DECODERS_STATUS_ENUM_ALL_READY      3
+
 static int ffmpegLockManager( void **mtx, enum AVLockOp op )
 {
     switch( op )
@@ -48,12 +62,12 @@ CCDataManager::~CCDataManager()
 {
 }
 
-void CCDataManager::SendMessage(MessageObjectId messageSender,
+void CCDataManager::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender,
+    CCMessageCenter::GetInstance()->PostMessage(messageSender,
                                                 messageReceiver,
                                                 msg,
                                                 anyParam);
@@ -80,15 +94,6 @@ bool CCDataManager::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
     return bGetMsg;
 }
 
-enum DataManagerStatus
-{
-    DATA_MANAGER_STATUS_ENUM_INIT,
-    DATA_MANAGER_STATUS_ENUM_WORKING,
-    DATA_MANAGER_STATUS_ENUM_SLEEPING,
-    DATA_MANAGER_STATUS_ENUM_DEADING,
-    DATA_MANAGER_STATUS_ENUM_MAX
-};
-
 void CCDataManager::Run()
 {
     //this is register for all ffmpeg action
@@ -105,6 +110,7 @@ void CCDataManager::Run()
     int asIndex;
     int vsIndex;
     DataManagerStatus status = DATA_MANAGER_STATUS_ENUM_INIT;
+    unsigned int decodersStatus = DECODERS_STATUS_ENUM_NONE_READY;
 
     while(m_bRunning)
     {
@@ -130,7 +136,7 @@ void CCDataManager::Run()
                         GetCodecContext(pAVFormatContext, asIndex, &pAudioCtx);
                         GetCodecContext(pAVFormatContext, vsIndex, &pVideoCtx);
 
-                        status = DATA_MANAGER_STATUS_ENUM_WORKING;
+                        //status = DATA_MANAGER_STATUS_ENUM_WORKING;
                     }
 
                     std::vector<Any> openedParams;
@@ -139,13 +145,30 @@ void CCDataManager::Run()
                     openedParams.push_back(Any(pAudioCtx));
                     openedParams.push_back(Any(pVideoCtx));
 
-                    SendMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                    PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                 MESSAGE_OBJECT_ENUM_PLAYER,
                                 MESSAGE_TYPE_ENUM_OPENED_FILE,
                                 openedParams);
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_AUDIO_DECODER_READY:
+                {
+                    decodersStatus += DECODERS_STATUS_ENUM_AUDIO_READY;
 
-                    //just for wait for the decoders working , I will change it
-                    Sleep(100);
+                    if(decodersStatus == DECODERS_STATUS_ENUM_ALL_READY)
+                    {
+                        status = DATA_MANAGER_STATUS_ENUM_WORKING;
+                    }
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_VIDEO_DECODER_READY:
+                {
+                    decodersStatus += DECODERS_STATUS_ENUM_VIDEO_READY;
+
+                    if(decodersStatus == DECODERS_STATUS_ENUM_ALL_READY)
+                    {
+                        status = DATA_MANAGER_STATUS_ENUM_WORKING;
+                    }
                 }
                 break;
                 default:
@@ -171,14 +194,14 @@ void CCDataManager::Run()
                 if(packet.GetPtr()->GetPacketPointer()->stream_index
                             == asIndex)
                 {
-                    SendMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                    PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                 MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                 MESSAGE_TYPE_ENUM_GET_AUDIO_PACKET,
                                 Any(packet));
                 }else if(packet.GetPtr()->GetPacketPointer()->stream_index
                             == vsIndex)
                 {
-                    SendMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                    PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                 MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                 MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET,
                                 Any(packet));
@@ -195,7 +218,7 @@ void CCDataManager::Run()
             break;
         } // end switch
 
-        Sleep(10);
+        Sleep(100);
     }
 }
 

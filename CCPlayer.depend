@@ -600,3 +600,388 @@
 	"error.h"
 	"avutil.h"
 
+1350790834 source:c:\users\lion\desktop\cbproject\ccplayer\main.cpp
+	"App.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\app.h
+	"IRSPCommand.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
+
+1350923555 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+	"AudioRender.h"
+	"MessageCenter.h"
+	"ALWrapper.h"
+
+1350922072 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\audiorender.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"ALWrapper.h"
+	"AudioDef.h"
+	"IMessageReceiver.h"
+
+1351010527 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\thread.h
+	"Common.h"
+	<pthread.h>
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\common.h
+	<iostream>
+	<cstdlib>
+	<string>
+	<vector>
+	<map>
+	<queue>
+	<limits>
+	<cassert>
+	<ctime>
+	<algorithm>
+	<GL/gl.h>
+	<GL/glu.h>
+	<Windows.h>
+	"libavutil/mem.h"
+	"libavformat/avformat.h"
+	"libavcodec/avcodec.h"
+	"libswscale/swscale.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\mem.h
+	"attributes.h"
+	"error.h"
+	"avutil.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\attributes.h
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\error.h
+	<errno.h>
+	"avutil.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avutil.h
+	"common.h"
+	"error.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"attributes.h"
+	"libavutil/avconfig.h"
+	"config.h"
+	"intmath.h"
+	"common.h"
+	"mem.h"
+	"internal.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\avconfig.h
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"attributes.h"
+	"rational.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\rational.h
+	<stdint.h>
+	<limits.h>
+	"attributes.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"attributes.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+	"attributes.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\pixfmt.h
+	"libavutil/avconfig.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"avio.h"
+	"libavformat/version.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/samplefmt.h"
+	"libavutil/avutil.h"
+	"libavutil/cpu.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"libavutil/pixfmt.h"
+	"libavutil/rational.h"
+	"libavcodec/version.h"
+	"libavutil/audioconvert.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\samplefmt.h
+	"avutil.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\cpu.h
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\dict.h
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavcodec\version.h
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavutil\audioconvert.h
+	<stdint.h>
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+	"libavutil/dict.h"
+	"libavutil/log.h"
+	"libavformat/version.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libavformat\version.h
+	"libavutil/avutil.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\plugins\ffmpeg-0.10.4\include\libswscale\swscale.h
+	"libavutil/avutil.h"
+	"libavutil/log.h"
+	"libavutil/pixfmt.h"
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\pthread.h
+	<windows.h>
+	"config.h"
+	<time.h>
+	<signal.h>
+	<limits.h>
+	"need_errno.h"
+	<errno.h>
+	<sched.h>
+	<sys/types.h>
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\pthread-2.9.1\include\sched.h
+	"need_errno.h"
+	<errno.h>
+	<sys/types.h>
+	<time.h>
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\spinlock.h
+	<pthread.h>
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\alwrapper.h
+	"Common.h"
+	"AudioDef.h"
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alext.h>
+
+1350922993 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\audiodef.h
+	"Common.h"
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\al.h
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alc.h
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\alext.h
+	<stddef.h>
+	"efx.h"
+
+1350790835 c:\users\lion\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\efx.h
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\imessagereceiver.h
+	"Event.h"
+	"SmartPtr.h"
+
+1350917440 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\event.h
+	"Any.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\any.h
+	<typeinfo>
+	<type_traits>
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
+	"SpinLock.h"
+
+1350922169 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
+	"Common.h"
+	"SpinLock.h"
+	"RWLock.h"
+	"Thread.h"
+	"Event.h"
+	"SmartPtr.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
+	<pthread.h>
+
+1350923576 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\player.cpp
+	"Player.h"
+	"IRSPCommand.h"
+	"MessageCenter.h"
+	"ModuleManager.h"
+	"Any.h"
+
+1350922086 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\player.h
+	"Common.h"
+	"Thread.h"
+	"IMessageReceiver.h"
+	"Event.h"
+	"SmartPtr.h"
+	"SpinLock.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
+	"Common.h"
+
+1350923581 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+	"VideoRender.h"
+	"MessageCenter.h"
+	"UIGLView.h"
+	"UIWindow.h"
+	"GLWrapper.h"
+	"GLViewImplWin32.h"
+
+1350922098 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\videorender.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"VideoDef.h"
+	"IMessageReceiver.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
+	"Common.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
+	"Common.h"
+	"UIObject.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\uiobject.h
+	"Common.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\uiwindow.h
+	"UIObject.h"
+
+1350918908 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\glwrapper.h
+	"Common.h"
+
+1350918838 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\glviewimplwin32.h
+	"Win32Def.h"
+	"UIGLView.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\win32def.h
+	<Windows.h>
+
+1350790836 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
+	"ALWrapper.h"
+
+1350790836 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
+	"Common.h"
+
+1350920392 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\glwrapper.cpp
+	"GLWrapper.h"
+	"UIGLView.h"
+	"VideoDef.h"
+
+1350923591 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
+	"MessageCenter.h"
+	"IMessageReceiver.h"
+	"SmartPtr.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\modulemanager.cpp
+	"ModuleManager.h"
+	"MessageCenter.h"
+	"AudioRender.h"
+	"AudioDecoder.h"
+	"VideoRender.h"
+	"VideoDecoder.h"
+	"DataManager.h"
+
+1350922065 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"AudioDef.h"
+	"IMessageReceiver.h"
+
+1350922092 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"VideoDef.h"
+	"IMessageReceiver.h"
+
+1350922077 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+	"Thread.h"
+	"Common.h"
+	"SpinLock.h"
+	"IMessageReceiver.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\thread.cpp
+	"Thread.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\timer.cpp
+	"Timer.h"
+
+1350790833 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\timer.h
+	"Common.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\uiglview.cpp
+	"UIGLView.h"
+	"UIWindow.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\uiwindow.cpp
+	"UIWindow.h"
+
+1350790837 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+	"App.h"
+	"Win32Def.h"
+	"Player.h"
+	"WindowImplWin32.h"
+	"GLViewImplWin32.h"
+
+1350790834 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\windowimplwin32.h
+	"Win32Def.h"
+	"UIWindow.h"
+
+1350918939 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\glviewimplwin32.cpp
+	"GLViewImplWin32.h"
+	"VideoDef.h"
+
+1350790839 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
+	"WindowImplWin32.h"
+
+1350923550 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+	"AudioDecoder.h"
+	"MessageCenter.h"
+
+1350923562 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+	"DataManager.h"
+	"MessageCenter.h"
+
+1350923569 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+	"VideoDecoder.h"
+	"MessageCenter.h"
+
+1350922423 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\timemanager.cpp
+	"TimeManager.h"
+
+1350922409 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\timemanager.h
+	"Timer.h"
+	"Mutex.h"
+	"RWLock.h"
+
+1350922398 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\mutex.h
+	<pthread.h>
+
+1351053620 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\systemalarm.cpp
+	"SystemAlarm.h"
+
+1351053637 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\systemalarm.h
+	"Timer.h"
+	"Mutex.h"
+	"RWLock.h"
+

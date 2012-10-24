@@ -12,12 +12,12 @@ CCVideoDecoder::~CCVideoDecoder()
 {
 }
 
-void CCVideoDecoder::SendMessage(MessageObjectId messageSender,
+void CCVideoDecoder::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender, messageReceiver, msg, anyParam);
+    CCMessageCenter::GetInstance()->PostMessage(messageSender, messageReceiver, msg, anyParam);
 }
 
 void CCVideoDecoder::ReceiverMessage(const SmartPtr<Event>& rSmtEvent)
@@ -75,13 +75,18 @@ void CCVideoDecoder::Run()
                         videoInformartion.push_back(Any(imgWidth));
                         videoInformartion.push_back(Any(imgHeight));
 
-                        SendMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                        PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                     MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                     MESSAGE_TYPE_ENUM_GET_AUDIO_INFORMATION,
                                     Any(videoInformartion));
 
                         pDecodedFrame = avcodec_alloc_frame();
                         pDecodePicture = (AVPicture*)av_mallocz(sizeof(AVPicture));
+
+                        PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                    MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_TYPE_ENUM_VIDEO_DECODER_READY,
+                                    Any());
                     }
                 }
                 break;
@@ -117,7 +122,7 @@ void CCVideoDecoder::Run()
                                   pDecodePicture->linesize);
 
                         SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, 0));
-                        SendMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                        PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                     MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                     MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME,
                                     Any(videoFrame));
@@ -129,7 +134,7 @@ void CCVideoDecoder::Run()
             } // end switch case
         }
 
-        Sleep(10);
+        Sleep(100);
     }
 }
 

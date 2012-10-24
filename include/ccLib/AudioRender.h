@@ -18,7 +18,7 @@ public:
     virtual ~CCAudioRender();
 
 public:
-    void SendMessage(MessageObjectId messageSender,
+    void PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam);

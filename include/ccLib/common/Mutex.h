@@ -19,11 +19,11 @@ public:
 public:
     int Lock()
     {
-        pthread_mutex_lock(&m_mutex);
+        return pthread_mutex_lock(&m_mutex);
     }
     int UnLock()
     {
-        pthread_mutex_unlock(&m_mutex);
+        return pthread_mutex_unlock(&m_mutex);
     }
 private:
     pthread_mutex_t m_mutex;

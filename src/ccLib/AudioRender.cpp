@@ -23,12 +23,12 @@ CCAudioRender::~CCAudioRender()
 {
 }
 
-void CCAudioRender::SendMessage(MessageObjectId messageSender,
+void CCAudioRender::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
                             Any anyParam)
 {
-    CCMessageCenter::GetInstance()->SendMessage(messageSender, messageReceiver, msg, anyParam);
+    CCMessageCenter::GetInstance()->PostMessage(messageSender, messageReceiver, msg, anyParam);
 }
 
 void CCAudioRender::ReceiverMessage(const SmartPtr<Event>& rSmtEvent)
@@ -134,7 +134,7 @@ void CCAudioRender::Run()
             }
         }
 
-        //Sleep(10);
+        Sleep(100);
     }
 }
 
