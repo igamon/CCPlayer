@@ -9,7 +9,7 @@ namespace CCPlayer
 class ITimerInterface
 {
 public:
-    virtual void TimeElapsed();
+    virtual void TimeElapsed() = 0;
 };
 
 class CCTimer

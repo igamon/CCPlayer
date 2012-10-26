@@ -7,11 +7,12 @@
 #include "ALWrapper.h"
 #include "AudioDef.h"
 #include "IMessageReceiver.h"
+#include "FrequencyWorker.h"
 
 namespace CCPlayer
 {
 
-class CCAudioRender: public CCThread, public IMessageReceiver
+class CCAudioRender: public CCThread, public IMessageReceiver, public CCFrequencyWorker
 {
 public:
     CCAudioRender();

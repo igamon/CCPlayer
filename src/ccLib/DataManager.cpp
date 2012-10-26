@@ -167,12 +167,24 @@ void CCDataManager::Run()
 
                     if(decodersStatus == DECODERS_STATUS_ENUM_ALL_READY)
                     {
+                        printf("all are ready\n");
                         status = DATA_MANAGER_STATUS_ENUM_WORKING;
                     }
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_ORDER_SLEEP:
+                {
+                    status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP:
+                {
+                    status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                }
+                break;
                 default:
                     std::cout << "Unknow Data Manager Message" << std::endl;
+                break;
             }
         }
 
@@ -184,6 +196,8 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_WORKING:
             {
+                std::cout << "data manager are working" << std::endl;
+
                 SmartPtr<CCPacket> packet(new CCPacket());
                 if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
                 {
@@ -210,6 +224,9 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_SLEEPING:
             {
+                Sleep(10);
+                //after we have a reset , we should working
+                status = DATA_MANAGER_STATUS_ENUM_WORKING;
             }
             break;
             case DATA_MANAGER_STATUS_ENUM_DEADING:
@@ -217,8 +234,6 @@ void CCDataManager::Run()
             }
             break;
         } // end switch
-
-        Sleep(100);
     }
 }
 

@@ -5,12 +5,22 @@ namespace CCPlayer
 
 CCFrequencyWorker::CCFrequencyWorker()
 {
-    //ctor
+    sem_init(&m_semaphore, 0, 1);
 }
 
 CCFrequencyWorker::~CCFrequencyWorker()
 {
-    //dtor
+    sem_destroy(&m_semaphore);
+}
+
+void CCFrequencyWorker::Post()
+{
+    sem_post(&m_semaphore);
+}
+
+void CCFrequencyWorker::Wait()
+{
+    sem_wait(&m_semaphore);
 }
 
 }

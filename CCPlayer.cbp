@@ -44,7 +44,7 @@
 		<Linker>
 			<Add library="gdi32" />
 			<Add library="Winmm" />
-			<Add library="pthreadGCE2" />
+			<Add library="pthread" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="avutil.dll" />
@@ -54,7 +54,6 @@
 			<Add library="OpenAL32.dll" />
 			<Add directory="plugins\openal-1.14\lib" />
 			<Add directory="plugins\ffmpeg-0.10.4\lib" />
-			<Add directory="plugins\pthread-2.9.1\lib\x86" />
 		</Linker>
 		<Unit filename="include\ccLib\AudioDecoder.h" />
 		<Unit filename="include\ccLib\AudioRender.h" />
@@ -68,15 +67,16 @@
 		<Unit filename="include\ccLib\common\AudioDef.h" />
 		<Unit filename="include\ccLib\common\Common.h" />
 		<Unit filename="include\ccLib\common\Event.h" />
+		<Unit filename="include\ccLib\common\FrequencyWorker.h" />
 		<Unit filename="include\ccLib\common\GLWrapper.h" />
 		<Unit filename="include\ccLib\common\IMessageReceiver.h" />
 		<Unit filename="include\ccLib\common\MessageCenter.h" />
 		<Unit filename="include\ccLib\common\ModuleManager.h" />
 		<Unit filename="include\ccLib\common\Mutex.h" />
 		<Unit filename="include\ccLib\common\RWLock.h" />
-		<Unit filename="include\ccLib\common\ReferenceTimer.h" />
 		<Unit filename="include\ccLib\common\SmartPtr.h" />
 		<Unit filename="include\ccLib\common\SpinLock.h" />
+		<Unit filename="include\ccLib\common\SystemAlarm.h" />
 		<Unit filename="include\ccLib\common\Thread.h" />
 		<Unit filename="include\ccLib\common\Timer.h" />
 		<Unit filename="include\ccLib\common\UIGLView.h" />
@@ -96,10 +96,11 @@
 		<Unit filename="src\ccLib\VideoRender.cpp" />
 		<Unit filename="src\ccLib\common\ALWrapper.cpp" />
 		<Unit filename="src\ccLib\common\Common.cpp" />
+		<Unit filename="src\ccLib\common\FrequencyWorker.cpp" />
 		<Unit filename="src\ccLib\common\GLWrapper.cpp" />
 		<Unit filename="src\ccLib\common\MessageCenter.cpp" />
 		<Unit filename="src\ccLib\common\ModuleManager.cpp" />
-		<Unit filename="src\ccLib\common\ReferenceTimer.cpp" />
+		<Unit filename="src\ccLib\common\SystemAlarm.cpp" />
 		<Unit filename="src\ccLib\common\Thread.cpp" />
 		<Unit filename="src\ccLib\common\Timer.cpp" />
 		<Unit filename="src\ccLib\common\UIGLView.cpp" />

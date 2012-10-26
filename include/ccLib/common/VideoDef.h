@@ -9,6 +9,10 @@ namespace CCPlayer
 #define VIDEO_OUTPUT_WIDTH  1024
 #define VIDEO_OUTPUT_HEIGHT 1024
 
+//define the limits of audio
+#define MAX_VIDEO_FRAME_QUEUE_SIZE  2
+#define MAX_VIDEO_PACKET_QUEUE_SIZE 10
+
 class VideoFrame
 {
 public:

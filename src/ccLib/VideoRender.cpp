@@ -4,6 +4,7 @@
 #include "UIWindow.h"
 #include "GLWrapper.h"
 #include "GLViewImplWin32.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -57,6 +58,8 @@ bool CCVideoRender::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCVideoRender::Run()
 {
+    CCSystemAlarm::GetInstance()->RegisterSystemAlarm(this);
+
     CCGLWrapper glWrapper;
     int imgWidth = 0;
     int imgHeight = 0;
@@ -104,6 +107,8 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
+                CCFrequencyWorker::Wait();
+
                 if(!m_videoFrameQueue.empty())
                 {
                     SmartPtr<VideoFrame> shrdVideoFrame =
@@ -111,6 +116,14 @@ void CCVideoRender::Run()
                     m_videoFrameQueue.pop();
 
                     glWrapper.DrawFrame(shrdVideoFrame.GetPtr(), imgWidth, imgHeight);
+                }
+
+                if(m_videoFrameQueue.size() > MAX_VIDEO_FRAME_QUEUE_SIZE)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
+                                Any());
                 }
             }
             break;
@@ -131,8 +144,10 @@ void CCVideoRender::Run()
             break;
         } // end of the render status
 
-        Sleep(100);
+        CCFrequencyWorker::Wait();
     }
+
+    CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }
 
 }

@@ -7,13 +7,14 @@
 #include "Thread.h"
 #include "Event.h"
 #include "SmartPtr.h"
+#include "FrequencyWorker.h"
 
 namespace CCPlayer
 {
 
 class IMessageReceiver;
 
-class CCMessageCenter: public CCThread
+class CCMessageCenter: public CCThread, public CCFrequencyWorker
 {
 private:
     CCMessageCenter()

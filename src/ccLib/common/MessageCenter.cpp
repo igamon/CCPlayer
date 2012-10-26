@@ -1,6 +1,7 @@
 #include "MessageCenter.h"
 #include "IMessageReceiver.h"
 #include "SmartPtr.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -91,6 +92,8 @@ void CCMessageCenter::InitMessageCenter()
 
 void CCMessageCenter::Run()
 {
+    CCSystemAlarm::GetInstance()->RegisterSystemAlarm(this);
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -101,8 +104,11 @@ void CCMessageCenter::Run()
                 event.GetPtr()->pReceiveModule->ReceiverMessage(event);
             }
         }
-        Sleep(100);
+
+        CCFrequencyWorker::Wait();
     }
+
+    CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }
 
 }

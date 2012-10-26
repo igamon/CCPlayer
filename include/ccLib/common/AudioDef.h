@@ -21,6 +21,10 @@ typedef enum
 #define BASE_AUDIO_BUFFER_SIZE  4096
 #define AUDIO_BUFFER_NUMBER     2
 
+//define the limits of audio
+#define MAX_AUDIO_FRAME_QUEUE_SIZE  2
+#define MAX_AUDIO_PACKET_QUEUE_SIZE 10
+
 class AudioFrame
 {
 public:

@@ -1,6 +1,7 @@
 #include "AudioRender.h"
 #include "MessageCenter.h"
 #include "ALWrapper.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -54,6 +55,8 @@ bool CCAudioRender::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCAudioRender::Run()
 {
+    CCSystemAlarm::GetInstance()->RegisterSystemAlarm(this);
+
     ALWrapper alWrapper;
 
     AudioRenderStatus status = AUDIO_RENDER_STATUS_ENUM_UNKNOW;
@@ -118,12 +121,23 @@ void CCAudioRender::Run()
                     break;
                 case AUDIO_RENDER_STATUS_ENUM_UPDATING:
                     {
+                        CCFrequencyWorker::Wait();
+
                         if(alWrapper.NeedData() && !m_audioFrameQueue.empty())
                         {
                             SmartPtr<AudioFrame> shrdAudioFrame = m_audioFrameQueue.front();
                             m_audioFrameQueue.pop();
 
                             alWrapper.UpdateAudioFrame(shrdAudioFrame.GetPtr());
+                        }
+
+                        //tell the decoder we have enough frames
+                        if(m_audioFrameQueue.size() > MAX_AUDIO_FRAME_QUEUE_SIZE)
+                        {
+                            PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                        MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                        MESSAGE_TYPE_ENUM_AUDIO_RENDER_ORDER_SLEEP,
+                                        Any());
                         }
                     }
                     break;
@@ -133,9 +147,9 @@ void CCAudioRender::Run()
                     break;
             }
         }
-
-        Sleep(100);
     }
+
+    CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }
 
 ALenum CCAudioRender::GetAudioFormat(CCChannels channels, CCType type)

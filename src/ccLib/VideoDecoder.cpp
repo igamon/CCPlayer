@@ -4,6 +4,15 @@
 namespace CCPlayer
 {
 
+enum VideoDecoderStatus
+{
+    VIDEO_DECODER_STATUS_ENUM_UNKNOW,
+    VIDEO_DECODER_STATUS_ENUM_WORKING,
+    VIDEO_DECODER_STATUS_ENUM_SLEEPING,
+    VIDEO_DECODER_STATUS_ENUM_DEADING,
+    VIDEO_DECODER_STATUS_ENUM_MAX
+};
+
 CCVideoDecoder::CCVideoDecoder()
 {
 }
@@ -43,6 +52,8 @@ bool CCVideoDecoder::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCVideoDecoder::Run()
 {
+    VideoDecoderStatus status = VIDEO_DECODER_STATUS_ENUM_UNKNOW;
+
     AVCodecContext* pVideoCtx = NULL;
     SwsContext* pImageConvertCtx = NULL;
     AVFrame *pDecodedFrame;
@@ -87,6 +98,9 @@ void CCVideoDecoder::Run()
                                     MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                     MESSAGE_TYPE_ENUM_VIDEO_DECODER_READY,
                                     Any());
+
+                        //turn the video decoder status to working
+                        status = VIDEO_DECODER_STATUS_ENUM_WORKING;
                     }
                 }
                 break;
@@ -94,6 +108,29 @@ void CCVideoDecoder::Run()
                 {
                     SmartPtr<CCPacket> shdPacket
                                             = any_cast<SmartPtr<CCPacket> >(event.GetPtr()->anyParams);
+
+                    m_videoPacketQueue.push(shdPacket);
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP:
+                {
+                    status = VIDEO_DECODER_STATUS_ENUM_SLEEPING;
+                }
+                break;
+            } // end switch case
+        }//end get a message
+
+        switch(status)
+        {
+            case VIDEO_DECODER_STATUS_ENUM_WORKING:
+            {
+                std::cout << "Video Decoder are working" << std::endl;
+
+                if(!m_videoPacketQueue.empty())
+                {
+                    SmartPtr<CCPacket> shdPacket
+                                            = m_videoPacketQueue.front();
+                    m_videoPacketQueue.pop();
 
                     AVPacket packet = shdPacket.GetPtr()->GetPacket();
 
@@ -128,13 +165,38 @@ void CCVideoDecoder::Run()
                                     Any(videoFrame));
 
                         av_free(pScaleBuffer);
-                    }
-                }
-                break;
-            } // end switch case
-        }
+                    }// we get frame
+                }// end if video packet queue is not empty
 
-        Sleep(100);
+                if(m_videoPacketQueue.size() > MAX_VIDEO_PACKET_QUEUE_SIZE)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
+                                Any());
+                }
+
+            }// end while decode the packet
+            break;
+            case VIDEO_DECODER_STATUS_ENUM_SLEEPING:
+            {
+                Sleep(20);
+
+                //after have a reset , we should working now
+                status = VIDEO_DECODER_STATUS_ENUM_WORKING;
+            }
+            break;
+            case VIDEO_DECODER_STATUS_ENUM_DEADING:
+            {
+
+            }
+            break;
+            case VIDEO_DECODER_STATUS_ENUM_UNKNOW:
+            {
+
+            }
+            break;
+        }// end switch case status
     }
 }
 

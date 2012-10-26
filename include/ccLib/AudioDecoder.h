@@ -36,6 +36,9 @@ private:
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;
     CCSpinLock m_spinLockMessageQueue;
+
+private:
+    std::queue<SmartPtr<CCPacket> > m_audioPacketQueue;
 };
 
 }

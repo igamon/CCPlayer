@@ -6,11 +6,12 @@
 #include "SpinLock.h"
 #include "VideoDef.h"
 #include "IMessageReceiver.h"
+#include "FrequencyWorker.h"
 
 namespace CCPlayer
 {
 
-class CCVideoRender: public CCThread, public IMessageReceiver
+class CCVideoRender: public CCThread, public IMessageReceiver, public CCFrequencyWorker
 {
 public:
     CCVideoRender();
