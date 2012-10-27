@@ -117,6 +117,11 @@ void CCVideoDecoder::Run()
                     status = VIDEO_DECODER_STATUS_ENUM_SLEEPING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                {
+                    status = VIDEO_DECODER_STATUS_ENUM_DEADING;
+                }
+                break;
             } // end switch case
         }//end get a message
 
@@ -124,7 +129,14 @@ void CCVideoDecoder::Run()
         {
             case VIDEO_DECODER_STATUS_ENUM_WORKING:
             {
-                std::cout << "Video Decoder are working" << std::endl;
+                //std::cout << "Video Decoder are working" << std::endl;
+                if(m_videoPacketQueue.size() > MAX_VIDEO_PACKET_QUEUE_SIZE)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
+                                Any());
+                }
 
                 if(!m_videoPacketQueue.empty())
                 {
@@ -167,20 +179,11 @@ void CCVideoDecoder::Run()
                         av_free(pScaleBuffer);
                     }// we get frame
                 }// end if video packet queue is not empty
-
-                if(m_videoPacketQueue.size() > MAX_VIDEO_PACKET_QUEUE_SIZE)
-                {
-                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
-                                Any());
-                }
-
             }// end while decode the packet
             break;
             case VIDEO_DECODER_STATUS_ENUM_SLEEPING:
             {
-                Sleep(20);
+                Sleep(50);
 
                 //after have a reset , we should working now
                 status = VIDEO_DECODER_STATUS_ENUM_WORKING;
@@ -188,7 +191,8 @@ void CCVideoDecoder::Run()
             break;
             case VIDEO_DECODER_STATUS_ENUM_DEADING:
             {
-
+                m_bRunning = false;
+                continue;
             }
             break;
             case VIDEO_DECODER_STATUS_ENUM_UNKNOW:

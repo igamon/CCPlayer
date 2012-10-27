@@ -3,6 +3,7 @@
 #include "MessageCenter.h"
 #include "ModuleManager.h"
 #include "Any.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -78,6 +79,7 @@ bool CCPlayer::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
 
 void CCPlayer::Run()
 {
+    CCSystemAlarm::GetInstance()->RegisterSystemAlarm(this);
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -133,10 +135,26 @@ void CCPlayer::Run()
                         }
                     }
                     break;
+                    case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                    {
+                        m_bRunning = false;
+                        continue;
+                    }
+                    break;
             }
         }
-        Sleep(100);
+
+        CCFrequencyWorker::Wait();
+        CCFrequencyWorker::Wait();
+        CCFrequencyWorker::Wait();
+        CCFrequencyWorker::Wait();
+        CCFrequencyWorker::Wait();
+        CCFrequencyWorker::Wait();
+
+        //std::cout << "The play is running" << std::endl;
     }
+
+    CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }
 
 }

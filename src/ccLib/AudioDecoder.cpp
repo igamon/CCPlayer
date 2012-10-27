@@ -112,6 +112,11 @@ void CCAudioDecoder::Run()
                     status = AUDIO_DECODER_STATUS_ENUM_SLEEPING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                {
+                    status = AUDIO_DECODER_STATUS_ENUM_DEADING;
+                }
+                break;
             } // end switch case
         }// end if get a message
 
@@ -120,10 +125,20 @@ void CCAudioDecoder::Run()
         {
             case AUDIO_DECODER_STATUS_ENUM_WORKING:
             {
-                std::cout << "Audio Decoder are working" << std::endl;
+                if(m_audioPacketQueue.size() > MAX_AUDIO_PACKET_QUEUE_SIZE)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_ORDER_SLEEP,
+                                Any());
+                }
+                //std::cout << "Audio Decoder are working" << std::endl;
 
                 if(!m_audioPacketQueue.empty())
                 {
+                    //static int count = 0;
+                    //std::cout << "decoder a audio packet" << ++count << std::endl;
+
                     SmartPtr<CCPacket> shdPacket = m_audioPacketQueue.front();
                     m_audioPacketQueue.pop();
 
@@ -143,6 +158,9 @@ void CCAudioDecoder::Run()
 
                         if(gotFrame)
                         {
+                            //std::cout << "Get a frame" << std::endl;
+                            //count = 0;
+
                             int decodedDataSize = av_samples_get_buffer_size(NULL,
                                                                     pAudioCodecCtx->channels,
                                                                     pDecodedFrame->nb_samples,
@@ -157,20 +175,12 @@ void CCAudioDecoder::Run()
                         }
                     }// end while decoder packet
                 }// end the packet queue is not empty
-
-                if(m_audioPacketQueue.size() > MAX_AUDIO_PACKET_QUEUE_SIZE)
-                {
-                    PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
-                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_ORDER_SLEEP,
-                                Any());
-                }
             }
             break;
             case AUDIO_DECODER_STATUS_ENUM_SLEEPING:
             {
                 // just sleep for millionsecond
-                Sleep(20);
+                Sleep(50);
 
                 //after take a reset , we should working.
                 status = AUDIO_DECODER_STATUS_ENUM_WORKING;
@@ -178,7 +188,8 @@ void CCAudioDecoder::Run()
             break;
             case AUDIO_DECODER_STATUS_ENUM_DEADING:
             {
-
+                m_bRunning = false;
+                continue;
             }
             break;
             case AUDIO_DECODER_STATUS_ENUM_UNKNOW:

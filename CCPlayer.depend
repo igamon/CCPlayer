@@ -608,7 +608,7 @@
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
 
-1351187017 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+1351242926 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
 	"AudioRender.h"
 	"MessageCenter.h"
 	"ALWrapper.h"
@@ -627,7 +627,7 @@
 	"Common.h"
 	<pthread.h>
 
-1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\common.h
+1351241046 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\common.h
 	<iostream>
 	<cstdlib>
 	<string>
@@ -783,7 +783,7 @@
 	<AL/alc.h>
 	<AL/alext.h>
 
-1351188579 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\audiodef.h
+1351240750 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\audiodef.h
 	"Common.h"
 
 1351174065 c:\users\lion\desktop\cbproject\ccplayer\plugins\openal-1.14\include\al\al.h
@@ -800,7 +800,7 @@
 	"Event.h"
 	"SmartPtr.h"
 
-1351186677 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\event.h
+1351240992 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\event.h
 	"Any.h"
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\any.h
@@ -810,7 +810,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\smartptr.h
 	"SpinLock.h"
 
-1351182306 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
+1351241759 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\messagecenter.h
 	"Common.h"
 	"SpinLock.h"
 	"RWLock.h"
@@ -822,25 +822,27 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
 	<pthread.h>
 
-1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1351242825 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
 	"IRSPCommand.h"
 	"MessageCenter.h"
 	"ModuleManager.h"
 	"Any.h"
+	"SystemAlarm.h"
 
-1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\player.h
+1351237652 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\player.h
 	"Common.h"
 	"Thread.h"
 	"IMessageReceiver.h"
 	"Event.h"
 	"SmartPtr.h"
 	"SpinLock.h"
+	"FrequencyWorker.h"
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
 	"Common.h"
 
-1351187396 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1351242794 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 	"UIGLView.h"
@@ -857,7 +859,7 @@
 	"IMessageReceiver.h"
 	"FrequencyWorker.h"
 
-1351188586 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
+1351240756 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
 	"Common.h"
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
@@ -891,7 +893,7 @@
 	"UIGLView.h"
 	"VideoDef.h"
 
-1351183486 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
+1351242372 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\messagecenter.cpp
 	"MessageCenter.h"
 	"IMessageReceiver.h"
 	"SmartPtr.h"
@@ -920,11 +922,12 @@
 	"VideoDef.h"
 	"IMessageReceiver.h"
 
-1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+1351243310 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\datamanager.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
 	"IMessageReceiver.h"
+	"FrequencyWorker.h"
 
 1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\thread.cpp
 	"Thread.h"
@@ -942,7 +945,7 @@
 1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\uiwindow.cpp
 	"UIWindow.h"
 
-1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
+1351243782 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\app.cpp
 	"App.h"
 	"Win32Def.h"
 	"Player.h"
@@ -960,15 +963,16 @@
 1351174067 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
 	"WindowImplWin32.h"
 
-1351188389 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+1351243086 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
 	"AudioDecoder.h"
 	"MessageCenter.h"
 
-1351188342 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+1351243811 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
 	"DataManager.h"
 	"MessageCenter.h"
+	"SystemAlarm.h"
 
-1351188404 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+1351243117 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
 	"VideoDecoder.h"
 	"MessageCenter.h"
 
@@ -983,7 +987,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\mutex.h
 	<pthread.h>
 
-1351183053 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\systemalarm.cpp
+1351240803 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\systemalarm.cpp
 	"SystemAlarm.h"
 	"FrequencyWorker.h"
 

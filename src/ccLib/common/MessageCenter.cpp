@@ -85,6 +85,25 @@ bool CCMessageCenter::PopFrontMessage(SmartPtr<Event>& rSmtEvent)
     return bGetMsg;
 }
 
+void CCMessageCenter::NotifyToAllMessageObject(const SmartPtr<Event>& rSmtEvent)
+{
+    m_spinLockMessageQueue.Lock();
+
+    std::map<MessageObjectId, IMessageReceiver*>::const_iterator cit
+                                                    = m_mapMessageReceiver.begin();
+
+    while(cit != m_mapMessageReceiver.end())
+    {
+        SmartPtr<Event> shdEvent = rSmtEvent;
+        rSmtEvent.GetPtr()->pReceiveModule = cit->second;
+        cit->second->ReceiverMessage(rSmtEvent);
+
+        cit ++;
+    }
+
+    m_spinLockMessageQueue.UnLock();
+}
+
 void CCMessageCenter::InitMessageCenter()
 {
     m_pSharedInstance->Launch();
@@ -103,9 +122,14 @@ void CCMessageCenter::Run()
             {
                 event.GetPtr()->pReceiveModule->ReceiverMessage(event);
             }
+            else
+            {
+                NotifyToAllMessageObject(event);
+            }
+        }else
+        {
+            CCFrequencyWorker::Wait();
         }
-
-        CCFrequencyWorker::Wait();
     }
 
     CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);

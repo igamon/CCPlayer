@@ -86,9 +86,16 @@ void CCAudioRender::Run()
                 break;
                 case  MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME:
                 {
+                    //std::cout << "get a audio frame =======" << std::endl;
+
                     SmartPtr<AudioFrame> shrdAudioFrame
                                             = any_cast<SmartPtr<AudioFrame> >(event.GetPtr()->anyParams);
                     m_audioFrameQueue.push(shrdAudioFrame);
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                {
+                    status = AUDIO_REDNER_STATUS_ENUM_DEADING;
                 }
                 break;
             } // end switch case
@@ -102,6 +109,9 @@ void CCAudioRender::Run()
                     break;
                 case AUDIO_RENDER_STATUS_ENUM_INITTED:
                     {
+                        //std::cout << "Audio render are initing ======================" << std::endl;
+                        //std::cout << "m_audioFrameQueue.size() ====================== " << m_audioFrameQueue.size() << std::endl;
+
                         if(m_audioFrameQueue.size() >= AUDIO_BUFFER_NUMBER)
                         {
                             std::cout << "Init the audio buffers" << std::endl;
@@ -121,6 +131,8 @@ void CCAudioRender::Run()
                     break;
                 case AUDIO_RENDER_STATUS_ENUM_UPDATING:
                     {
+                        //std::cout << "Audio render are working" << std::endl;
+
                         CCFrequencyWorker::Wait();
 
                         if(alWrapper.NeedData() && !m_audioFrameQueue.empty())
@@ -144,7 +156,11 @@ void CCAudioRender::Run()
                 case AUDIO_RENDER_STATUS_ENUM_SLEEPING:
                     break;
                 case AUDIO_REDNER_STATUS_ENUM_DEADING:
-                    break;
+                {
+                    m_bRunning = false;
+                    continue;
+                }
+                break;
             }
         }
     }

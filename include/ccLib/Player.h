@@ -7,6 +7,7 @@
 #include "Event.h"
 #include "SmartPtr.h"
 #include "SpinLock.h"
+#include "FrequencyWorker.h"
 
 namespace CCPlayer
 {
@@ -15,7 +16,7 @@ class IRSPCommand;
 class CCUIGLView;
 class CCUIWindow;
 
-class CCPlayer : public CCThread, public IMessageReceiver
+class CCPlayer : public CCThread, public IMessageReceiver, public CCFrequencyWorker
 {
 public:
     CCPlayer();

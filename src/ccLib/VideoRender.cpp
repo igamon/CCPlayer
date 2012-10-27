@@ -100,6 +100,11 @@ void CCVideoRender::Run()
                     m_videoFrameQueue.push(shrdVideoFrame);
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                {
+                    status = VIDEO_REDNER_STATUS_ENUM_DEADING;
+                }
+                break;
             } // end of case event
         } // end of get a message
 
@@ -107,6 +112,8 @@ void CCVideoRender::Run()
         {
             case VIDEO_RENDER_STATUS_ENUM_INITTED:
             {
+                //std::cout << "Video Render are working" << std::endl;
+
                 CCFrequencyWorker::Wait();
 
                 if(!m_videoFrameQueue.empty())
@@ -134,17 +141,15 @@ void CCVideoRender::Run()
             break;
             case VIDEO_RENDER_STATUS_ENUM_SLEEPING:
             {
-                Sleep(10);
             }
             break;
             case VIDEO_REDNER_STATUS_ENUM_DEADING:
             {
-
+                m_bRunning = false;
+                break;
             }
             break;
         } // end of the render status
-
-        CCFrequencyWorker::Wait();
     }
 
     CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);

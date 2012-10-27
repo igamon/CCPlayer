@@ -1,5 +1,6 @@
 #include "DataManager.h"
 #include "MessageCenter.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -105,6 +106,8 @@ void CCDataManager::Run()
         // TODO Failure av_lockmgr_register
     }
 
+    CCSystemAlarm::GetInstance()->RegisterSystemAlarm(this);
+
     std::string mediaUrl;
     AVFormatContext *pAVFormatContext = NULL;
     int asIndex;
@@ -167,7 +170,6 @@ void CCDataManager::Run()
 
                     if(decodersStatus == DECODERS_STATUS_ENUM_ALL_READY)
                     {
-                        printf("all are ready\n");
                         status = DATA_MANAGER_STATUS_ENUM_WORKING;
                     }
                 }
@@ -196,14 +198,20 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_WORKING:
             {
-                std::cout << "data manager are working" << std::endl;
-
                 SmartPtr<CCPacket> packet(new CCPacket());
                 if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
                 {
+                    //PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                    //            MESSAGE_OJBECT_ENUM_ALL,
+                    //            MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                    //            Any());
+                    std::cout << "endend==========================================endend" << std::endl;
                     m_bRunning = false;
                     continue;
                 }
+
+                //CCFrequencyWorker::Wait();
+                //Sleep(2);
 
                 if(packet.GetPtr()->GetPacketPointer()->stream_index
                             == asIndex)
@@ -224,7 +232,7 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_SLEEPING:
             {
-                Sleep(10);
+                Sleep(200);
                 //after we have a reset , we should working
                 status = DATA_MANAGER_STATUS_ENUM_WORKING;
             }
@@ -235,6 +243,8 @@ void CCDataManager::Run()
             break;
         } // end switch
     }
+
+    CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }
 
 int CCDataManager::OpenFile(const std::string& mediaUrl,

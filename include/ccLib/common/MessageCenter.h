@@ -49,6 +49,7 @@ private:
                          MessageType msg,
                          Any anyParam);
     bool PopFrontMessage(SmartPtr<Event>& rSmtEvent);
+    void NotifyToAllMessageObject(const SmartPtr<Event>& rSmtEvent);
 
 public:
     static void PostMessage(MessageObjectId messageSender,

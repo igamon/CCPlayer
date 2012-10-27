@@ -5,11 +5,12 @@
 #include "Common.h"
 #include "SpinLock.h"
 #include "IMessageReceiver.h"
+#include "FrequencyWorker.h"
 
 namespace CCPlayer
 {
 
-class CCDataManager : public CCThread, public IMessageReceiver
+class CCDataManager : public CCThread, public IMessageReceiver, public CCFrequencyWorker
 {
 public:
     CCDataManager();
