@@ -60,6 +60,8 @@ void CCAudioDecoder::Run()
     int gotFrame = 0;
     int decodedLen = 0;
 
+    int audioFrameQueueSize = 0;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -107,9 +109,11 @@ void CCAudioDecoder::Run()
                     m_audioPacketQueue.push(shdPacket);
                 }
                 break;
-                case MESSAGE_TYPE_ENUM_AUDIO_RENDER_ORDER_SLEEP:
+                case MESSAGE_TYPE_ENUM_AUDIO_RENDER_A_FRAME:
                 {
-                    status = AUDIO_DECODER_STATUS_ENUM_SLEEPING;
+                    //status = AUDIO_DECODER_STATUS_ENUM_SLEEPING;
+                    //update
+                    audioFrameQueueSize --;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
@@ -125,65 +129,71 @@ void CCAudioDecoder::Run()
         {
             case AUDIO_DECODER_STATUS_ENUM_WORKING:
             {
-                if(m_audioPacketQueue.size() > MAX_AUDIO_PACKET_QUEUE_SIZE)
-                {
-                    PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
-                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_ORDER_SLEEP,
-                                Any());
-                }
                 //std::cout << "Audio Decoder are working" << std::endl;
 
-                if(!m_audioPacketQueue.empty())
+                if(audioFrameQueueSize < MAX_AUDIO_FRAME_QUEUE_SIZE)
                 {
-                    //static int count = 0;
-                    //std::cout << "decoder a audio packet" << ++count << std::endl;
-
-                    SmartPtr<CCPacket> shdPacket = m_audioPacketQueue.front();
-                    m_audioPacketQueue.pop();
-
-                    AVPacket packet = shdPacket.GetPtr()->GetPacket();
-
-                    while(packet.size > 0)
+                    if(!m_audioPacketQueue.empty())
                     {
-                        avcodec_get_frame_defaults(pDecodedFrame);
+                        //static int count = 0;
+                        //std::cout << "decoder a audio packet" << ++count << std::endl;
 
-                        decodedLen = avcodec_decode_audio4(pAudioCodecCtx,
-                                                           pDecodedFrame,
-                                                           &gotFrame,
-                                                           &packet);
+                        SmartPtr<CCPacket> shdPacket = m_audioPacketQueue.front();
+                        m_audioPacketQueue.pop();
 
-                        packet.data += decodedLen;
-                        packet.size -= decodedLen;
+                        AVPacket packet = shdPacket.GetPtr()->GetPacket();
 
-                        if(gotFrame)
+                        while(packet.size > 0)
                         {
-                            //std::cout << "Get a frame" << std::endl;
-                            //count = 0;
+                            avcodec_get_frame_defaults(pDecodedFrame);
 
-                            int decodedDataSize = av_samples_get_buffer_size(NULL,
-                                                                    pAudioCodecCtx->channels,
-                                                                    pDecodedFrame->nb_samples,
-                                                                    pAudioCodecCtx->sample_fmt,
-                                                                    1);
+                            decodedLen = avcodec_decode_audio4(pAudioCodecCtx,
+                                                               pDecodedFrame,
+                                                               &gotFrame,
+                                                               &packet);
 
-                            SmartPtr<AudioFrame> audioFrame(new AudioFrame(pDecodedFrame->data[0], decodedDataSize));
-                            PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
-                                        MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
-                                        MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME,
-                                        Any(audioFrame));
-                        }
-                    }// end while decoder packet
-                }// end the packet queue is not empty
+                            packet.data += decodedLen;
+                            packet.size -= decodedLen;
+
+                            if(gotFrame)
+                            {
+                                //std::cout << "Get a frame" << std::endl;
+                                //count = 0;
+                                //increment the queue size count
+                                audioFrameQueueSize ++;
+
+                                int decodedDataSize = av_samples_get_buffer_size(NULL,
+                                                                        pAudioCodecCtx->channels,
+                                                                        pDecodedFrame->nb_samples,
+                                                                        pAudioCodecCtx->sample_fmt,
+                                                                        1);
+
+                                SmartPtr<AudioFrame> audioFrame(new AudioFrame(pDecodedFrame->data[0], decodedDataSize));
+                                PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                            MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                            MESSAGE_TYPE_ENUM_GET_AUDIO_FRAME,
+                                            Any(audioFrame));
+                            }
+                        }// end while decoder packet
+
+
+                        //tell the datamanager we have decoded a packet
+                        PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                    MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_A_PACKET,
+                                    Any());
+                    }// end the packet queue is not empty
+                }// end not enough audio frame
+                else
+                {
+                    Sleep(10);
+                }
             }
             break;
             case AUDIO_DECODER_STATUS_ENUM_SLEEPING:
             {
-                // just sleep for millionsecond
-                Sleep(50);
-
                 //after take a reset , we should working.
-                status = AUDIO_DECODER_STATUS_ENUM_WORKING;
+                //status = AUDIO_DECODER_STATUS_ENUM_WORKING;
             }
             break;
             case AUDIO_DECODER_STATUS_ENUM_DEADING:

@@ -608,7 +608,7 @@
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
 
-1351242926 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+1351317840 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
 	"AudioRender.h"
 	"MessageCenter.h"
 	"ALWrapper.h"
@@ -800,7 +800,7 @@
 	"Event.h"
 	"SmartPtr.h"
 
-1351240992 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\event.h
+1351315798 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\event.h
 	"Any.h"
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\any.h
@@ -842,7 +842,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
 	"Common.h"
 
-1351242794 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1351314585 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 	"UIGLView.h"
@@ -882,7 +882,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\win32def.h
 	<Windows.h>
 
-1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
+1351317530 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
 	"ALWrapper.h"
 
 1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
@@ -963,16 +963,18 @@
 1351174067 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
 	"WindowImplWin32.h"
 
-1351243086 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+1351313124 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
 	"AudioDecoder.h"
 	"MessageCenter.h"
 
-1351243811 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+1351316602 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
 	"DataManager.h"
 	"MessageCenter.h"
 	"SystemAlarm.h"
+	"AudioDef.h"
+	"VideoDef.h"
 
-1351243117 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+1351315474 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
 	"VideoDecoder.h"
 	"MessageCenter.h"
 

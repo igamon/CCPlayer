@@ -123,13 +123,10 @@ void CCVideoRender::Run()
                     m_videoFrameQueue.pop();
 
                     glWrapper.DrawFrame(shrdVideoFrame.GetPtr(), imgWidth, imgHeight);
-                }
 
-                if(m_videoFrameQueue.size() > MAX_VIDEO_FRAME_QUEUE_SIZE)
-                {
                     PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                 MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
+                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_A_FRAME,
                                 Any());
                 }
             }

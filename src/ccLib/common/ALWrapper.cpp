@@ -95,12 +95,21 @@ void ALWrapper::InitAudioFrame(AudioFrame* pAudioFrame, int index)
                  pAudioFrame->GetFrameSize(),
                  m_audRate);
     alSourceQueueBuffers(m_audSource, 1, &m_audBuffers[index]);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        std::cout << "Init audio render." << std::endl;
+    }
 }
 
 bool ALWrapper::NeedData()
 {
+    std::cout << "NeedData called" << std::endl;
     ALint processed = 0;
     alGetSourcei(m_audSource, AL_BUFFERS_PROCESSED, &processed);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        std::cout << "Cannot check OpenAL source state." << std::endl;
+    }
     if (processed == 0)
     {
         ALint state = AL_SOURCE_STATE;

@@ -1,6 +1,8 @@
 #include "DataManager.h"
 #include "MessageCenter.h"
 #include "SystemAlarm.h"
+#include "AudioDef.h"
+#include "VideoDef.h"
 
 namespace CCPlayer
 {
@@ -115,11 +117,16 @@ void CCDataManager::Run()
     DataManagerStatus status = DATA_MANAGER_STATUS_ENUM_INIT;
     unsigned int decodersStatus = DECODERS_STATUS_ENUM_NONE_READY;
 
+    int audioPacketQueueSize = 0;
+    int videoPacketQueueSize = 0;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
         if(PopFrontMessage(event))
         {
+            //std::cout << "event.GetPtr()->type=" << event.GetPtr()->type << std::endl;
+
             switch(event.GetPtr()->type)
             {
                 case MESSAGE_TYPE_ENUM_OPEN_FILE:
@@ -174,14 +181,18 @@ void CCDataManager::Run()
                     }
                 }
                 break;
-                case MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_ORDER_SLEEP:
+                case MESSAGE_TYPE_ENUM_AUDIO_DEOCDER_A_PACKET:
                 {
-                    status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                    //status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                    //we decoded a audio packet
+                    audioPacketQueueSize --;
                 }
                 break;
-                case MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP:
+                case MESSAGE_TYPE_ENUM_VIDEO_DECODER_A_PACKET:
                 {
-                    status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                    //status = DATA_MANAGER_STATUS_ENUM_SLEEPING;
+                    //we decoded a video packet
+                    videoPacketQueueSize --;
                 }
                 break;
                 default:
@@ -198,43 +209,56 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_WORKING:
             {
-                SmartPtr<CCPacket> packet(new CCPacket());
-                if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
+                if(audioPacketQueueSize < MAX_AUDIO_PACKET_QUEUE_SIZE
+                   || videoPacketQueueSize < MAX_VIDEO_PACKET_QUEUE_SIZE)
                 {
-                    //PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                    //            MESSAGE_OJBECT_ENUM_ALL,
-                    //            MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
-                    //            Any());
-                    std::cout << "endend==========================================endend" << std::endl;
-                    m_bRunning = false;
-                    continue;
-                }
+                    SmartPtr<CCPacket> packet(new CCPacket());
+                    if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
+                    {
+                        //PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                        //            MESSAGE_OJBECT_ENUM_ALL,
+                        //            MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                        //            Any());
+                        std::cout << "endend==========================================endend" << std::endl;
+                        m_bRunning = false;
+                        continue;
+                    }
 
-                //CCFrequencyWorker::Wait();
-                //Sleep(2);
+                    //CCFrequencyWorker::Wait();
+                    //Sleep(2);
 
-                if(packet.GetPtr()->GetPacketPointer()->stream_index
-                            == asIndex)
+                    if(packet.GetPtr()->GetPacketPointer()->stream_index
+                                == asIndex)
+                    {
+                        PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                    MESSAGE_TYPE_ENUM_GET_AUDIO_PACKET,
+                                    Any(packet));
+                        //we got a audio packet
+                        audioPacketQueueSize ++;
+                    }else if(packet.GetPtr()->GetPacketPointer()->stream_index
+                                == vsIndex)
+                    {
+                        PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET,
+                                    Any(packet));
+
+                        //we got a video packet
+                        videoPacketQueueSize ++;
+                    }
+                }// if audio packet enough or video packet enough
+                else
                 {
-                    PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
-                                MESSAGE_TYPE_ENUM_GET_AUDIO_PACKET,
-                                Any(packet));
-                }else if(packet.GetPtr()->GetPacketPointer()->stream_index
-                            == vsIndex)
-                {
-                    PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                MESSAGE_TYPE_ENUM_GET_VIDEO_PACKET,
-                                Any(packet));
+                    Sleep(10);
                 }
             }
             break;
             case DATA_MANAGER_STATUS_ENUM_SLEEPING:
             {
-                Sleep(200);
+                Sleep(50);
                 //after we have a reset , we should working
-                status = DATA_MANAGER_STATUS_ENUM_WORKING;
+                //status = DATA_MANAGER_STATUS_ENUM_WORKING;
             }
             break;
             case DATA_MANAGER_STATUS_ENUM_DEADING:

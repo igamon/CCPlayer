@@ -14,7 +14,7 @@
 		<Cursor position="160" topLine="0" />
 	</File>
 	<File name="include\ccLib\Player.h" open="0" top="0" tabpos="5">
-		<Cursor position="367" topLine="12" />
+		<Cursor position="418" topLine="0" />
 	</File>
 	<File name="include\ccLib\VideoDecoder.h" open="0" top="0" tabpos="11">
 		<Cursor position="1145" topLine="31" />
@@ -28,14 +28,14 @@
 	<File name="include\ccLib\common\Any.h" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="include\ccLib\common\AudioDef.h" open="0" top="0" tabpos="1">
-		<Cursor position="579" topLine="24" />
+	<File name="include\ccLib\common\AudioDef.h" open="0" top="0" tabpos="2">
+		<Cursor position="427" topLine="13" />
 	</File>
 	<File name="include\ccLib\common\Common.h" open="0" top="0" tabpos="3">
 		<Cursor position="574" topLine="35" />
 	</File>
-	<File name="include\ccLib\common\Event.h" open="0" top="0" tabpos="6">
-		<Cursor position="912" topLine="31" />
+	<File name="include\ccLib\common\Event.h" open="1" top="1" tabpos="0">
+		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="include\ccLib\common\FrequencyWorker.h" open="0" top="0" tabpos="0">
 		<Cursor position="256" topLine="13" />
@@ -55,8 +55,8 @@
 	<File name="include\ccLib\common\SmartPtr.h" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="include\ccLib\common\SystemAlarm.h" open="1" top="1" tabpos="0">
-		<Cursor position="518" topLine="28" />
+	<File name="include\ccLib\common\SystemAlarm.h" open="0" top="0" tabpos="0">
+		<Cursor position="66" topLine="0" />
 	</File>
 	<File name="include\ccLib\common\Thread.h" open="0" top="0" tabpos="0">
 		<Cursor position="96" topLine="17" />
@@ -74,7 +74,7 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="include\ccLib\common\VideoDef.h" open="0" top="0" tabpos="3">
-		<Cursor position="258" topLine="6" />
+		<Cursor position="219" topLine="6" />
 	</File>
 	<File name="include\platformWin32\App.h" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
@@ -85,26 +85,29 @@
 	<File name="include\platformWin32\Win32Def.h" open="0" top="0" tabpos="0">
 		<Cursor position="158" topLine="2" />
 	</File>
-	<File name="src\ccLib\AudioDecoder.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2282" topLine="68" />
+	<File name="main.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="119" topLine="0" />
+	</File>
+	<File name="src\ccLib\AudioDecoder.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="3714" topLine="109" />
 	</File>
 	<File name="src\ccLib\AudioRender.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1562" topLine="62" />
+		<Cursor position="13" topLine="0" />
 	</File>
-	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="4752" topLine="133" />
+	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="6020" topLine="187" />
 	</File>
 	<File name="src\ccLib\Player.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="5538" topLine="93" />
 	</File>
 	<File name="src\ccLib\VideoDecoder.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="4267" topLine="129" />
+		<Cursor position="1897" topLine="66" />
 	</File>
 	<File name="src\ccLib\VideoRender.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="3269" topLine="108" />
+		<Cursor position="3859" topLine="118" />
 	</File>
 	<File name="src\ccLib\common\ALWrapper.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="77" topLine="136" />
+		<Cursor position="2667" topLine="102" />
 	</File>
 	<File name="src\ccLib\common\Common.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="44" topLine="0" />

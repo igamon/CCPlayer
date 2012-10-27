@@ -63,6 +63,8 @@ void CCVideoDecoder::Run()
 	int imgBufferLen = 0;
     int gotFrame = 0;
 
+    int videoFrameQueueSize = 0;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -112,9 +114,11 @@ void CCVideoDecoder::Run()
                     m_videoPacketQueue.push(shdPacket);
                 }
                 break;
-                case MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP:
+                case MESSAGE_TYPE_ENUM_VIDEO_RENDER_A_FRAME:
                 {
-                    status = VIDEO_DECODER_STATUS_ENUM_SLEEPING;
+                    //status = VIDEO_DECODER_STATUS_ENUM_SLEEPING;
+                    //we rendered a video frame
+                    videoFrameQueueSize --;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
@@ -130,63 +134,67 @@ void CCVideoDecoder::Run()
             case VIDEO_DECODER_STATUS_ENUM_WORKING:
             {
                 //std::cout << "Video Decoder are working" << std::endl;
-                if(m_videoPacketQueue.size() > MAX_VIDEO_PACKET_QUEUE_SIZE)
+                if(videoFrameQueueSize < MAX_VIDEO_PACKET_QUEUE_SIZE)
                 {
-                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_ORDER_SLEEP,
-                                Any());
-                }
-
-                if(!m_videoPacketQueue.empty())
-                {
-                    SmartPtr<CCPacket> shdPacket
-                                            = m_videoPacketQueue.front();
-                    m_videoPacketQueue.pop();
-
-                    AVPacket packet = shdPacket.GetPtr()->GetPacket();
-
-                    avcodec_decode_video2(pVideoCtx,
-                                          pDecodedFrame,
-                                          &gotFrame,
-                                          &packet);
-
-                    if (gotFrame)
+                    if(!m_videoPacketQueue.empty())
                     {
-                        unsigned char* pScaleBuffer =
-                                        (unsigned char*)av_mallocz(imgBufferLen);
+                        SmartPtr<CCPacket> shdPacket
+                                                = m_videoPacketQueue.front();
+                        m_videoPacketQueue.pop();
 
-                        avpicture_fill(pDecodePicture,
-                                       pScaleBuffer,
-                                       PIX_FMT_RGBA,
-                                       imgWidth,
-                                       imgHeight);
+                        AVPacket packet = shdPacket.GetPtr()->GetPacket();
 
-                        sws_scale(pImageConvertCtx,
-                                  pDecodedFrame->data,
-                                  pDecodedFrame->linesize,
-                                  0,
-                                  pVideoCtx->height,
-                                  pDecodePicture->data,
-                                  pDecodePicture->linesize);
+                        avcodec_decode_video2(pVideoCtx,
+                                              pDecodedFrame,
+                                              &gotFrame,
+                                              &packet);
 
-                        SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, 0));
+                        if (gotFrame)
+                        {
+                            unsigned char* pScaleBuffer =
+                                            (unsigned char*)av_mallocz(imgBufferLen);
+
+                            avpicture_fill(pDecodePicture,
+                                           pScaleBuffer,
+                                           PIX_FMT_RGBA,
+                                           imgWidth,
+                                           imgHeight);
+
+                            sws_scale(pImageConvertCtx,
+                                      pDecodedFrame->data,
+                                      pDecodedFrame->linesize,
+                                      0,
+                                      pVideoCtx->height,
+                                      pDecodePicture->data,
+                                      pDecodePicture->linesize);
+
+                            SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, 0));
+                            PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                        MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                        MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME,
+                                        Any(videoFrame));
+
+                            av_free(pScaleBuffer);
+
+                            //we've got a video frame
+                            videoFrameQueueSize ++;
+                        }// we get frame
+
                         PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                    MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
-                                    MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME,
-                                    Any(videoFrame));
-
-                        av_free(pScaleBuffer);
-                    }// we get frame
-                }// end if video packet queue is not empty
-            }// end while decode the packet
+                                    MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_TYPE_ENUM_VIDEO_DECODER_A_PACKET,
+                                    Any());
+                    }// end if video packet queue is not empty
+                } // end if the audio frame is enough
+                else
+                {
+                    Sleep(10);
+                }
+            }
             break;
             case VIDEO_DECODER_STATUS_ENUM_SLEEPING:
             {
                 Sleep(50);
-
-                //after have a reset , we should working now
-                status = VIDEO_DECODER_STATUS_ENUM_WORKING;
             }
             break;
             case VIDEO_DECODER_STATUS_ENUM_DEADING:
