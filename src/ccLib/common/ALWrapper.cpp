@@ -103,7 +103,7 @@ void ALWrapper::InitAudioFrame(AudioFrame* pAudioFrame, int index)
 
 bool ALWrapper::NeedData()
 {
-    std::cout << "NeedData called" << std::endl;
+    //std::cout << "NeedData called" << std::endl;
     ALint processed = 0;
     alGetSourcei(m_audSource, AL_BUFFERS_PROCESSED, &processed);
     if (alGetError() != AL_NO_ERROR)

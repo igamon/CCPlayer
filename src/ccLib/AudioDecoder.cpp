@@ -54,7 +54,9 @@ void CCAudioDecoder::Run()
 {
     AudioDecoderStatus status = AUDIO_DECODER_STATUS_ENUM_UNKNOW;
 
-    AVCodecContext *pAudioCodecCtx = NULL;
+    AVFormatContext* pAVFormatCtx = NULL;
+    AVCodecContext* pAudioCodecCtx = NULL;
+    AVRational audioTimeBase;
 
     AVFrame* pDecodedFrame = NULL;
     int gotFrame = 0;
@@ -74,8 +76,14 @@ void CCAudioDecoder::Run()
                     CCChannels channels = -1;
                     CCRates rates = -1 ;
                     CCType type = CCType::unknow;
+                    int asIndex = -1;
 
-                    pAudioCodecCtx = any_cast<AVCodecContext*>(event.GetPtr()->anyParams);
+                    std::vector<Any> audioStreamInfo
+                                        = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
+                    pAVFormatCtx = any_cast<AVFormatContext*>(audioStreamInfo[0]);
+                    asIndex = any_cast<int>(audioStreamInfo[1]);
+
+                    GetCodecContext(pAVFormatCtx, asIndex, &pAudioCodecCtx, &audioTimeBase);
                     int ret = GetAudioInformation(pAudioCodecCtx, &channels, &rates, &type);
 
                     if(ret == 0)
@@ -209,6 +217,15 @@ void CCAudioDecoder::Run()
             break;
         }// end switch case
     }
+}
+
+int CCAudioDecoder::GetCodecContext(AVFormatContext* pFormatCtx,
+                                    int streamIndex,
+                                    AVCodecContext** ppCodecContext,
+                                    AVRational* pAudioTimeBase)
+{
+    *ppCodecContext = pFormatCtx->streams[streamIndex]->codec;
+    *pAudioTimeBase = pFormatCtx->streams[streamIndex]->time_base;
 }
 
 int CCAudioDecoder::GetAudioInformation(AVCodecContext *pAudioCtx,

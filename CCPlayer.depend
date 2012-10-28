@@ -608,7 +608,7 @@
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\irspcommand.h
 
-1351317840 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
+1351318130 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiorender.cpp
 	"AudioRender.h"
 	"MessageCenter.h"
 	"ALWrapper.h"
@@ -822,7 +822,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\rwlock.h
 	<pthread.h>
 
-1351242825 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\player.cpp
+1351336200 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\player.cpp
 	"Player.h"
 	"IRSPCommand.h"
 	"MessageCenter.h"
@@ -842,7 +842,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\modulemanager.h
 	"Common.h"
 
-1351314585 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
+1351414433 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videorender.cpp
 	"VideoRender.h"
 	"MessageCenter.h"
 	"UIGLView.h"
@@ -859,7 +859,7 @@
 	"IMessageReceiver.h"
 	"FrequencyWorker.h"
 
-1351240756 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
+1351412289 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\videodef.h
 	"Common.h"
 
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\common\uiglview.h
@@ -882,7 +882,7 @@
 1351174059 c:\users\lion\desktop\cbproject\ccplayer\include\platformwin32\win32def.h
 	<Windows.h>
 
-1351317530 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
+1351409737 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\alwrapper.cpp
 	"ALWrapper.h"
 
 1351174066 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\common\common.cpp
@@ -908,21 +908,21 @@
 	"VideoDecoder.h"
 	"DataManager.h"
 
-1351184061 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
+1351336828 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\audiodecoder.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
 	"AudioDef.h"
 	"IMessageReceiver.h"
 
-1351185281 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
+1351337658 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\videodecoder.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
 	"VideoDef.h"
 	"IMessageReceiver.h"
 
-1351243310 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\datamanager.h
+1351335805 c:\users\lion\desktop\cbproject\ccplayer\include\cclib\datamanager.h
 	"Thread.h"
 	"Common.h"
 	"SpinLock.h"
@@ -963,18 +963,18 @@
 1351174067 source:c:\users\lion\desktop\cbproject\ccplayer\src\platformwin32\windowimplwin32.cpp
 	"WindowImplWin32.h"
 
-1351313124 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
+1351337639 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\audiodecoder.cpp
 	"AudioDecoder.h"
 	"MessageCenter.h"
 
-1351316602 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
+1351414228 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\datamanager.cpp
 	"DataManager.h"
 	"MessageCenter.h"
 	"SystemAlarm.h"
 	"AudioDef.h"
 	"VideoDef.h"
 
-1351315474 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
+1351414463 source:c:\users\lion\desktop\cbproject\ccplayer\src\cclib\videodecoder.cpp
 	"VideoDecoder.h"
 	"MessageCenter.h"
 

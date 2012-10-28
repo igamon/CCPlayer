@@ -28,6 +28,11 @@ public:
     virtual void Run();
 
 private:
+    int GetCodecContext(AVFormatContext* pFormatCtx,
+                        int streamIndex,
+                        AVCodecContext** ppCodecContext,
+                        AVRational* pAudioTimeBase);
+
     int GetAudioInformation(AVCodecContext *pAudioCtx,
                             CCChannels* pChannels,
                             CCRates* pRates,

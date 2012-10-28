@@ -133,8 +133,8 @@ void CCDataManager::Run()
                 {
                     mediaUrl = any_cast<std::string>(event.GetPtr()->anyParams);
 
-                    AVCodecContext* pAudioCtx = NULL;
-                    AVCodecContext* pVideoCtx = NULL;
+                    //AVCodecContext* pAudioCtx = NULL;
+                    //AVCodecContext* pVideoCtx = NULL;
 
                     int ret = OpenFile(mediaUrl,
                                        &pAVFormatContext,
@@ -143,8 +143,8 @@ void CCDataManager::Run()
                                         if(ret == 0)
                     if(ret == 0)
                     {
-                        GetCodecContext(pAVFormatContext, asIndex, &pAudioCtx);
-                        GetCodecContext(pAVFormatContext, vsIndex, &pVideoCtx);
+                        //GetCodecContext(pAVFormatContext, asIndex, &pAudioCtx);
+                        //GetCodecContext(pAVFormatContext, vsIndex, &pVideoCtx);
 
                         //status = DATA_MANAGER_STATUS_ENUM_WORKING;
                     }
@@ -152,8 +152,8 @@ void CCDataManager::Run()
                     std::vector<Any> openedParams;
                     openedParams.push_back(Any(ret));
                     openedParams.push_back(Any(pAVFormatContext));
-                    openedParams.push_back(Any(pAudioCtx));
-                    openedParams.push_back(Any(pVideoCtx));
+                    openedParams.push_back(Any(asIndex));
+                    openedParams.push_back(Any(vsIndex));
 
                     PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
                                 MESSAGE_OBJECT_ENUM_PLAYER,
@@ -324,14 +324,19 @@ int CCDataManager::OpenFile(const std::string& mediaUrl,
 
 	}
 
+	(*ppFormatCtx)->start_time = av_gettime() / 1000.0;
+	std::cout << "The start time is :" << (*ppFormatCtx)->start_time << std::endl;
+
 	return 0;
 }
 
+/*
 void CCDataManager::GetCodecContext(AVFormatContext* pFormatCtx,
                       int streamIndex,
                       AVCodecContext** ppCodecContext)
 {
     *ppCodecContext = pFormatCtx->streams[streamIndex]->codec;
 }
+*/
 
 }

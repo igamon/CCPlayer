@@ -114,21 +114,33 @@ void CCVideoRender::Run()
             {
                 //std::cout << "Video Render are working" << std::endl;
 
-                CCFrequencyWorker::Wait();
-
                 if(!m_videoFrameQueue.empty())
                 {
                     SmartPtr<VideoFrame> shrdVideoFrame =
                                             m_videoFrameQueue.front();
-                    m_videoFrameQueue.pop();
 
-                    glWrapper.DrawFrame(shrdVideoFrame.GetPtr(), imgWidth, imgHeight);
+                    // div it with 1000.0 to prevent the number is to large
+                    double currTime = av_gettime() / 1000.0;
+                    //std::cout << " the show time is:" << (int64_t)shrdVideoFrame.GetPtr()->GetShowTime() << std::endl;
+                    //std::cout << " the curr time is:=====" << (int64_t)currTime << std::endl;
 
-                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
-                                MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                MESSAGE_TYPE_ENUM_VIDEO_RENDER_A_FRAME,
-                                Any());
+                    if(shrdVideoFrame.GetPtr()->GetShowTime() < currTime)
+                    {
+                        //std::cout << " the show time is:" << (int64_t)shrdVideoFrame.GetPtr()->GetShowTime() << std::endl;
+                        //std::cout << " the curr time is:=====" << (int64_t)currTime << std::endl;
+
+                        m_videoFrameQueue.pop();
+
+                        glWrapper.DrawFrame(shrdVideoFrame.GetPtr(), imgWidth, imgHeight);
+
+                        PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_TYPE_ENUM_VIDEO_RENDER_A_FRAME,
+                                    Any());
+                    } // end of if get show time
                 }
+
+                CCFrequencyWorker::Wait();
             }
             break;
             case VIDEO_RENDER_STATUS_ENUM_UPDATING:

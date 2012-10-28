@@ -103,28 +103,38 @@ void CCPlayer::Run()
                     {
                         std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
                         int ret = any_cast<int>(openedParams[0]);
-                        //AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
-                        AVCodecContext* pAudioCtx = any_cast<AVCodecContext*>(openedParams[2]);
-                        AVCodecContext* pVideoCtx = any_cast<AVCodecContext*>(openedParams[3]);
+                        AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
+                        int asIndex = any_cast<int>(openedParams[2]);
+                        int vsIndex = any_cast<int>(openedParams[3]);
 
-                        if(pAudioCtx != NULL)
+                        if(asIndex != -1)
                         {
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
+
+                            std::vector<Any> audioStreamInfo;
+                            audioStreamInfo.push_back(Any(pAVFormatCtx));
+                            audioStreamInfo.push_back(Any(asIndex));
+
                             PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                         MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                         MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM,
-                                        Any(pAudioCtx));
+                                        Any(audioStreamInfo));
 
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
                         }
 
-                        if(pVideoCtx != NULL)
+                        if(vsIndex != -1)
                         {
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
+
+                            std::vector<Any> videoStreamInfo;
+                            videoStreamInfo.push_back(Any(pAVFormatCtx));
+                            videoStreamInfo.push_back(Any(vsIndex));
+
                             PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
                                         MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                         MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM,
-                                        Any(pVideoCtx));
+                                        Any(videoStreamInfo));
 
                             CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
                         }

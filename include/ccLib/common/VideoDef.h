@@ -71,6 +71,8 @@ public:
             delete m_pFrameData;
             m_pFrameData = NULL;
         }
+
+        m_showTime = 0;
 	}
 
 public:

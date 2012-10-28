@@ -32,9 +32,9 @@ private:
                  AVFormatContext** ppFormatCtx,
                  int* pASIndex,
                  int* pVSIndex);
-    void GetCodecContext(AVFormatContext* pFormatCtx,
-                          int streamIndex,
-                          AVCodecContext** ppCodecContext);
+    //void GetCodecContext(AVFormatContext* pFormatCtx,
+    //                      int streamIndex,
+    //                      AVCodecContext** ppCodecContext);
 
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;

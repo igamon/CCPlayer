@@ -54,8 +54,10 @@ void CCVideoDecoder::Run()
 {
     VideoDecoderStatus status = VIDEO_DECODER_STATUS_ENUM_UNKNOW;
 
-    AVCodecContext* pVideoCtx = NULL;
+    AVFormatContext* pAVFormatCtx = NULL;
+    AVCodecContext* pVideoCodecCtx = NULL;
     SwsContext* pImageConvertCtx = NULL;
+    AVRational videoTimeBase;
     AVFrame *pDecodedFrame;
 	AVPicture *pDecodePicture;
     int imgWidth = 0;
@@ -74,11 +76,19 @@ void CCVideoDecoder::Run()
             {
                 case MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM:
                 {
-                    pVideoCtx = any_cast<AVCodecContext*>(event.GetPtr()->anyParams);
+                    int vsIndex = -1;
 
-                    if(pVideoCtx != NULL)
+                    std::vector<Any> videoStreamInfo
+                                            = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
+
+                    pAVFormatCtx = any_cast<AVFormatContext*>(videoStreamInfo[0]);
+                    vsIndex = any_cast<int>(videoStreamInfo[1]);
+
+                    if(vsIndex != -1)
                     {
-                        GetVideoInformation(pVideoCtx,
+                        GetCodecContext(pAVFormatCtx, vsIndex, &pVideoCodecCtx, &videoTimeBase);
+
+                        GetVideoInformation(pVideoCodecCtx,
                                             &pImageConvertCtx,
                                             &imgWidth,
                                             &imgHeight,
@@ -144,7 +154,7 @@ void CCVideoDecoder::Run()
 
                         AVPacket packet = shdPacket.GetPtr()->GetPacket();
 
-                        avcodec_decode_video2(pVideoCtx,
+                        avcodec_decode_video2(pVideoCodecCtx,
                                               pDecodedFrame,
                                               &gotFrame,
                                               &packet);
@@ -164,11 +174,20 @@ void CCVideoDecoder::Run()
                                       pDecodedFrame->data,
                                       pDecodedFrame->linesize,
                                       0,
-                                      pVideoCtx->height,
+                                      pVideoCodecCtx->height,
                                       pDecodePicture->data,
                                       pDecodePicture->linesize);
 
-                            SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, 0));
+                            // sychonize the video
+                            int64_t iPts = pDecodedFrame->pkt_pts;
+
+                            double dPts = iPts * av_q2d(videoTimeBase);
+                            dPts *= AV_TIME_BASE / 1000.0;
+                            dPts += pAVFormatCtx->start_time;
+
+                            //std::cout << "dPts======" << (int64_t)dPts << std::endl;
+
+                            SmartPtr<VideoFrame> videoFrame(new VideoFrame(pScaleBuffer, imgBufferLen, dPts));
                             PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
                                         MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
                                         MESSAGE_TYPE_ENUM_GET_VIDEO_FRAME,
@@ -210,6 +229,15 @@ void CCVideoDecoder::Run()
             break;
         }// end switch case status
     }
+}
+
+int CCVideoDecoder::GetCodecContext(AVFormatContext* pFormatCtx,
+                                    int streamIndex,
+                                    AVCodecContext** ppCodecContext,
+                                    AVRational* pAudioTimeBase)
+{
+    *ppCodecContext = pFormatCtx->streams[streamIndex]->codec;
+    *pAudioTimeBase = pFormatCtx->streams[streamIndex]->time_base;
 }
 
 int CCVideoDecoder::GetVideoInformation(AVCodecContext* pVideoCtx,

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include\ccLib\AudioDecoder.h" open="0" top="0" tabpos="10">
-		<Cursor position="1001" topLine="34" />
+	<File name="include\ccLib\AudioDecoder.h" open="0" top="0" tabpos="7">
+		<Cursor position="881" topLine="22" />
 	</File>
 	<File name="include\ccLib\AudioRender.h" open="0" top="0" tabpos="11">
 		<Cursor position="228" topLine="4" />
 	</File>
-	<File name="include\ccLib\DataManager.h" open="0" top="0" tabpos="13">
-		<Cursor position="236" topLine="2" />
+	<File name="include\ccLib\DataManager.h" open="0" top="0" tabpos="4">
+		<Cursor position="866" topLine="26" />
 	</File>
 	<File name="include\ccLib\IRSPCommand.h" open="0" top="0" tabpos="10">
 		<Cursor position="160" topLine="0" />
@@ -16,8 +16,8 @@
 	<File name="include\ccLib\Player.h" open="0" top="0" tabpos="5">
 		<Cursor position="418" topLine="0" />
 	</File>
-	<File name="include\ccLib\VideoDecoder.h" open="0" top="0" tabpos="11">
-		<Cursor position="1145" topLine="31" />
+	<File name="include\ccLib\VideoDecoder.h" open="0" top="0" tabpos="8">
+		<Cursor position="687" topLine="24" />
 	</File>
 	<File name="include\ccLib\VideoRender.h" open="0" top="0" tabpos="10">
 		<Cursor position="299" topLine="6" />
@@ -33,9 +33,6 @@
 	</File>
 	<File name="include\ccLib\common\Common.h" open="0" top="0" tabpos="3">
 		<Cursor position="574" topLine="35" />
-	</File>
-	<File name="include\ccLib\common\Event.h" open="1" top="1" tabpos="0">
-		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="include\ccLib\common\FrequencyWorker.h" open="0" top="0" tabpos="0">
 		<Cursor position="256" topLine="13" />
@@ -73,8 +70,8 @@
 	<File name="include\ccLib\common\UIWindow.h" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="include\ccLib\common\VideoDef.h" open="0" top="0" tabpos="3">
-		<Cursor position="219" topLine="6" />
+	<File name="include\ccLib\common\VideoDef.h" open="0" top="0" tabpos="1">
+		<Cursor position="1879" topLine="88" />
 	</File>
 	<File name="include\platformWin32\App.h" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
@@ -86,28 +83,28 @@
 		<Cursor position="158" topLine="2" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="119" topLine="0" />
+		<Cursor position="52" topLine="0" />
 	</File>
-	<File name="src\ccLib\AudioDecoder.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3714" topLine="109" />
+	<File name="src\ccLib\AudioDecoder.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="4674" topLine="271" />
 	</File>
 	<File name="src\ccLib\AudioRender.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="13" topLine="0" />
+		<Cursor position="4704" topLine="141" />
 	</File>
-	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="6020" topLine="187" />
+	<File name="src\ccLib\DataManager.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="6239" topLine="218" />
 	</File>
-	<File name="src\ccLib\Player.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="5538" topLine="93" />
+	<File name="src\ccLib\Player.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="5730" topLine="0" />
 	</File>
-	<File name="src\ccLib\VideoDecoder.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="1897" topLine="66" />
+	<File name="src\ccLib\VideoDecoder.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="1674" topLine="68" />
 	</File>
-	<File name="src\ccLib\VideoRender.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="3859" topLine="118" />
+	<File name="src\ccLib\VideoRender.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="1723" topLine="98" />
 	</File>
 	<File name="src\ccLib\common\ALWrapper.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="2667" topLine="102" />
+		<Cursor position="2450" topLine="100" />
 	</File>
 	<File name="src\ccLib\common\Common.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="44" topLine="0" />
@@ -139,8 +136,8 @@
 	<File name="src\ccLib\common\UIWindow.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="92" topLine="14" />
 	</File>
-	<File name="src\platformWin32\App.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1075" topLine="38" />
+	<File name="src\platformWin32\App.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="693" topLine="39" />
 	</File>
 	<File name="src\platformWin32\GLViewImplWin32.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="295" topLine="109" />
