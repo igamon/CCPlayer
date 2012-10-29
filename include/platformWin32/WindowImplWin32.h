@@ -9,7 +9,7 @@ namespace CCPlayer
 class CCWindowImplWin32: public CCUIWindow
 {
 public:
-    CCWindowImplWin32(int x, int y, int width, int height);
+    CCWindowImplWin32(int x, int y, int width, int height, void* pUserData);
     virtual ~CCWindowImplWin32();
 
 public:

@@ -10,6 +10,7 @@ enum VideoDecoderStatus
     VIDEO_DECODER_STATUS_ENUM_WORKING,
     VIDEO_DECODER_STATUS_ENUM_SLEEPING,
     VIDEO_DECODER_STATUS_ENUM_DEADING,
+    VIDEO_DECODER_STATUS_ENUM_DEADED,
     VIDEO_DECODER_STATUS_ENUM_MAX
 };
 
@@ -136,6 +137,11 @@ void CCVideoDecoder::Run()
                     status = VIDEO_DECODER_STATUS_ENUM_DEADING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_CLIENT_STOP:
+                {
+                    status = VIDEO_DECODER_STATUS_ENUM_DEADED;
+                }
+                break;
             } // end switch case
         }//end get a message
 
@@ -217,6 +223,12 @@ void CCVideoDecoder::Run()
             }
             break;
             case VIDEO_DECODER_STATUS_ENUM_DEADING:
+            {
+                //m_bRunning = false;
+                //continue;
+            }
+            break;
+            case VIDEO_DECODER_STATUS_ENUM_DEADED:
             {
                 m_bRunning = false;
                 continue;

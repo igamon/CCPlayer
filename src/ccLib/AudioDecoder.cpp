@@ -10,6 +10,7 @@ enum AudioDecoderStatus
     AUDIO_DECODER_STATUS_ENUM_WORKING,
     AUDIO_DECODER_STATUS_ENUM_SLEEPING,
     AUDIO_DECODER_STATUS_ENUM_DEADING,
+    AUDIO_DECODER_STATUS_ENUM_DEADED,
     AUDIO_DECODER_STATUS_ENUM_MAX
 };
 
@@ -129,6 +130,11 @@ void CCAudioDecoder::Run()
                     status = AUDIO_DECODER_STATUS_ENUM_DEADING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_CLIENT_STOP:
+                {
+                    status = AUDIO_DECODER_STATUS_ENUM_DEADED;
+                }
+                break;
             } // end switch case
         }// end if get a message
 
@@ -213,6 +219,12 @@ void CCAudioDecoder::Run()
             case AUDIO_DECODER_STATUS_ENUM_UNKNOW:
             {
 
+            }
+            break;
+            case AUDIO_DECODER_STATUS_ENUM_DEADED:
+            {
+                m_bRunning = false;
+                continue;
             }
             break;
         }// end switch case

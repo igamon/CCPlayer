@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "IRSPCommand.h"
+#include "Common.h"
 
 namespace CCPlayer
 {
@@ -19,6 +20,9 @@ public:
 
 public:
     virtual void OpenResponse(int ErrCode);
+
+public:
+    void OnKeyUp(WPARAM wParam, LPARAM lParam);
 
 private:
     CCWindowImplWin32* m_pMainWindow;

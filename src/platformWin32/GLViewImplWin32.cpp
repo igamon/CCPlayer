@@ -7,6 +7,8 @@ namespace CCPlayer
 const char* CCGLViewImplWin32::ourClassNameA = "CCPlayer_GLView";
 int CCGLViewImplWin32::ourViewCount = 0;
 
+LRESULT CALLBACK PrivateGLViewEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam);
+
 CCGLViewImplWin32::CCGLViewImplWin32(HWND hParent, int x, int y, int width, int height)
 {
     if(ourViewCount++ == 0)
@@ -40,7 +42,7 @@ void CCGLViewImplWin32::RegisterViewClass()
 {
     WNDCLASSA WindowClass;
     WindowClass.style         = 0;
-    WindowClass.lpfnWndProc   = GlobalUIObjectsEvent;
+    WindowClass.lpfnWndProc   = PrivateGLViewEvent;
     WindowClass.cbClsExtra    = 0;
     WindowClass.cbWndExtra    = 0;
     WindowClass.hInstance     = GetModuleHandle(NULL);
@@ -120,6 +122,11 @@ int CCGLViewImplWin32::SwapBuffers()
     {
         return -1;
     }
+}
+
+LRESULT CALLBACK PrivateGLViewEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam)
+{
+    return DefWindowProcA(Handle, Message, WParam, LParam);
 }
 
 } // end namespace CCPlayer

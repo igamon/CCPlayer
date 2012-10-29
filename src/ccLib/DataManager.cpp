@@ -13,6 +13,7 @@ enum DataManagerStatus
     DATA_MANAGER_STATUS_ENUM_WORKING,
     DATA_MANAGER_STATUS_ENUM_SLEEPING,
     DATA_MANAGER_STATUS_ENUM_DEADING,
+    DATA_MANAGER_STATUS_ENUM_DEADED,
     DATA_MANAGER_STATUS_ENUM_MAX
 };
 
@@ -195,6 +196,11 @@ void CCDataManager::Run()
                     videoPacketQueueSize --;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_CLIENT_STOP:
+                {
+                    status = DATA_MANAGER_STATUS_ENUM_DEADED;
+                }
+                break;
                 default:
                     std::cout << "Unknow Data Manager Message" << std::endl;
                 break;
@@ -263,6 +269,12 @@ void CCDataManager::Run()
             break;
             case DATA_MANAGER_STATUS_ENUM_DEADING:
             {
+            }
+            break;
+            case DATA_MANAGER_STATUS_ENUM_DEADED:
+            {
+                m_bRunning = false;
+                continue;
             }
             break;
         } // end switch

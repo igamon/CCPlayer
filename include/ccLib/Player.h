@@ -28,6 +28,9 @@ public:
 public:
     void InitGLWindow(CCUIGLView* pGLRenderView);
     void Open(const std::string& loadParams);
+    void Pause();
+    void Continue();
+    void Stop();
 
 public:
     void PostMessage(MessageObjectId messageSender,

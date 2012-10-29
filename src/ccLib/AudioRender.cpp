@@ -13,6 +13,7 @@ enum AudioRenderStatus
     AUDIO_RENDER_STATUS_ENUM_UPDATING,
     AUDIO_RENDER_STATUS_ENUM_SLEEPING,
     AUDIO_REDNER_STATUS_ENUM_DEADING,
+    AUDIO_RENDER_STATUS_ENUM_DEADED,
     AUDIO_RENDER_STATUS_ENUM_MAX
 };
 
@@ -99,6 +100,20 @@ void CCAudioRender::Run()
                     //status = AUDIO_REDNER_STATUS_ENUM_DEADING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_AUDIO_PAUSE:
+                {
+                    status = AUDIO_RENDER_STATUS_ENUM_SLEEPING;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_AUDIO_CONTINUE:
+                {
+                    status = AUDIO_RENDER_STATUS_ENUM_UPDATING;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_CLIENT_STOP:
+                {
+                    status = AUDIO_RENDER_STATUS_ENUM_DEADED;
+                }
             } // end switch case
         } // end if get a message
 
@@ -159,8 +174,17 @@ void CCAudioRender::Run()
             } //end case AUDIO_RENDER_STATUS_ENUM_UPDATING
             break;
             case AUDIO_RENDER_STATUS_ENUM_SLEEPING:
+            {
+                Sleep(100);
+            }
             break;
             case AUDIO_REDNER_STATUS_ENUM_DEADING:
+            {
+                m_bRunning = false;
+                continue;
+            }
+            break;
+            case AUDIO_RENDER_STATUS_ENUM_DEADED:
             {
                 m_bRunning = false;
                 continue;

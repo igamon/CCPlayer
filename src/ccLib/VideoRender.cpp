@@ -16,6 +16,7 @@ enum VideoRenderStatus
     VIDEO_RENDER_STATUS_ENUM_UPDATING,
     VIDEO_RENDER_STATUS_ENUM_SLEEPING,
     VIDEO_REDNER_STATUS_ENUM_DEADING,
+    VIDEO_RENDER_STATUS_ENUM_DEADED,
     VIDEO_RENDER_STATUS_ENUM_MAX
 };
 
@@ -105,6 +106,21 @@ void CCVideoRender::Run()
                     status = VIDEO_REDNER_STATUS_ENUM_DEADING;
                 }
                 break;
+                case MESSAGE_TYPE_ENUM_VIDEO_PAUSE:
+                {
+                    status = VIDEO_RENDER_STATUS_ENUM_SLEEPING;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_VIDEO_CONTINUE:
+                {
+                    status = VIDEO_RENDER_STATUS_ENUM_INITTED;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_CLIENT_STOP:
+                {
+                    status = VIDEO_RENDER_STATUS_ENUM_DEADED;
+                }
+                break;
             } // end of case event
         } // end of get a message
 
@@ -150,12 +166,19 @@ void CCVideoRender::Run()
             break;
             case VIDEO_RENDER_STATUS_ENUM_SLEEPING:
             {
+                Sleep(100);
             }
             break;
             case VIDEO_REDNER_STATUS_ENUM_DEADING:
             {
-                m_bRunning = false;
+                //m_bRunning = false;
                 break;
+            }
+            break;
+            case VIDEO_RENDER_STATUS_ENUM_DEADED:
+            {
+                m_bRunning = false;
+                continue;
             }
             break;
         } // end of the render status

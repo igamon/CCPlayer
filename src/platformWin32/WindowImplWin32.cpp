@@ -5,7 +5,7 @@ namespace CCPlayer
 const char* CCWindowImplWin32::ourClassNameA = "CCPlayer_Window";
 int CCWindowImplWin32::ourWindowCount = 0;
 
-CCWindowImplWin32::CCWindowImplWin32(int x, int y, int width, int height)
+CCWindowImplWin32::CCWindowImplWin32(int x, int y, int width, int height, void* pUserData)
 {
     if(ourWindowCount++ == 0)
     {
@@ -16,7 +16,7 @@ CCWindowImplWin32::CCWindowImplWin32(int x, int y, int width, int height)
                                    WS_OVERLAPPEDWINDOW,
                                    x, y, width, height,
                                    NULL, NULL,
-                                   ::GetModuleHandle(NULL), NULL);
+                                   ::GetModuleHandle(NULL), pUserData);
 
     //After Create it , we should show it
     Show(true);

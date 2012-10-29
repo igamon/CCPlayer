@@ -45,6 +45,30 @@ void CCPlayer::Open(const std::string& loadParams)
                                                 Any(loadParams));
 }
 
+void CCPlayer::Pause()
+{
+    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_CLIENT,
+                                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                                COMMAND_TYPE_ENUM_PAUSE,
+                                                Any());
+}
+
+void CCPlayer::Continue()
+{
+    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_CLIENT,
+                                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                                COMMAND_TYPE_ENUM_CONTINUE,
+                                                Any());
+}
+
+void CCPlayer::Stop()
+{
+    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_CLIENT,
+                                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                                COMMAND_TYPE_ENUM_STOP,
+                                                Any());
+}
+
 void CCPlayer::PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
@@ -88,69 +112,103 @@ void CCPlayer::Run()
             switch(event.GetPtr()->type)
             {
                 case COMMAND_TYPE_ENUM_OPEN:
-                    {
-                        std::string mediaUrl = any_cast<std::string>(event.GetPtr()->anyParams);
+                {
+                    std::string mediaUrl = any_cast<std::string>(event.GetPtr()->anyParams);
 
-                        CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_DATA_MANAGER);
+                    CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_DATA_MANAGER);
+
+                    PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                MESSAGE_TYPE_ENUM_OPEN_FILE,
+                                Any(mediaUrl));
+                }
+                break;
+                case COMMAND_TYPE_ENUM_CONTINUE:
+                {
+                    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                                                MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                                                MESSAGE_TYPE_ENUM_AUDIO_CONTINUE,
+                                                                Any());
+
+                    CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                                                MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                                                MESSAGE_TYPE_ENUM_VIDEO_CONTINUE,
+                                                                Any());
+                }
+                break;
+                case COMMAND_TYPE_ENUM_PAUSE:
+                {
+                        CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                                                    MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                                                    MESSAGE_TYPE_ENUM_AUDIO_PAUSE,
+                                                                    Any());
+
+                        CCMessageCenter::GetInstance()->PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                                                    MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                                                    MESSAGE_TYPE_ENUM_VIDEO_PAUSE,
+                                                                    Any());
+                }
+                break;
+                case COMMAND_TYPE_ENUM_STOP:
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                MESSAGE_OJBECT_ENUM_ALL,
+                                MESSAGE_TYPE_ENUM_CLIENT_STOP,
+                                Any());
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_OPENED_FILE:
+                {
+                    std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
+                    int ret = any_cast<int>(openedParams[0]);
+                    AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
+                    int asIndex = any_cast<int>(openedParams[2]);
+                    int vsIndex = any_cast<int>(openedParams[3]);
+
+                    if(asIndex != -1)
+                    {
+                        CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
+
+                        std::vector<Any> audioStreamInfo;
+                        audioStreamInfo.push_back(Any(pAVFormatCtx));
+                        audioStreamInfo.push_back(Any(asIndex));
 
                         PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
-                                    MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                                    MESSAGE_TYPE_ENUM_OPEN_FILE,
-                                    Any(mediaUrl));
+                                    MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                    MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM,
+                                    Any(audioStreamInfo));
+
+                        CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
                     }
-                    break;
-                case MESSAGE_TYPE_ENUM_OPENED_FILE:
+
+                    if(vsIndex != -1)
                     {
-                        std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
-                        int ret = any_cast<int>(openedParams[0]);
-                        AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
-                        int asIndex = any_cast<int>(openedParams[2]);
-                        int vsIndex = any_cast<int>(openedParams[3]);
+                        CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
 
-                        if(asIndex != -1)
-                        {
-                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
+                        std::vector<Any> videoStreamInfo;
+                        videoStreamInfo.push_back(Any(pAVFormatCtx));
+                        videoStreamInfo.push_back(Any(vsIndex));
 
-                            std::vector<Any> audioStreamInfo;
-                            audioStreamInfo.push_back(Any(pAVFormatCtx));
-                            audioStreamInfo.push_back(Any(asIndex));
+                        PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM,
+                                    Any(videoStreamInfo));
 
-                            PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
-                                        MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
-                                        MESSAGE_TYPE_ENUM_FINDED_AUDIO_STREAM,
-                                        Any(audioStreamInfo));
-
-                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_RENDER);
-                        }
-
-                        if(vsIndex != -1)
-                        {
-                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
-
-                            std::vector<Any> videoStreamInfo;
-                            videoStreamInfo.push_back(Any(pAVFormatCtx));
-                            videoStreamInfo.push_back(Any(vsIndex));
-
-                            PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
-                                        MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
-                                        MESSAGE_TYPE_ENUM_FINDED_VIDEO_STREAM,
-                                        Any(videoStreamInfo));
-
-                            CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
-                        }
-
-                        if(m_pRspCommentObject != NULL)
-                        {
-                            m_pRspCommentObject->OpenResponse(ret);
-                        }
+                        CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_RENDER);
                     }
-                    break;
-                    case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+
+                    if(m_pRspCommentObject != NULL)
                     {
-                        m_bRunning = false;
-                        continue;
+                        m_pRspCommentObject->OpenResponse(ret);
                     }
-                    break;
+                }
+                break;
+                case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
+                {
+                    m_bRunning = false;
+                    continue;
+                }
+                break;
             }
         }
 
