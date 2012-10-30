@@ -1,5 +1,6 @@
 #include "VideoDecoder.h"
 #include "MessageCenter.h"
+#include "SystemAlarm.h"
 
 namespace CCPlayer
 {
@@ -68,6 +69,8 @@ void CCVideoDecoder::Run()
 
     int videoFrameQueueSize = 0;
 
+    bool bDataManagerEof = false;
+
     while(m_bRunning)
     {
         SmartPtr<Event> event;
@@ -134,7 +137,7 @@ void CCVideoDecoder::Run()
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
                 {
-                    status = VIDEO_DECODER_STATUS_ENUM_DEADING;
+                    bDataManagerEof = true;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_CLIENT_STOP:
@@ -189,7 +192,7 @@ void CCVideoDecoder::Run()
 
                             double dPts = iPts * av_q2d(videoTimeBase);
                             dPts *= AV_TIME_BASE / 1000.0;
-                            dPts += pAVFormatCtx->start_time;
+                            dPts += CCSystemAlarm::GetInstance()->GetRealStartTime();
 
                             //std::cout << "dPts======" << (int64_t)dPts << std::endl;
 
@@ -211,7 +214,15 @@ void CCVideoDecoder::Run()
                                     Any());
                     }// end if video packet queue is not empty
                 } // end if the audio frame is enough
-                else
+                else if(bDataManagerEof)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                                Any());
+                    m_bRunning = false;
+                    break;
+                }else
                 {
                     Sleep(10);
                 }
@@ -241,6 +252,8 @@ void CCVideoDecoder::Run()
             break;
         }// end switch case status
     }
+
+    std::cout << "The video decoder is deaded" << std::endl;
 }
 
 int CCVideoDecoder::GetCodecContext(AVFormatContext* pFormatCtx,

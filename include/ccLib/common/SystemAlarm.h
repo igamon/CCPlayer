@@ -21,6 +21,14 @@ public:
     void UnRegisterSystemAlarm(CCFrequencyWorker* pFrequencyWorker);
 
 public:
+    void SetRealStartTime(int64_t realStartTime);
+    int64_t GetRealStartTime();
+
+private:
+    //the actully start time for the begin;
+    int64_t m_realStartTime;
+
+public:
     static CCSystemAlarm* GetInstance();
 
 private:

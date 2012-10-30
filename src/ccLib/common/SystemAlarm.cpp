@@ -59,6 +59,16 @@ void CCSystemAlarm::UnRegisterSystemAlarm(CCFrequencyWorker* pFrequencyWorker)
     m_frequencyWorkerMutex.UnLock();
 }
 
+void CCSystemAlarm::SetRealStartTime(int64_t realStartTime)
+{
+    m_realStartTime = realStartTime;
+}
+
+int64_t CCSystemAlarm::GetRealStartTime()
+{
+    return m_realStartTime;
+}
+
 void CCSystemAlarm::TimeElapsed()
 {
     m_frequencyWorkerMutex.Lock();

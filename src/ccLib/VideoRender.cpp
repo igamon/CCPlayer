@@ -15,7 +15,6 @@ enum VideoRenderStatus
     VIDEO_RENDER_STATUS_ENUM_INITTED,
     VIDEO_RENDER_STATUS_ENUM_UPDATING,
     VIDEO_RENDER_STATUS_ENUM_SLEEPING,
-    VIDEO_REDNER_STATUS_ENUM_DEADING,
     VIDEO_RENDER_STATUS_ENUM_DEADED,
     VIDEO_RENDER_STATUS_ENUM_MAX
 };
@@ -67,6 +66,7 @@ void CCVideoRender::Run()
 
     VideoRenderStatus status
                         = VIDEO_RENDER_STATUS_ENUM_UNKNOW;
+    bool bDataManagerEof = false;
 
     while(m_bRunning)
     {
@@ -103,7 +103,7 @@ void CCVideoRender::Run()
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
                 {
-                    status = VIDEO_REDNER_STATUS_ENUM_DEADING;
+                    bDataManagerEof = true;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_VIDEO_PAUSE:
@@ -154,6 +154,14 @@ void CCVideoRender::Run()
                                     MESSAGE_TYPE_ENUM_VIDEO_RENDER_A_FRAME,
                                     Any());
                     } // end of if get show time
+                }else if(bDataManagerEof)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_VIDEO_RENDER,
+                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                MESSAGE_TYPE_ENUM_VIDEO_DEADED,
+                                Any());
+                    m_bRunning = false;
+                    continue;
                 }
 
                 CCFrequencyWorker::Wait();
@@ -169,12 +177,6 @@ void CCVideoRender::Run()
                 Sleep(100);
             }
             break;
-            case VIDEO_REDNER_STATUS_ENUM_DEADING:
-            {
-                //m_bRunning = false;
-                break;
-            }
-            break;
             case VIDEO_RENDER_STATUS_ENUM_DEADED:
             {
                 m_bRunning = false;
@@ -183,6 +185,8 @@ void CCVideoRender::Run()
             break;
         } // end of the render status
     }
+
+    std::cout << "The vide render is deaded" << std::endl;
 
     CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }

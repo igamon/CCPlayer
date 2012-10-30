@@ -23,6 +23,7 @@ public:
 
 public:
     void OnKeyUp(WPARAM wParam, LPARAM lParam);
+    void OnPlayerOpen(WPARAM wParam, LPARAM lParam);
 
 private:
     CCWindowImplWin32* m_pMainWindow;

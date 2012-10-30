@@ -9,7 +9,6 @@ enum AudioDecoderStatus
     AUDIO_DECODER_STATUS_ENUM_UNKNOW,
     AUDIO_DECODER_STATUS_ENUM_WORKING,
     AUDIO_DECODER_STATUS_ENUM_SLEEPING,
-    AUDIO_DECODER_STATUS_ENUM_DEADING,
     AUDIO_DECODER_STATUS_ENUM_DEADED,
     AUDIO_DECODER_STATUS_ENUM_MAX
 };
@@ -64,6 +63,8 @@ void CCAudioDecoder::Run()
     int decodedLen = 0;
 
     int audioFrameQueueSize = 0;
+
+    bool bDataManagerEof = false;
 
     while(m_bRunning)
     {
@@ -127,7 +128,7 @@ void CCAudioDecoder::Run()
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
                 {
-                    status = AUDIO_DECODER_STATUS_ENUM_DEADING;
+                    bDataManagerEof = true;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_CLIENT_STOP:
@@ -198,7 +199,16 @@ void CCAudioDecoder::Run()
                                     Any());
                     }// end the packet queue is not empty
                 }// end not enough audio frame
-                else
+                else if(bDataManagerEof)//there is no data for data manager
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                                Any());
+                    m_bRunning = false;
+
+                    continue;
+                }else
                 {
                     Sleep(10);
                 }
@@ -206,14 +216,7 @@ void CCAudioDecoder::Run()
             break;
             case AUDIO_DECODER_STATUS_ENUM_SLEEPING:
             {
-                //after take a reset , we should working.
-                //status = AUDIO_DECODER_STATUS_ENUM_WORKING;
-            }
-            break;
-            case AUDIO_DECODER_STATUS_ENUM_DEADING:
-            {
-                m_bRunning = false;
-                continue;
+                Sleep(50);
             }
             break;
             case AUDIO_DECODER_STATUS_ENUM_UNKNOW:
@@ -229,6 +232,8 @@ void CCAudioDecoder::Run()
             break;
         }// end switch case
     }
+
+    std::cout << "The audio decoder is deaded" << std::endl;
 }
 
 int CCAudioDecoder::GetCodecContext(AVFormatContext* pFormatCtx,

@@ -7,6 +7,8 @@
 namespace CCPlayer
 {
 
+#define MESSAGE_TYPE_OPEN   WM_USER+1
+
 CCApp::CCApp(int argc, char* argv[])
 :m_bInited(true)
 {
@@ -18,7 +20,9 @@ CCApp::~CCApp()
 
 void CCApp::OpenResponse(int ErrCode)
 {
-    m_pPlayerInstance->InitGLWindow(dynamic_cast<CCUIGLView*>(m_pGLRenderView));
+    ::SendMessage(m_pMainWindow->GetUIObjectHandle(), MESSAGE_TYPE_OPEN, 0, 0);
+
+    //m_pPlayerInstance->InitGLWindow(dynamic_cast<CCUIGLView*>(m_pGLRenderView));
 }
 
 int CCApp::Exec()
@@ -69,7 +73,25 @@ void CCApp::OnKeyUp(WPARAM wParam, LPARAM lParam)
             std::cout << "Key S Pressed" << std::endl;
         }
         break;
+        case 'G':
+        {
+            int64_t totalDuration = 0, currentPostion = 0;
+            m_pPlayerInstance->GetTotalDurationBySecond(&totalDuration);
+            m_pPlayerInstance->GetCurrentPostionBySecond(&currentPostion);
+            std::cout << currentPostion <<":" << totalDuration << std::endl;
+        }
+        break;
     }
+}
+
+void CCApp::OnPlayerOpen(WPARAM wParam, LPARAM lParam)
+{
+    m_pPlayerInstance->InitGLWindow(dynamic_cast<CCUIGLView*>(m_pGLRenderView));
+
+    int64_t totalDuration = 0.0;
+
+    m_pPlayerInstance->GetTotalDurationBySecond(&totalDuration);
+    std::cout << "Total time duration is : " << totalDuration << std::endl;
 }
 
 LRESULT CALLBACK GlobalUIObjectsEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam)
@@ -93,6 +115,13 @@ LRESULT CALLBACK GlobalUIObjectsEvent(HWND Handle, UINT Message, WPARAM WParam, 
             CCApp* pApp = reinterpret_cast<CCApp*>(GetWindowLong(Handle, GWL_USERDATA));
             pApp->OnKeyUp(WParam, LParam);
         }
+        break;
+        case MESSAGE_TYPE_OPEN:
+        {
+            CCApp* pApp = reinterpret_cast<CCApp*>(GetWindowLong(Handle, GWL_USERDATA));
+            pApp->OnPlayerOpen(WParam, LParam);
+        }
+        break;
     }
 
     return DefWindowProcA(Handle, Message, WParam, LParam);

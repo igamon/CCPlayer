@@ -33,6 +33,11 @@ public:
     void Stop();
 
 public:
+    //get total display time
+    int GetTotalDurationBySecond(int64_t* pTotalDuration);
+    int GetCurrentPostionBySecond(int64_t* pCurrPostion);
+
+public:
     void PostMessage(MessageObjectId messageSender,
                             MessageObjectId messageReceiver,
                             MessageType msg,
@@ -49,6 +54,9 @@ public:
 private:
     std::queue<SmartPtr<Event> > m_messageQueue;
     CCSpinLock m_spinLockMessageQueue;
+
+private:
+    AVFormatContext* m_pAVFormatCtx;
 
 private:
     IRSPCommand* m_pRspCommentObject;

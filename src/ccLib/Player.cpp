@@ -9,7 +9,8 @@ namespace CCPlayer
 {
 
 CCPlayer::CCPlayer()
-:m_pRspCommentObject(NULL)
+:m_pAVFormatCtx(NULL)
+,m_pRspCommentObject(NULL)
 {
     //this will start the message center thread
     CCMessageCenter::GetInstance()->InitMessageCenter();
@@ -67,6 +68,29 @@ void CCPlayer::Stop()
                                                 MESSAGE_OBJECT_ENUM_PLAYER,
                                                 COMMAND_TYPE_ENUM_STOP,
                                                 Any());
+}
+
+//get total display time
+int CCPlayer::GetTotalDurationBySecond(int64_t* pTotalDuration)
+{
+    if(m_pAVFormatCtx != NULL)
+    {
+        *pTotalDuration = avio_size(m_pAVFormatCtx->pb) / (m_pAVFormatCtx->bit_rate / 8);
+        return 0;
+    }
+    return -1;
+}
+
+int CCPlayer::GetCurrentPostionBySecond(int64_t* pCurrPostion)
+{
+    if(m_pAVFormatCtx != NULL)
+    {
+        std::cout << "current postion is : " << avio_tell(m_pAVFormatCtx->pb) << std::endl;
+
+        *pCurrPostion = avio_tell(m_pAVFormatCtx->pb) / (m_pAVFormatCtx->bit_rate / 8);
+        return 0;
+    }
+    return -1;
 }
 
 void CCPlayer::PostMessage(MessageObjectId messageSender,
@@ -161,7 +185,7 @@ void CCPlayer::Run()
                 {
                     std::vector<Any> openedParams = any_cast<std::vector<Any> >(event.GetPtr()->anyParams);
                     int ret = any_cast<int>(openedParams[0]);
-                    AVFormatContext* pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
+                    m_pAVFormatCtx = any_cast<AVFormatContext*>(openedParams[1]);
                     int asIndex = any_cast<int>(openedParams[2]);
                     int vsIndex = any_cast<int>(openedParams[3]);
 
@@ -170,7 +194,7 @@ void CCPlayer::Run()
                         CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_AUDIO_DECODER);
 
                         std::vector<Any> audioStreamInfo;
-                        audioStreamInfo.push_back(Any(pAVFormatCtx));
+                        audioStreamInfo.push_back(Any(m_pAVFormatCtx));
                         audioStreamInfo.push_back(Any(asIndex));
 
                         PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
@@ -186,7 +210,7 @@ void CCPlayer::Run()
                         CCModuleManager::AddModule(MESSAGE_OBJECT_ENUM_VIDEO_DECODER);
 
                         std::vector<Any> videoStreamInfo;
-                        videoStreamInfo.push_back(Any(pAVFormatCtx));
+                        videoStreamInfo.push_back(Any(m_pAVFormatCtx));
                         videoStreamInfo.push_back(Any(vsIndex));
 
                         PostMessage(MESSAGE_OBJECT_ENUM_PLAYER,
@@ -205,8 +229,8 @@ void CCPlayer::Run()
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
                 {
-                    m_bRunning = false;
-                    continue;
+                    //m_bRunning = false;
+                    //continue;
                 }
                 break;
             }

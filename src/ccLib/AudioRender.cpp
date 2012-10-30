@@ -61,6 +61,7 @@ void CCAudioRender::Run()
     ALWrapper alWrapper;
 
     AudioRenderStatus status = AUDIO_RENDER_STATUS_ENUM_UNKNOW;
+    bool bDataManagerEof = false;
 
     while(m_bRunning)
     {
@@ -97,7 +98,7 @@ void CCAudioRender::Run()
                 break;
                 case MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF:
                 {
-                    //status = AUDIO_REDNER_STATUS_ENUM_DEADING;
+                    bDataManagerEof = true;
                 }
                 break;
                 case MESSAGE_TYPE_ENUM_AUDIO_PAUSE:
@@ -158,6 +159,7 @@ void CCAudioRender::Run()
 
                 CCFrequencyWorker::Wait();
 
+
                 if(alWrapper.NeedData() && !m_audioFrameQueue.empty())
                 {
                     //std::cout << "audio render data" << std::endl;
@@ -170,6 +172,14 @@ void CCAudioRender::Run()
                                 MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
                                 MESSAGE_TYPE_ENUM_AUDIO_RENDER_A_FRAME,
                                 Any());
+                }else if(bDataManagerEof)
+                {
+                    PostMessage(MESSAGE_OBJECT_ENUM_AUDIO_RENDER,
+                                MESSAGE_OBJECT_ENUM_PLAYER,
+                                MESSAGE_TYPE_ENUM_AUDIO_DEADED,
+                                Any());
+                    m_bRunning = false;
+                    continue;
                 }
             } //end case AUDIO_RENDER_STATUS_ENUM_UPDATING
             break;
@@ -192,6 +202,8 @@ void CCAudioRender::Run()
             break;
         } // end switch(status)
     }
+
+    std::cout << "The audio render is deaded" << std::endl;
 
     CCSystemAlarm::GetInstance()->UnRegisterSystemAlarm(this);
 }

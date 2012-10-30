@@ -113,8 +113,8 @@ void CCDataManager::Run()
 
     std::string mediaUrl;
     AVFormatContext *pAVFormatContext = NULL;
-    int asIndex;
-    int vsIndex;
+    int asIndex = -1;
+    int vsIndex = -1;
     DataManagerStatus status = DATA_MANAGER_STATUS_ENUM_INIT;
     unsigned int decodersStatus = DECODERS_STATUS_ENUM_NONE_READY;
 
@@ -221,11 +221,16 @@ void CCDataManager::Run()
                     SmartPtr<CCPacket> packet(new CCPacket());
                     if(av_read_frame(pAVFormatContext, packet.GetPtr()->GetPacketPointer()) < 0)
                     {
-                        //PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
-                        //            MESSAGE_OJBECT_ENUM_ALL,
-                        //            MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
-                        //            Any());
-                        std::cout << "endend==========================================endend" << std::endl;
+                        PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_OBJECT_ENUM_AUDIO_DECODER,
+                                    MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                                    Any());
+
+                        PostMessage(MESSAGE_OBJECT_ENUM_DATA_MANAGER,
+                                    MESSAGE_OBJECT_ENUM_VIDEO_DECODER,
+                                    MESSAGE_TYPE_ENUM_DATA_MANAGER_EOF,
+                                    Any());
+                        //std::cout << "endend==========================================endend" << std::endl;
                         m_bRunning = false;
                         continue;
                     }
@@ -336,19 +341,20 @@ int CCDataManager::OpenFile(const std::string& mediaUrl,
 
 	}
 
-	(*ppFormatCtx)->start_time = av_gettime() / 1000.0;
-	std::cout << "The start time is :" << (*ppFormatCtx)->start_time << std::endl;
+    int64_t realStartTime = av_gettime() / 1000;
+    CCSystemAlarm::GetInstance()->SetRealStartTime(realStartTime);
+
+    //std::cout << "The total time is : " << (*ppFormatCtx)->duration / 1000000 << std::endl;
+	//(*ppFormatCtx)->start_time = av_gettime() / 1000.0;
+	//std::cout << "The start time is :" << (*ppFormatCtx)->start_time << std::endl;
+	//std::cout << "The total file size is : " << avio_size((*ppFormatCtx)->pb) << std::endl;
+    //std::cout << "The Bit_rate is : " << avio_size((*ppFormatCtx)->pb) / ((*ppFormatCtx)->duration / 1000000) << std::endl;
+    //std::cout << "The real bit rate is: " << (*ppFormatCtx)->bit_rate / 8 << std::endl;
+
+	//avio_seek((*ppFormatCtx)->pb, 0, SEEK_END);
+	//std::cout << "The total file size is : " << avio_tell((*ppFormatCtx)->pb) << std::endl;
 
 	return 0;
 }
-
-/*
-void CCDataManager::GetCodecContext(AVFormatContext* pFormatCtx,
-                      int streamIndex,
-                      AVCodecContext** ppCodecContext)
-{
-    *ppCodecContext = pFormatCtx->streams[streamIndex]->codec;
-}
-*/
 
 }
